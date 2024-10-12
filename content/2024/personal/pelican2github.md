@@ -2,8 +2,10 @@ Title: Pelican Webpages on Github Pages
 Date: 2024-09-29 10:46
 Category: Programming
 Tags: pelican, github, python
+Slug: pelican_on_github
 Authors: Yunchi Zhang
 Summary: Describe how to use Pelican generated webpages on Github pages.
+Keywords: Pelican, Github
 
 # HowTo
 
@@ -15,9 +17,14 @@ To be added.
 
 To be added.
 
+### Pelican Themes
+
+To be added.
+
 ## Git Version Control
 
 To be added.
+$$ f(x)=e^x $$
 
 ## Deploy Generated Webpages
 

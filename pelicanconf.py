@@ -35,3 +35,14 @@ DEFAULT_PAGINATION = 10
 # RELATIVE_URLS = True
 
 OUTPUT_RETENTION = [".hg", ".git", "CNAME"]
+THEME = "../pelican-themes/elegant"
+# PLUGINS = [
+#     'series',
+#     'tipue_search',
+#     'render-math',
+# ]
+DIRECT_TEMPLATES = ['search', '404']
+
+TAGS_URL = "tags"
+CATEGORIES_URL = "categories"
+ARCHIVES_URL = "archives"
