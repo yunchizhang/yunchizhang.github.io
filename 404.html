@@ -13,14 +13,8 @@
 
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary">
-
-<meta property="og:title" content="Yunchi Zhang&#39;s Website"/>
-<meta name="twitter:title" content="Yunchi Zhang&#39;s Website">
-<meta property="og:url" content="https://yunchizhang.github.io" />
-<meta property="og:site_name" content="Yunchi Zhang&#39;s Website" />
-<meta property="og:article:author" content="Yunchi Zhang" />
-<meta name="keywords" content=" github,  pelican,  python,  Programming, " />
-        <title>Yunchi Zhang's Website - python tag</title>
+        <title>Page not found · Yunchi Zhang&#39;s Website
+</title>
         <link href="https://yunchizhang.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Yunchi Zhang&#39;s Website - Full Atom Feed" />
 
 
@@ -57,34 +51,42 @@
                 <div class="row-fluid">
                     <div class="span1"></div>
                     <div class="span10">
-
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+    <h1>That page doesn't exist!</h1>
+    </header>
+</div>
 
 <div class="row-fluid">
-
-    <div class="row-fluid">
-
-    </div>
-
-    <div class="row-fluid">
-        <div class="span8 offset2">
-            <header>
-            <h1 id="recent-posts">Recent Posts <a id="allposts" href="https://yunchizhang.github.io/archives">all posts</a></h1>
-            </header>
-        <div class="recent-posts">
-            <div itemscope class="recent-posts-article">
-                <a href="https://yunchizhang.github.io/pelican_on_github.html">
-                    Pelican Webpages on Github Pages
-                </a>
-                <div class="recent-posts-posted">
-                    posted in
-                    <a href="https://yunchizhang.github.io/categories#programming-ref">Programming</a>
-                    <time itemprop="dateCreated" datetime="2024-09-29T10:46:00-05:00">Sun 29 September 2024</time>
-                </div>
-            </div>
-        </div>
+    <div class="span8 offset2">
+        <p>Sorry, but the page you are looking for cannot be found. It seems that the page you were trying to reach doesn't exist, or may be it has just moved, or it no longer exists.</p>
+        <p>The best thing to do is to use the search form or start again from the <a href="https://yunchizhang.github.io">home page</a>.</p>
+        <div class="input-append">
+            <form action="https://yunchizhang.github.io/search.html" onsubmit="return validateForm(this.elements['q'].value)">
+                <input type="text" class="span12" placeholder="Search" name="q" id="tipue_search_input_404">
+                <button class="btn" type="submit">Search</button>
+            </form>
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    // Get Current location as the initial search item
+    var newurl = (' ' + window.location.pathname).slice(1);
+
+    // Replace "/" in path into spaces
+    var newurl = newurl.replace(/\//g, ' ');
+
+    // Remove html extension
+    var newurl = newurl.replace(/.html/g, ' ');
+
+    // Replace - by ' '
+    var newurl = newurl.replace(/\-/g, ' ');
+
+    // Fill search field with resulting string
+    document.getElementById('tipue_search_input_404').value = newurl;
+</script>
+
                     </div>
                     <div class="span1"></div>
                 </div>
