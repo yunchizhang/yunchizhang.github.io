@@ -41,7 +41,7 @@ THEME = "../pelican-themes/elegant"
 #     'tipue_search',
 #     'render-math',
 # ]
-DIRECT_TEMPLATES = ['search', '404']
+DIRECT_TEMPLATES = ['search', '404', 'index', 'categories', 'tags', 'archives']
 
 TAGS_URL = "tags"
 CATEGORIES_URL = "categories"
