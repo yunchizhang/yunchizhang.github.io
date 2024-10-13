@@ -1,5 +1,5 @@
 AUTHOR = 'Yunchi Zhang'
-SITENAME = "Yunchi Zhang's Website"
+SITENAME = "Yunchi Zhang"
 SITEURL = ""
 
 PATH = "content"
