@@ -46,3 +46,5 @@ DIRECT_TEMPLATES = ['search', '404', 'index', 'categories', 'tags', 'archives']
 TAGS_URL = "tags"
 CATEGORIES_URL = "categories"
 ARCHIVES_URL = "archives"
+
+LANDING_PAGE_TITLE = "I work on telecommunications"
