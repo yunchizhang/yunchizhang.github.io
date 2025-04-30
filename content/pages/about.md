@@ -1,6 +1,5 @@
 Title: Engineering on Telecommunications and SatCom
 Date: 2024-10-13 12:15
-Layout: page
 Status: hidden
 Slug: landing-page-about-hidden
 Authors: Yunchi Zhang

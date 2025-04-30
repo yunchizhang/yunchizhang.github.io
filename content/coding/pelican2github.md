@@ -7,6 +7,8 @@ Authors: Yunchi Zhang
 Summary: Describe how to use Pelican generated webpages on Github pages.
 Keywords: Pelican, Github
 
+[TOC]
+
 # HowTo
 
 ## Github User Page
