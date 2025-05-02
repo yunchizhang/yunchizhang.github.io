@@ -57,7 +57,7 @@
                                        https://yunchizhang.github.io
                                     >Home</a>
                                 </li>
-                                <li ><a href="https://yunchizhang.github.io/pages/my-resume.html">Curriculum Vitae</a></li>
+                                <li ><a href="https://yunchizhang.github.io/pages/resume.html">Curriculum Vitae</a></li>
                                 <li ><a href="https://yunchizhang.github.io/categories">Categories</a></li>
                                 <li ><a href="https://yunchizhang.github.io/tags">Tags</a></li>
                                 <li  class="active"><a href="https://yunchizhang.github.io/archives">Archives</a></li>
@@ -79,12 +79,35 @@
 <div class="row-fluid">
     <div class="span10 offset2">
         <div class="blog-archives">
-                    <h2 id="2024"><a href="#2024">2024</a></h2>
+                    <h2 id="2025"><a href="#2025">2025</a></h2>
+
+
+                        <div itemscope>
+
+                <a href="https://yunchizhang.github.io/posts/mathjax_support.html">
+                    Mathjax support in VS Code and Pelican
+                </a>
+                <time itemprop="dateCreated" datetime="2025-05-02T15:20:00-05:00">
+                    Fri 02 May 2025
+                </time>
+                </div>
+
+
+                        <div itemscope class="last-entry-of-year">
+
+                <a href="https://yunchizhang.github.io/posts/codeblock_markdown_pelican.html">
+                    Markdown codeblock format for Pelican
+                </a>
+                <time itemprop="dateCreated" datetime="2025-05-01T14:00:00-05:00">
+                    Thu 01 May 2025
+                </time>
+                </div>
+                        <h2 id="2024"><a href="#2024">2024</a></h2>
 
                     <div itemscope class="last-entry-of-year">
 
-                <a href="https://yunchizhang.github.io/pelican_on_github.html">
-                    Pelican Webpages on Github Pages
+                <a href="https://yunchizhang.github.io/posts/pelican_on_github.html">
+                    Publish Pelican Webpages to Github Pages
                 </a>
                 <time itemprop="dateCreated" datetime="2024-09-29T10:46:00-05:00">
                     Sun 29 September 2024
@@ -100,17 +123,33 @@
             </div>
         </div>
 <footer>
+    <div>
+        All Rights Reserved. Copyright © 2025 <a href="mailto:yunchi.zhang@gmail.com">Yunchi Zhang</a>.
+    </div>
 
+    <div>
+        <span class="site-name">Yzowledge</span> - Knowledge and Experience
+    </div>
 
 
 
     <div id="fpowered">
         Powered by: <a href="http://getpelican.com/" title="Pelican Home Page" target="_blank" rel="nofollow noopener noreferrer">Pelican</a>
-        Theme: <a href="https://elegant.oncrashreboot.com/" title="Theme Elegant Home Page" target="_blank" rel="nofollow noopener noreferrer">Elegant</a>
+        Theme: <a href="https://github.com/yunchizhang/elegant" title="Theme Elegant Home Page" target="_blank" rel="nofollow noopener noreferrer">Customized Elegant</a>
     </div>
 </footer>        <script src="//code.jquery.com/jquery.min.js"></script>
         <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
         <script src="https://yunchizhang.github.io/theme/js/elegant.prod.9e9d5ce754.js"></script>
+        <script>
+            window.MathJax = {
+                tex: {
+                    inlineMath: [['$', '$'], ['\\(', '\\)']],
+                    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                    tags: 'ams'  // Enables equation numbering and \label/\ref support
+                }
+            };
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
         <script>
             function validateForm(query)
             {
