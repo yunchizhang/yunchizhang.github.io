@@ -1,7 +1,7 @@
 Title: Antenna
 Subtitle:
 Date: 2025-04-24 18:23
-Status: published
+Status: draft
 Comments: False
 Slug: antenna
 Save_as: pages/antenna/index.html

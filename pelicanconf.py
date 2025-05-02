@@ -45,12 +45,16 @@ PLUGINS = [
 ]
 MARKDOWN = {
     "extension_configs": {
+        "markdown.extensions.admonition": {},
         "markdown.extensions.extra": {},
         "markdown.extensions.meta": {},
-        'markdown.extensions.toc': {}
-    }
+        'markdown.extensions.toc': {},
+        "markdown.extensions.codehilite": {"css_class": "highlight"},
+        "markdown.extensions.fenced_code": {},
+        "markdown.extensions.attr_list": {},
+        "markdown.extensions.def_list": {},
+    },
 }
-
 
 TAGS_URL = "tags"
 CATEGORIES_URL = "categories"
@@ -89,3 +93,7 @@ PROJECTS_TITLE = "Related Projects"
 
 # comment
 DISQUS_SITENAME = "yunchizhang"
+
+# license
+SITE_LICENSE = """All Rights Reserved. Copyright © 2025 <a href="mailto:yunchi.zhang@gmail.com">Yunchi Zhang</a>."""
+SITESUBTITLE = "Knowledge and Experience"
