@@ -53,6 +53,7 @@ MARKDOWN = {
         "markdown.extensions.fenced_code": {},
         "markdown.extensions.attr_list": {},
         "markdown.extensions.def_list": {},
+        "markdown.extensions.tables": {},
     },
 }
 
@@ -70,7 +71,7 @@ LANDING_PAGE_TITLE = "Yunchi Zhang, PhD"
 SOCIAL_PROFILE_LABEL = 'Stay in Touch'
 
 USE_SHORTCUT_ICONS = True
-STATIC_PATHS = ['theme/images', 'images']
+STATIC_PATHS = ['theme/images', 'images', 'digital_related/images']
 PAGE_PATHS = ['pages', 'antenna']
 
 # projects
