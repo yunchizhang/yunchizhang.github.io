@@ -17,3 +17,32 @@ footer {
 td.linenos .codecopy-btn {
     display: none !important; /* Hide the button in the line numbers column */
 }
+
+/* a special table class with 8 columns for the "even" and "odd" columns */
+.custom-8col-table table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+.custom-8col-table th,
+.custom-8col-table td {
+    padding: 6px 8px;
+    border: 1px solid #ddd;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* white-space: nowrap; */
+}
+
+/* Narrow odd columns */
+.custom-8col-table td:nth-child(odd),
+.custom-8col-table th:nth-child(odd) {
+    width: 8%;
+}
+
+/* Even columns fill remaining space */
+.custom-8col-table td:nth-child(even),
+.custom-8col-table th:nth-child(even) {
+    width: 17%;
+}

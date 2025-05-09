@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Yzowledge - Digital Communications</title><link href="https://yunchizhang.github.io/" rel="alternate"></link><link href="https://yunchizhang.github.io/feeds/digital-communications.atom.xml" rel="self"></link><id>https://yunchizhang.github.io/</id><updated>2025-05-09T09:20:00-05:00</updated><subtitle>Knowledge and Experience</subtitle><entry><title>Linear Feedback Shift Register</title><link href="https://yunchizhang.github.io/posts/lfsr.html" rel="alternate"></link><published>2025-05-09T09:20:00-05:00</published><updated>2025-05-09T09:20:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2025-05-09:/posts/lfsr.html</id><summary type="html">&lt;p&gt;Describe details of linear feedback shift register (LFSR).&lt;/p&gt;</summary><content type="html">
+&lt;p&gt;A linear-feedback shift register (LFSR) is a shift register whose input bit is a linear function of
+its previous state.&lt;/p&gt;
+&lt;p&gt;The most commonly used linear function of single bits is exclusive-or (XOR). Thus, an LFSR is most
+often a shift register whose input bit is driven by the XOR of some bits of the overall shift
+register value.&lt;/p&gt;
+&lt;p&gt;Two implementation methods are usually considered:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Simple shift register generator (SSRG) or Fibonacci configuration&lt;/li&gt;
+&lt;li&gt;Modular shift register generator (MSRG) or Galois configuration&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="fibonacci-configuration"&gt;Fibonacci Configuration&lt;/h2&gt;
+&lt;p&gt;The following two diagrams illustrate the Fibonacci configurations of LFSR with register shifting
+direction to LSB/Right and MSB/Left, respectively.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Fibonacci Shifting to LSB" src="https://yunchizhang.github.io/digital_related/images/Fibonacci_LFSR_Shift_Right.png"/&gt;
+&lt;img alt="Fibonacci Shifting to MSB" src="https://yunchizhang.github.io/digital_related/images/Fibonacci_LFSR_Shift_Left.png"/&gt;&lt;/p&gt;
+&lt;p&gt;The polynomial &lt;span class="math"&gt;\(a\)&lt;/span&gt; or &lt;span class="math"&gt;\(b\)&lt;/span&gt; determines the feedback connections of the shift register. It is a primitive
+binary polynomial in &lt;span class="math"&gt;\(x\)&lt;/span&gt;, &lt;span class="math"&gt;\(a_nx^n+a_{n–1}x^{n–1}+...+a_2x^2+a_1x^1+a_0\)&lt;/span&gt; or
+&lt;span class="math"&gt;\(b_nx^n+b_{n–1}x^{n–1}+...+b_2x^2+b_1x^1+b_0\)&lt;/span&gt;. For the coefficient &lt;span class="math"&gt;\(a_{i}\)&lt;/span&gt; or &lt;span class="math"&gt;\(b_{i}\)&lt;/span&gt;, the
+coefficient is &lt;em&gt;1&lt;/em&gt; if there is a connection from the &lt;em&gt;ith&lt;/em&gt; register to the adder. The leading term,
+&lt;span class="math"&gt;\(a_n\)&lt;/span&gt; or &lt;span class="math"&gt;\(b_n\)&lt;/span&gt;, and the constant term, &lt;span class="math"&gt;\(a_0\)&lt;/span&gt; or &lt;span class="math"&gt;\(b_0\)&lt;/span&gt;, of the generator polynomial must be &lt;em&gt;1&lt;/em&gt;
+because the polynomial must be primitive. At each time step, all &lt;em&gt;n&lt;/em&gt; registers in the generator
+update their values according to the value of the incoming arrow to the shift register. The adders
+perform addition modulo &lt;em&gt;2&lt;/em&gt;. The output of the LFSR reflects the sum of all connections in the &lt;em&gt;m&lt;/em&gt;
+or &lt;em&gt;k&lt;/em&gt; mask vector.&lt;/p&gt;
+&lt;p&gt;The &lt;em&gt;m&lt;/em&gt; or &lt;em&gt;k&lt;/em&gt; mask vector is optional. The output bit will be the bit shifted from the final
+register at the shift direction if a mask vector is not provided.&lt;/p&gt;
+&lt;p&gt;The two Fibonacci configurations are equivalent if &lt;span class="math"&gt;\(a_i=b_{n-i}\)&lt;/span&gt; and the initial seeds are mirror
+imaged. For example, the maximum length sequence for a 7-bit LFSR should have &lt;span class="math"&gt;\(a_i=1\)&lt;/span&gt; at (7, 6, 0)
+and &lt;span class="math"&gt;\(b_i=1\)&lt;/span&gt; at (7, 1, 0).&lt;/p&gt;
+&lt;div class="admonition note"&gt;
+&lt;p class="admonition-title"&gt;Note&lt;/p&gt;
+&lt;p&gt;The tap indices start from the right most position in the LFSR.&lt;/p&gt;
+&lt;/div&gt;
+&lt;h2 id="galois-configuration"&gt;Galois Configuration&lt;/h2&gt;
+&lt;p&gt;The following two diagrams illustrate the Galois configurations of LFSR with register shifting
+direction to MSB/Left and LSB/Right, respectively.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Galois Shifting to MSB" src="https://yunchizhang.github.io/digital_related/images/Galois_LFSR_Shift_Left.png"/&gt;
+&lt;img alt="Galois Shifting to LSB" src="https://yunchizhang.github.io/digital_related/images/Galois_LFSR_Shift_Right.png"/&gt;&lt;/p&gt;
+&lt;p&gt;The Galois LFSR has the same output stream as the Fibonacci LFSR with a time/phase offset. So a
+different start point will be needed to get the same output each cycle.&lt;/p&gt;
+&lt;p&gt;Coefficients of Galois LFSR shifting to MSB should be identical as Fibonacci LFSR shifting to LSB
+to generate the same sequence with a phase offset. Similarly for Galois LFSR shifting to LSB and
+Fibonacci shifting to MSB.&lt;/p&gt;
+&lt;h2 id="maximum-length-sequence-mls"&gt;Maximum Length Sequence (MLS)&lt;/h2&gt;
+&lt;p&gt;The maximum sequence length is &lt;span class="math"&gt;\(2^n – 1\)&lt;/span&gt;. MLS have the following properties.&lt;/p&gt;
+&lt;h3 id="balance-property"&gt;Balance Property&lt;/h3&gt;
+&lt;p&gt;The occurrence of 0 and 1 in the sequence should be approximately the same. More precisely, in a
+maximum length sequence of length &lt;span class="math"&gt;\(2^n-1\)&lt;/span&gt; there are &lt;span class="math"&gt;\(2^{n-1}\)&lt;/span&gt; ones and &lt;span class="math"&gt;\(2^{n-1}-1\)&lt;/span&gt; zeros. The
+number of ones equals the number of zeros  plus one, since the state containing only zeros cannot
+occur.&lt;/p&gt;
+&lt;h3 id="run-property"&gt;Run Property&lt;/h3&gt;
+&lt;p&gt;A "run" is a sub-sequence of consecutive "1"s or consecutive "0"s within the MLS concerned. The
+number of runs is the number of such sub-sequences.&lt;/p&gt;
+&lt;p&gt;Of all the "runs" (consisting of "1"s or "0"s) in the sequence :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;One half of the runs are of length 1.&lt;/li&gt;
+&lt;li&gt;One quarter of the runs are of length 2.&lt;/li&gt;
+&lt;li&gt;One eighth of the runs are of length 3.&lt;/li&gt;
+&lt;li&gt;... etc. ...&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="correlation-property"&gt;Correlation Property&lt;/h3&gt;
+&lt;p&gt;The circular autocorrelation of an MLS is a Kronecker delta function (with DC offset and time
+delay, depending on implementation). For the &lt;span class="math"&gt;\(\pm 1\)&lt;/span&gt; convention, i.e., bit value 1 is assigned
+&lt;span class="math"&gt;\(s=+1\)&lt;/span&gt; and bit value 0 &lt;span class="math"&gt;\(s=-1\)&lt;/span&gt;, mapping XOR to the negative of the product:&lt;/p&gt;
+&lt;div class="math"&gt;$$R(n)=\frac{1}{N}\sum_{m=1}^N s[m]s^*[m+n]_N=\begin{cases}1 &amp;amp; if\space n=0 \\ -\frac{1}{N} &amp;amp; if
+\space 0&amp;lt;n&amp;lt;N\end{cases}$$&lt;/div&gt;
+&lt;p&gt;where &lt;span class="math"&gt;\(s^*\)&lt;/span&gt; represents a complex conjugate and $[m+n]_N represents a circular shift.&lt;/p&gt;
+&lt;p&gt;The linear autocorrelation of an MLS approximates a Kronecker delta.&lt;/p&gt;
+&lt;p&gt;To generate a maximum length sequence for a generator polynomial that has the degree n, set
+Polynomial to a value from the following table. The table is applied to Fibonacci Shifting to LSB
+and Galois Shifting to MSB configurations. Counterpart values of &lt;span class="math"&gt;\(n-i\)&lt;/span&gt; should be used for the other
+two configurations.&lt;/p&gt;
+&lt;div class="custom-8col-table"&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;strong&gt;n&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;Generator Polynomial&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;n&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;Generator Polynomial&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;n&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;Generator Polynomial&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;n&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;Generator Polynomial&lt;/strong&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;[2 1 0]&lt;/td&gt;
+&lt;td&gt;15&lt;/td&gt;
+&lt;td&gt;[15 14 0]&lt;/td&gt;
+&lt;td&gt;28&lt;/td&gt;
+&lt;td&gt;[28 25 0]&lt;/td&gt;
+&lt;td&gt;41&lt;/td&gt;
+&lt;td&gt;[41 3 0]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;[3 2 0]&lt;/td&gt;
+&lt;td&gt;16&lt;/td&gt;
+&lt;td&gt;[16 15 13 4 0]&lt;/td&gt;
+&lt;td&gt;29&lt;/td&gt;
+&lt;td&gt;[29 27 0]&lt;/td&gt;
+&lt;td&gt;42&lt;/td&gt;
+&lt;td&gt;[42 23 22 1 0]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;[4 3 0]&lt;/td&gt;
+&lt;td&gt;17&lt;/td&gt;
+&lt;td&gt;[17 14 0]&lt;/td&gt;
+&lt;td&gt;30&lt;/td&gt;
+&lt;td&gt;[30 29 28 7 0]&lt;/td&gt;
+&lt;td&gt;43&lt;/td&gt;
+&lt;td&gt;[43 6 4 3 0]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;5&lt;/td&gt;
+&lt;td&gt;[5 3 0]&lt;/td&gt;
+&lt;td&gt;18&lt;/td&gt;
+&lt;td&gt;[18 11 0]&lt;/td&gt;
+&lt;td&gt;31&lt;/td&gt;
+&lt;td&gt;[31 28 0]&lt;/td&gt;
+&lt;td&gt;44&lt;/td&gt;
+&lt;td&gt;[44 6 5 2 0]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;6&lt;/td&gt;
+&lt;td&gt;[6 5 0]&lt;/td&gt;
+&lt;td&gt;19&lt;/td&gt;
+&lt;td&gt;[19 18 17 14 0]&lt;/td&gt;
+&lt;td&gt;32&lt;/td&gt;
+&lt;td&gt;[32 31 30 10 0]&lt;/td&gt;
+&lt;td&gt;45&lt;/td&gt;
+&lt;td&gt;[45 4 3 1 0]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;7&lt;/td&gt;
+&lt;td&gt;[7 6 0]&lt;/td&gt;
+&lt;td&gt;20&lt;/td&gt;
+&lt;td&gt;[20 17 0]&lt;/td&gt;
+&lt;td&gt;33&lt;/td&gt;
+&lt;td&gt;[33 20 0]&lt;/td&gt;
+&lt;td&gt;46&lt;/td&gt;
+&lt;td&gt;[46 21 10 1 0]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;8&lt;/td&gt;
+&lt;td&gt;[8 6 5 4 0]&lt;/td&gt;
+&lt;td&gt;21&lt;/td&gt;
+&lt;td&gt;[21 19 0]&lt;/td&gt;
+&lt;td&gt;34&lt;/td&gt;
+&lt;td&gt;[34 15 14 1 0]&lt;/td&gt;
+&lt;td&gt;47&lt;/td&gt;
+&lt;td&gt;[47 14 0]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;9&lt;/td&gt;
+&lt;td&gt;[9 5 0]&lt;/td&gt;
+&lt;td&gt;22&lt;/td&gt;
+&lt;td&gt;[22 21 0]&lt;/td&gt;
+&lt;td&gt;35&lt;/td&gt;
+&lt;td&gt;[35 2 0]&lt;/td&gt;
+&lt;td&gt;48&lt;/td&gt;
+&lt;td&gt;[48 28 27 1 0]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;10&lt;/td&gt;
+&lt;td&gt;[10 7 0]&lt;/td&gt;
+&lt;td&gt;23&lt;/td&gt;
+&lt;td&gt;[23 18 0]&lt;/td&gt;
+&lt;td&gt;36&lt;/td&gt;
+&lt;td&gt;[36 11 0]&lt;/td&gt;
+&lt;td&gt;49&lt;/td&gt;
+&lt;td&gt;[49 9 0]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;11&lt;/td&gt;
+&lt;td&gt;[11 9 0]&lt;/td&gt;
+&lt;td&gt;24&lt;/td&gt;
+&lt;td&gt;[24 23 22 17 0]&lt;/td&gt;
+&lt;td&gt;37&lt;/td&gt;
+&lt;td&gt;[37 12 10 2 0]&lt;/td&gt;
+&lt;td&gt;50&lt;/td&gt;
+&lt;td&gt;[50 4 3 2 0]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;12&lt;/td&gt;
+&lt;td&gt;[12 11 8 6 0]&lt;/td&gt;
+&lt;td&gt;25&lt;/td&gt;
+&lt;td&gt;[25 22 0]&lt;/td&gt;
+&lt;td&gt;38&lt;/td&gt;
+&lt;td&gt;[38 6 5 1 0]&lt;/td&gt;
+&lt;td&gt;51&lt;/td&gt;
+&lt;td&gt;[51 6 3 1 0]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;13&lt;/td&gt;
+&lt;td&gt;[13 12 10 9 0]&lt;/td&gt;
+&lt;td&gt;26&lt;/td&gt;
+&lt;td&gt;[26 25 24 20 0]&lt;/td&gt;
+&lt;td&gt;39&lt;/td&gt;
+&lt;td&gt;[39 8 0]&lt;/td&gt;
+&lt;td&gt;52&lt;/td&gt;
+&lt;td&gt;[52 3 0]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;14&lt;/td&gt;
+&lt;td&gt;[14 13 8 4 0]&lt;/td&gt;
+&lt;td&gt;27&lt;/td&gt;
+&lt;td&gt;[27 26 25 22 0]&lt;/td&gt;
+&lt;td&gt;40&lt;/td&gt;
+&lt;td&gt;[40 5 4 3 0]&lt;/td&gt;
+&lt;td&gt;53&lt;/td&gt;
+&lt;td&gt;[53 6 2 1 0]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width &lt; 768) ? "left" : align;
+        indent = (screen.width &lt; 768) ? "0em" : indent;
+        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+&lt;/script&gt;</content><category term="Digital Communications"></category><category term="LFSR"></category><category term="Digital"></category><category term="Communications"></category></entry></feed>
