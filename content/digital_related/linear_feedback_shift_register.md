@@ -97,7 +97,7 @@ $s=+1$ and bit value 0 $s=-1$, mapping XOR to the negative of the product:
 $$R(n)=\frac{1}{N}\sum_{m=1}^N s[m]s^*[m+n]_N=\begin{cases}1 & if\space n=0 \\ -\frac{1}{N} & if
 \space 0<n<N\end{cases}$$
 
-where $s^*$ represents a complex conjugate and $[m+n]_N represents a circular shift.
+where $s^*$ represents a complex conjugate and $[m+n]_N$ represents a circular shift.
 
 The linear autocorrelation of an MLS approximates a Kronecker delta.
 
