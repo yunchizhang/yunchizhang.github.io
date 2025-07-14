@@ -15,18 +15,18 @@
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary">
 
-<meta name="keywords" content="LFSR, Digital, Communications, Digital Communications, LFSR" />
+<meta name="keywords" content="RF, Microwave, System, RF System, RF Mismatch" />
 
-<meta property="og:title" content="Linear Feedback Shift Register "/>
-<meta property="og:url" content="https://yunchizhang.github.io/posts/lfsr.html" />
-<meta property="og:description" content="Describe details of linear feedback shift register (LFSR)." />
+<meta property="og:title" content="RF Mismatch Loss, Error and Uncertainty "/>
+<meta property="og:url" content="https://yunchizhang.github.io/posts/rf_mismatch_error.html" />
+<meta property="og:description" content="Analysis of RF mismatch between components." />
 <meta property="og:site_name" content="Yzowledge" />
 <meta property="og:article:author" content="Yunchi Zhang" />
-<meta property="og:article:published_time" content="2025-05-09T09:20:00-05:00" />
-<meta name="twitter:title" content="Linear Feedback Shift Register ">
-<meta name="twitter:description" content="Describe details of linear feedback shift register (LFSR).">
+<meta property="og:article:published_time" content="2025-07-14T09:20:00-05:00" />
+<meta name="twitter:title" content="RF Mismatch Loss, Error and Uncertainty ">
+<meta name="twitter:description" content="Analysis of RF mismatch between components.">
 
-        <title>Linear Feedback Shift Register  · Yzowledge
+        <title>RF Mismatch Loss, Error and Uncertainty  · Yzowledge
 </title>
         <link rel="shortcut icon" href="https://yunchizhang.github.io/theme/images/favicon.ico" type="image/x-icon" />
         <link rel="icon" href="https://yunchizhang.github.io/theme/images/apple-touch-icon-152x152.png" type="image/png" />
@@ -80,8 +80,8 @@
 <div class="row-fluid">
     <header class="page-header span10 offset2">
         <h1>
-            <a href="https://yunchizhang.github.io/posts/lfsr.html">
-                Linear Feedback Shift Register
+            <a href="https://yunchizhang.github.io/posts/rf_mismatch_error.html">
+                RF Mismatch Loss, Error and Uncertainty
             </a>
         </h1>
     </header>
@@ -93,14 +93,8 @@
         <h4>Contents</h4>
         <div class="toc">
 <ul>
-<li><a href="#fibonacci-configuration">Fibonacci Configuration</a></li>
-<li><a href="#galois-configuration">Galois Configuration</a></li>
-<li><a href="#maximum-length-sequence-mls">Maximum Length Sequence (MLS)</a><ul>
-<li><a href="#balance-property">Balance Property</a></li>
-<li><a href="#run-property">Run Property</a></li>
-<li><a href="#correlation-property">Correlation Property</a></li>
-</ul>
-</li>
+<li><a href="#transducer-power-transfer-efficiency">Transducer Power Transfer Efficiency</a></li>
+<li><a href="#mismatch-loss-and-uncertainty">Mismatch Loss and Uncertainty</a></li>
 </ul>
 </div>
         </nav>
@@ -108,226 +102,82 @@
     <div class="span8 article-content">
             
             
-<p>A linear-feedback shift register (LFSR) is a shift register whose input bit is a linear function of
-its previous state.</p>
-<p>The most commonly used linear function of single bits is exclusive-or (XOR). Thus, an LFSR is most
-often a shift register whose input bit is driven by the XOR of some bits of the overall shift
-register value.</p>
-<p>Two implementation methods are usually considered:</p>
+<p>For maximum transfer of the power from any RF source component, the total input impedance of the
+component connected to the source must be equal to the conjugate of the source impedance. In
+practice, there is always some degree of impedance mismatch between the source and connected
+component. The power loss due to the impedance mismatch is the mismatch loss. Mismatch loss in
+transmission line theory is the amount of power expressed in decibels that will not be available on
+the output due to impedance mismatches and reflections.</p>
+<p>The impedance mismatch is expressed in terms of reflection coefficient <span class="math">\(\Gamma\)</span>, voltage standing
+wave ratio (<em>VSWR</em>) and return loss (<em>RL</em>). These quantities are interrelated:</p>
+<div class="math">$$\Gamma=\frac{Z-Z_0}{Z+Z_0}$$</div>
+<div class="math">$$|\Gamma|=\frac{VSWR-1}{VSWR+1}$$</div>
+<div class="math">$$RL=-20\log_{10}|\Gamma|$$</div>
+<p>If there are two components in cascade, the resultant mismatch loss is not only due to the
+mismatches from the individual components, but also from the reflections from each component and
+their combination. The overall mismatch loss cannot be calculated by just adding up the individual
+loss contributions from each component. Depending on how the multiple reflections combine, the
+overall system loss may be lower or higher than the sum of the mismatch loss from each component.
+The uncertainty associated in the evaluation of the mismatch error is known as the mismatch
+uncertainty and expressed in dB.</p>
+<h2 id="transducer-power-transfer-efficiency">Transducer Power Transfer Efficiency</h2>
+<p>For two cascaded RF components, defined as source and load, given:</p>
 <ul>
-<li>Simple shift register generator (SSRG) or Fibonacci configuration</li>
-<li>Modular shift register generator (MSRG) or Galois configuration</li>
+<li>Source with output reflection coefficient <span class="math">\(\Gamma_S\)</span></li>
+<li>Load with input reflection coefficient <span class="math">\(\Gamma_L\)</span></li>
+<li>Source and Load are connected</li>
 </ul>
-<h2 id="fibonacci-configuration">Fibonacci Configuration</h2>
-<p>The following two diagrams illustrate the Fibonacci configurations of LFSR with register shifting
-direction to LSB/Right and MSB/Left, respectively.</p>
-<p><img alt="Fibonacci Shifting to LSB" src="https://yunchizhang.github.io/digital_related/images/Fibonacci_LFSR_Shift_Right.png"/>
-<img alt="Fibonacci Shifting to MSB" src="https://yunchizhang.github.io/digital_related/images/Fibonacci_LFSR_Shift_Left.png"/></p>
-<p>The polynomial <span class="math">\(a\)</span> or <span class="math">\(b\)</span> determines the feedback connections of the shift register. It is a primitive
-binary polynomial in <span class="math">\(x\)</span>, <span class="math">\(a_nx^n+a_{n–1}x^{n–1}+...+a_2x^2+a_1x^1+a_0\)</span> or
-<span class="math">\(b_nx^n+b_{n–1}x^{n–1}+...+b_2x^2+b_1x^1+b_0\)</span>. For the coefficient <span class="math">\(a_{i}\)</span> or <span class="math">\(b_{i}\)</span>, the
-coefficient is <em>1</em> if there is a connection from the <em>ith</em> register to the adder. The leading term,
-<span class="math">\(a_n\)</span> or <span class="math">\(b_n\)</span>, and the constant term, <span class="math">\(a_0\)</span> or <span class="math">\(b_0\)</span>, of the generator polynomial must be <em>1</em>
-because the polynomial must be primitive. At each time step, all <em>n</em> registers in the generator
-update their values according to the value of the incoming arrow to the shift register. The adders
-perform addition modulo <em>2</em>. The output of the LFSR reflects the sum of all connections in the <em>m</em>
-or <em>k</em> mask vector.</p>
-<p>The <em>m</em> or <em>k</em> mask vector is optional. The output bit will be the bit shifted from the final
-register at the shift direction if a mask vector is not provided.</p>
-<p>The two Fibonacci configurations are equivalent if <span class="math">\(a_i=b_{n-i}\)</span> and the initial seeds are mirror
-imaged. For example, the maximum length sequence for a 7-bit LFSR should have <span class="math">\(a_i=1\)</span> at (7, 6, 0)
-and <span class="math">\(b_i=1\)</span> at (7, 1, 0).</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The tap indices start from the right most position in the LFSR.</p>
-</div>
-<h2 id="galois-configuration">Galois Configuration</h2>
-<p>The following two diagrams illustrate the Galois configurations of LFSR with register shifting
-direction to MSB/Left and LSB/Right, respectively.</p>
-<p><img alt="Galois Shifting to MSB" src="https://yunchizhang.github.io/digital_related/images/Galois_LFSR_Shift_Left.png"/>
-<img alt="Galois Shifting to LSB" src="https://yunchizhang.github.io/digital_related/images/Galois_LFSR_Shift_Right.png"/></p>
-<p>The Galois LFSR has the same output stream as the Fibonacci LFSR with a time/phase offset. So a
-different start point will be needed to get the same output each cycle.</p>
-<p>Coefficients of Galois LFSR shifting to MSB should be identical as Fibonacci LFSR shifting to LSB
-to generate the same sequence with a phase offset. Similarly for Galois LFSR shifting to LSB and
-Fibonacci shifting to MSB.</p>
-<h2 id="maximum-length-sequence-mls">Maximum Length Sequence (MLS)</h2>
-<p>The maximum sequence length is <span class="math">\(2^n – 1\)</span>. MLS have the following properties.</p>
-<h3 id="balance-property">Balance Property</h3>
-<p>The occurrence of 0 and 1 in the sequence should be approximately the same. More precisely, in a
-maximum length sequence of length <span class="math">\(2^n-1\)</span> there are <span class="math">\(2^{n-1}\)</span> ones and <span class="math">\(2^{n-1}-1\)</span> zeros. The
-number of ones equals the number of zeros  plus one, since the state containing only zeros cannot
-occur.</p>
-<h3 id="run-property">Run Property</h3>
-<p>A "run" is a sub-sequence of consecutive "1"s or consecutive "0"s within the MLS concerned. The
-number of runs is the number of such sub-sequences.</p>
-<p>Of all the "runs" (consisting of "1"s or "0"s) in the sequence :</p>
+<p>Let <span class="math">\(a\)</span> be the incident wave toward the load and <span class="math">\(b=\Gamma_La\)</span> be the reflected wave from the load,
+then the net power delivered to the load is:</p>
+<div class="math">$$P_L=|a|^2-|b|^2=|a|^2(1-|\Gamma_L|^2)$$</div>
+<p>But <span class="math">\(a\)</span> is not necessarily equal to the wave that the source would deliver under matched
+conditions. It is reduced due to reflection from the load and mismatch at the source.</p>
+<p><span class="math">\(a\)</span> can be written as a geometric series due to multiple reflections between source and load:</p>
+<div class="math">$$a=a_S[1+\Gamma_S\Gamma_L+(\Gamma_S\Gamma_L)^2+...]=\frac{a_S}{1-\Gamma_S\Gamma_L}$$</div>
+<p>where <span class="math">\(a_S\)</span> is the wave provided by the source.</p>
+<p>The delivered power is:</p>
+<div class="math">$$P_L=|a|^2(1-|\Gamma_L|^2)=|a_S|^2\cdot \frac{1-|\Gamma_L|^2}{|1-\Gamma_S\Gamma_L|^2}$$</div>
+<p>The maximum available power from the source is the power the source would deliver if the load was
+conjugately matched to it:</p>
+<div class="math">$$P_{avail}=|a_S|^2\cdot
+\frac{1-|\Gamma_S|^2}{|1-\Gamma_S\Gamma_S^*|^2}=\frac{|a_S|^2}{1-|\Gamma_S|^2}$$</div>
+<p>Therefore, the transducer power efficiency is:</p>
+<div class="math">$$T=\frac{P_L}{P_{avail}}=|a_S|^2\cdot \frac{1-|\Gamma_L|^2}{|1-\Gamma_S\Gamma_L|^2}\cdot
+\frac{1-|\Gamma_S|^2}{|a_S|^2}$$</div>
+<div class="math">$$T=\frac{(1-|\Gamma_S|^2)(1-|\Gamma_L|^2)}{|1-\Gamma_S\Gamma_L|^2}$$</div>
+<p>The mismatch loss is:</p>
+<div class="math">$$ML=\frac{1}{T}\Rightarrow ML_{dB}=-10\log_{10}T$$</div>
+<p>The <span class="math">\(Z_0\)</span> mismatch losses associated with the source and the load are given by <span class="math">\(1-|\Gamma_S|^2\)</span> and
+<span class="math">\(1-|\Gamma_L|^2\)</span>, respectively, while the uncertainty in the power transfer is given by <span class="math">\(|1-\Gamma_S\Gamma_L|^2\)</span>.</p>
+<h2 id="mismatch-loss-and-uncertainty">Mismatch Loss and Uncertainty</h2>
+<p>In practical cascade analysis, the phase difference between source and load reflection coefficients
+<span class="math">\(\Gamma_S\)</span> and <span class="math">\(\Gamma_L\)</span> is usually unknown, unless a full S-parameter or EM simulation is
+available.</p>
+<p>The minimum and maximum power transfer efficiencies are:</p>
+<div class="math">$$T_{min}=\frac{(1-|\Gamma_S|^2)(1-|\Gamma_L|^2)}{(1+|\Gamma_S||\Gamma_L|)^2}$$</div>
+<div class="math">$$T_{max}=\frac{(1-|\Gamma_S|^2)(1-|\Gamma_L|^2)}{(1-|\Gamma_S||\Gamma_L|)^2}$$</div>
+<p>Assuming the phase between reflections is unknown and uniformly distributed over <span class="math">\((0,2\pi)\)</span>, the
+typical-case or mean power transfer efficiency can be estimated.</p>
+<p>Let:</p>
 <ul>
-<li>One half of the runs are of length 1.</li>
-<li>One quarter of the runs are of length 2.</li>
-<li>One eighth of the runs are of length 3.</li>
-<li>... etc. ...</li>
+<li><span class="math">\(\gamma_S=|\Gamma_S|\)</span></li>
+<li><span class="math">\(\gamma_L=|\Gamma_L|\)</span></li>
+<li><span class="math">\(\theta=\angle(\Gamma_S\Gamma_L)\)</span>, the unknown phase combination</li>
 </ul>
-<h3 id="correlation-property">Correlation Property</h3>
-<p>The circular autocorrelation of an MLS is a Kronecker delta function (with DC offset and time
-delay, depending on implementation). For the <span class="math">\(\pm 1\)</span> convention, i.e., bit value 1 is assigned
-<span class="math">\(s=+1\)</span> and bit value 0 <span class="math">\(s=-1\)</span>, mapping XOR to the negative of the product:</p>
-<div class="math">$$R(n)=\frac{1}{N}\sum_{m=1}^N s[m]s^*[m+n]_N=\begin{cases}1 &amp; if\space n=0 \\ -\frac{1}{N} &amp; if
-\space 0&lt;n&lt;N\end{cases}$$</div>
-<p>where <span class="math">\(s^*\)</span> represents a complex conjugate and <span class="math">\([m+n]_N\)</span> represents a circular shift.</p>
-<p>The linear autocorrelation of an MLS approximates a Kronecker delta.</p>
-<p>To generate a maximum length sequence for a generator polynomial that has the degree n, set
-Polynomial to a value from the following table. The table is applied to Fibonacci Shifting to LSB
-and Galois Shifting to MSB configurations. Counterpart values of <span class="math">\(n-i\)</span> should be used for the other
-two configurations.</p>
-<div class="custom-8col-table">
-<table>
-<thead>
-<tr>
-<th><strong>n</strong></th>
-<th><strong>Generator Polynomial</strong></th>
-<th><strong>n</strong></th>
-<th><strong>Generator Polynomial</strong></th>
-<th><strong>n</strong></th>
-<th><strong>Generator Polynomial</strong></th>
-<th><strong>n</strong></th>
-<th><strong>Generator Polynomial</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>2</td>
-<td>[2 1 0]</td>
-<td>15</td>
-<td>[15 14 0]</td>
-<td>28</td>
-<td>[28 25 0]</td>
-<td>41</td>
-<td>[41 3 0]</td>
-</tr>
-<tr>
-<td>3</td>
-<td>[3 2 0]</td>
-<td>16</td>
-<td>[16 15 13 4 0]</td>
-<td>29</td>
-<td>[29 27 0]</td>
-<td>42</td>
-<td>[42 23 22 1 0]</td>
-</tr>
-<tr>
-<td>4</td>
-<td>[4 3 0]</td>
-<td>17</td>
-<td>[17 14 0]</td>
-<td>30</td>
-<td>[30 29 28 7 0]</td>
-<td>43</td>
-<td>[43 6 4 3 0]</td>
-</tr>
-<tr>
-<td>5</td>
-<td>[5 3 0]</td>
-<td>18</td>
-<td>[18 11 0]</td>
-<td>31</td>
-<td>[31 28 0]</td>
-<td>44</td>
-<td>[44 6 5 2 0]</td>
-</tr>
-<tr>
-<td>6</td>
-<td>[6 5 0]</td>
-<td>19</td>
-<td>[19 18 17 14 0]</td>
-<td>32</td>
-<td>[32 31 30 10 0]</td>
-<td>45</td>
-<td>[45 4 3 1 0]</td>
-</tr>
-<tr>
-<td>7</td>
-<td>[7 6 0]</td>
-<td>20</td>
-<td>[20 17 0]</td>
-<td>33</td>
-<td>[33 20 0]</td>
-<td>46</td>
-<td>[46 21 10 1 0]</td>
-</tr>
-<tr>
-<td>8</td>
-<td>[8 6 5 4 0]</td>
-<td>21</td>
-<td>[21 19 0]</td>
-<td>34</td>
-<td>[34 15 14 1 0]</td>
-<td>47</td>
-<td>[47 14 0]</td>
-</tr>
-<tr>
-<td>9</td>
-<td>[9 5 0]</td>
-<td>22</td>
-<td>[22 21 0]</td>
-<td>35</td>
-<td>[35 2 0]</td>
-<td>48</td>
-<td>[48 28 27 1 0]</td>
-</tr>
-<tr>
-<td>10</td>
-<td>[10 7 0]</td>
-<td>23</td>
-<td>[23 18 0]</td>
-<td>36</td>
-<td>[36 11 0]</td>
-<td>49</td>
-<td>[49 9 0]</td>
-</tr>
-<tr>
-<td>11</td>
-<td>[11 9 0]</td>
-<td>24</td>
-<td>[24 23 22 17 0]</td>
-<td>37</td>
-<td>[37 12 10 2 0]</td>
-<td>50</td>
-<td>[50 4 3 2 0]</td>
-</tr>
-<tr>
-<td>12</td>
-<td>[12 11 8 6 0]</td>
-<td>25</td>
-<td>[25 22 0]</td>
-<td>38</td>
-<td>[38 6 5 1 0]</td>
-<td>51</td>
-<td>[51 6 3 1 0]</td>
-</tr>
-<tr>
-<td>13</td>
-<td>[13 12 10 9 0]</td>
-<td>26</td>
-<td>[26 25 24 20 0]</td>
-<td>39</td>
-<td>[39 8 0]</td>
-<td>52</td>
-<td>[52 3 0]</td>
-</tr>
-<tr>
-<td>14</td>
-<td>[14 13 8 4 0]</td>
-<td>27</td>
-<td>[27 26 25 22 0]</td>
-<td>40</td>
-<td>[40 5 4 3 0]</td>
-<td>53</td>
-<td>[53 6 2 1 0]</td>
-</tr>
-</tbody>
-</table>
-</div>
+<p>Then:</p>
+<div class="math">$$T(\theta)=\frac{(1-\gamma_S^2)(1-\gamma_L^2)}{1-2\gamma_S\gamma_L\cos(\theta)+\gamma_S^2\gamma_L^2}$$</div>
+<p>The mean power transfer efficiency is given by:</p>
+<div class="math">$$\bar{T}=\frac{1}{2\pi}\int_0^{2\pi}T(\theta)d\theta=\frac{(1-\gamma_S^2)(1-\gamma_L^2)}{1-\gamma_S^2\gamma_L^2}$$</div>
+<p>Therefore,</p>
+<div class="math">$$\begin{cases}T_{min}=\frac{(1-\gamma_S^2)(1-\gamma_L^2)}{(1+\gamma_S\gamma_L)^2} \\ \\
+T_{typical}=\frac{(1-\gamma_S^2)(1-\gamma_L^2)}{1-\gamma_S^2\gamma_L^2} \\ \\
+T_{max}=\frac{(1-\gamma_S^2)(1-\gamma_L^2)}{(1-\gamma_S\gamma_L)^2}\end{cases}$$</div>
+<p>The minimum and maximum mismatch losses are:</p>
+<div class="math">$$\begin{cases}ML_{dB,min}=-20\log_{10}T_{max} \\ \\ ML_{dB, typical}=-20\log_{10}T_{typical} \\ \\ ML_{dB,max}=-20\log_{10}T_{min}\end{cases}$$</div>
+<p>The uncertainty limits in the mismatch error is given in decibels (dB) by,</p>
+<div class="math">$$20\log_{10}(1\pm \gamma_S\gamma_L)$$</div>
+<p>The power magnitude ripple in dB can be estimated as:</p>
+<div class="math">$$ripple_{mag}=10\log_{10}\frac{1+\gamma_S\gamma_L}{1-\gamma_S\gamma_L}$$</div>
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var align = "center",
         indent = "0em",
@@ -414,8 +264,8 @@ two configurations.</p>
                 <a class="accordion-toggle disqus-comment-count comment-count collapsed"
                    data-toggle="collapse"
                    data-parent="#accordion2"
-                   data-disqus-identifier="https://yunchizhang.github.io/posts/lfsr.html"
-                   href="https://yunchizhang.github.io/posts/lfsr.html#comment_thread"
+                   data-disqus-identifier="https://yunchizhang.github.io/posts/rf_mismatch_error.html"
+                   href="https://yunchizhang.github.io/posts/rf_mismatch_error.html#comment_thread"
                    id="comment-accordion-toggle">
                     Comments
                 </a>
@@ -433,8 +283,8 @@ two configurations.</p>
         (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
     }());
 
-    var disqus_identifier = 'https://yunchizhang.github.io/posts/lfsr.html';
-    var disqus_url = 'https://yunchizhang.github.io/posts/lfsr.html';
+    var disqus_identifier = 'https://yunchizhang.github.io/posts/rf_mismatch_error.html';
+    var disqus_url = 'https://yunchizhang.github.io/posts/rf_mismatch_error.html';
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -460,26 +310,25 @@ two configurations.</p>
             <aside>
             <nav>
             <ul class="articles-timeline">
-                <li class="previous-article">« <a href="https://yunchizhang.github.io/posts/mathjax_support.html" title="Previous: Mathjax support in VS Code and Pelican">Mathjax support in VS Code and Pelican</a></li>
-                <li class="next-article"><a href="https://yunchizhang.github.io/posts/rf_mismatch_error.html" title="Next: RF Mismatch Loss, Error and Uncertainty">RF Mismatch Loss, Error and Uncertainty</a> »</li>
+                <li class="previous-article">« <a href="https://yunchizhang.github.io/posts/lfsr.html" title="Previous: Linear Feedback Shift Register">Linear Feedback Shift Register</a></li>
             </ul>
             </nav>
             </aside>
         </div>
         <section id="article-sidebar" class="span2">
             <h4>Published</h4>
-            <time itemprop="dateCreated" datetime="2025-05-09T09:20:00-05:00">Fri 09 May 2025</time>
+            <time itemprop="dateCreated" datetime="2025-07-14T09:20:00-05:00">Mon 14 July 2025</time>
             <h4>Category</h4>
-            <a class="category-link" href="https://yunchizhang.github.io/categories#digital-communications-ref">Digital Communications</a>
+            <a class="category-link" href="https://yunchizhang.github.io/categories#rf-system-ref">RF System</a>
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
-                <li><a href="https://yunchizhang.github.io/tags#communications-ref">Communications
+                <li><a href="https://yunchizhang.github.io/tags#microwave-ref">Microwave
                     <span class="superscript">1</span>
 </a></li>
-                <li><a href="https://yunchizhang.github.io/tags#digital-ref">Digital
+                <li><a href="https://yunchizhang.github.io/tags#rf-ref">RF
                     <span class="superscript">1</span>
 </a></li>
-                <li><a href="https://yunchizhang.github.io/tags#lfsr-ref">LFSR
+                <li><a href="https://yunchizhang.github.io/tags#system-ref">System
                     <span class="superscript">1</span>
 </a></li>
             </ul>

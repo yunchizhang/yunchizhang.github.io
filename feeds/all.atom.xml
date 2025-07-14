@@ -1,5 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Yzowledge</title><link href="https://yunchizhang.github.io/" rel="alternate"></link><link href="https://yunchizhang.github.io/feeds/all.atom.xml" rel="self"></link><id>https://yunchizhang.github.io/</id><updated>2025-05-09T09:20:00-05:00</updated><subtitle>Knowledge and Experience</subtitle><entry><title>Linear Feedback Shift Register</title><link href="https://yunchizhang.github.io/posts/lfsr.html" rel="alternate"></link><published>2025-05-09T09:20:00-05:00</published><updated>2025-05-09T09:20:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2025-05-09:/posts/lfsr.html</id><summary type="html">&lt;p&gt;Describe details of linear feedback shift register (LFSR).&lt;/p&gt;</summary><content type="html">
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Yzowledge</title><link href="https://yunchizhang.github.io/" rel="alternate"></link><link href="https://yunchizhang.github.io/feeds/all.atom.xml" rel="self"></link><id>https://yunchizhang.github.io/</id><updated>2025-07-14T09:20:00-05:00</updated><subtitle>Knowledge and Experience</subtitle><entry><title>RF Mismatch Loss, Error and Uncertainty</title><link href="https://yunchizhang.github.io/posts/rf_mismatch_error.html" rel="alternate"></link><published>2025-07-14T09:20:00-05:00</published><updated>2025-07-14T09:20:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2025-07-14:/posts/rf_mismatch_error.html</id><summary type="html">&lt;p&gt;Analysis of RF mismatch between components.&lt;/p&gt;</summary><content type="html">
+&lt;p&gt;For maximum transfer of the power from any RF source component, the total input impedance of the
+component connected to the source must be equal to the conjugate of the source impedance. In
+practice, there is always some degree of impedance mismatch between the source and connected
+component. The power loss due to the impedance mismatch is the mismatch loss. Mismatch loss in
+transmission line theory is the amount of power expressed in decibels that will not be available on
+the output due to impedance mismatches and reflections.&lt;/p&gt;
+&lt;p&gt;The impedance mismatch is expressed in terms of reflection coefficient &lt;span class="math"&gt;\(\Gamma\)&lt;/span&gt;, voltage standing
+wave ratio (&lt;em&gt;VSWR&lt;/em&gt;) and return loss (&lt;em&gt;RL&lt;/em&gt;). These quantities are interrelated:&lt;/p&gt;
+&lt;div class="math"&gt;$$\Gamma=\frac{Z-Z_0}{Z+Z_0}$$&lt;/div&gt;
+&lt;div class="math"&gt;$$|\Gamma|=\frac{VSWR-1}{VSWR+1}$$&lt;/div&gt;
+&lt;div class="math"&gt;$$RL=-20\log_{10}|\Gamma|$$&lt;/div&gt;
+&lt;p&gt;If there are two components in cascade, the resultant mismatch loss is not only due to the
+mismatches from the individual components, but also from the reflections from each component and
+their combination. The overall mismatch loss cannot be calculated by just adding up the individual
+loss contributions from each component. Depending on how the multiple reflections combine, the
+overall system loss may be lower or higher than the sum of the mismatch loss from each component.
+The uncertainty associated in the evaluation of the mismatch error is known as the mismatch
+uncertainty and expressed in dB.&lt;/p&gt;
+&lt;h2 id="transducer-power-transfer-efficiency"&gt;Transducer Power Transfer Efficiency&lt;/h2&gt;
+&lt;p&gt;For two cascaded RF components, defined as source and load, given:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Source with output reflection coefficient &lt;span class="math"&gt;\(\Gamma_S\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;Load with input reflection coefficient &lt;span class="math"&gt;\(\Gamma_L\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;Source and Load are connected&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Let &lt;span class="math"&gt;\(a\)&lt;/span&gt; be the incident wave toward the load and &lt;span class="math"&gt;\(b=\Gamma_La\)&lt;/span&gt; be the reflected wave from the load,
+then the net power delivered to the load is:&lt;/p&gt;
+&lt;div class="math"&gt;$$P_L=|a|^2-|b|^2=|a|^2(1-|\Gamma_L|^2)$$&lt;/div&gt;
+&lt;p&gt;But &lt;span class="math"&gt;\(a\)&lt;/span&gt; is not necessarily equal to the wave that the source would deliver under matched
+conditions. It is reduced due to reflection from the load and mismatch at the source.&lt;/p&gt;
+&lt;p&gt;&lt;span class="math"&gt;\(a\)&lt;/span&gt; can be written as a geometric series due to multiple reflections between source and load:&lt;/p&gt;
+&lt;div class="math"&gt;$$a=a_S[1+\Gamma_S\Gamma_L+(\Gamma_S\Gamma_L)^2+...]=\frac{a_S}{1-\Gamma_S\Gamma_L}$$&lt;/div&gt;
+&lt;p&gt;where &lt;span class="math"&gt;\(a_S\)&lt;/span&gt; is the wave provided by the source.&lt;/p&gt;
+&lt;p&gt;The delivered power is:&lt;/p&gt;
+&lt;div class="math"&gt;$$P_L=|a|^2(1-|\Gamma_L|^2)=|a_S|^2\cdot \frac{1-|\Gamma_L|^2}{|1-\Gamma_S\Gamma_L|^2}$$&lt;/div&gt;
+&lt;p&gt;The maximum available power from the source is the power the source would deliver if the load was
+conjugately matched to it:&lt;/p&gt;
+&lt;div class="math"&gt;$$P_{avail}=|a_S|^2\cdot
+\frac{1-|\Gamma_S|^2}{|1-\Gamma_S\Gamma_S^*|^2}=\frac{|a_S|^2}{1-|\Gamma_S|^2}$$&lt;/div&gt;
+&lt;p&gt;Therefore, the transducer power efficiency is:&lt;/p&gt;
+&lt;div class="math"&gt;$$T=\frac{P_L}{P_{avail}}=|a_S|^2\cdot \frac{1-|\Gamma_L|^2}{|1-\Gamma_S\Gamma_L|^2}\cdot
+\frac{1-|\Gamma_S|^2}{|a_S|^2}$$&lt;/div&gt;
+&lt;div class="math"&gt;$$T=\frac{(1-|\Gamma_S|^2)(1-|\Gamma_L|^2)}{|1-\Gamma_S\Gamma_L|^2}$$&lt;/div&gt;
+&lt;p&gt;The mismatch loss is:&lt;/p&gt;
+&lt;div class="math"&gt;$$ML=\frac{1}{T}\Rightarrow ML_{dB}=-10\log_{10}T$$&lt;/div&gt;
+&lt;p&gt;The &lt;span class="math"&gt;\(Z_0\)&lt;/span&gt; mismatch losses associated with the source and the load are given by &lt;span class="math"&gt;\(1-|\Gamma_S|^2\)&lt;/span&gt; and
+&lt;span class="math"&gt;\(1-|\Gamma_L|^2\)&lt;/span&gt;, respectively, while the uncertainty in the power transfer is given by &lt;span class="math"&gt;\(|1-\Gamma_S\Gamma_L|^2\)&lt;/span&gt;.&lt;/p&gt;
+&lt;h2 id="mismatch-loss-and-uncertainty"&gt;Mismatch Loss and Uncertainty&lt;/h2&gt;
+&lt;p&gt;In practical cascade analysis, the phase difference between source and load reflection coefficients
+&lt;span class="math"&gt;\(\Gamma_S\)&lt;/span&gt; and &lt;span class="math"&gt;\(\Gamma_L\)&lt;/span&gt; is usually unknown, unless a full S-parameter or EM simulation is
+available.&lt;/p&gt;
+&lt;p&gt;The minimum and maximum power transfer efficiencies are:&lt;/p&gt;
+&lt;div class="math"&gt;$$T_{min}=\frac{(1-|\Gamma_S|^2)(1-|\Gamma_L|^2)}{(1+|\Gamma_S||\Gamma_L|)^2}$$&lt;/div&gt;
+&lt;div class="math"&gt;$$T_{max}=\frac{(1-|\Gamma_S|^2)(1-|\Gamma_L|^2)}{(1-|\Gamma_S||\Gamma_L|)^2}$$&lt;/div&gt;
+&lt;p&gt;Assuming the phase between reflections is unknown and uniformly distributed over &lt;span class="math"&gt;\((0,2\pi)\)&lt;/span&gt;, the
+typical-case or mean power transfer efficiency can be estimated.&lt;/p&gt;
+&lt;p&gt;Let:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class="math"&gt;\(\gamma_S=|\Gamma_S|\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class="math"&gt;\(\gamma_L=|\Gamma_L|\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class="math"&gt;\(\theta=\angle(\Gamma_S\Gamma_L)\)&lt;/span&gt;, the unknown phase combination&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Then:&lt;/p&gt;
+&lt;div class="math"&gt;$$T(\theta)=\frac{(1-\gamma_S^2)(1-\gamma_L^2)}{1-2\gamma_S\gamma_L\cos(\theta)+\gamma_S^2\gamma_L^2}$$&lt;/div&gt;
+&lt;p&gt;The mean power transfer efficiency is given by:&lt;/p&gt;
+&lt;div class="math"&gt;$$\bar{T}=\frac{1}{2\pi}\int_0^{2\pi}T(\theta)d\theta=\frac{(1-\gamma_S^2)(1-\gamma_L^2)}{1-\gamma_S^2\gamma_L^2}$$&lt;/div&gt;
+&lt;p&gt;Therefore,&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{cases}T_{min}=\frac{(1-\gamma_S^2)(1-\gamma_L^2)}{(1+\gamma_S\gamma_L)^2} \\ \\
+T_{typical}=\frac{(1-\gamma_S^2)(1-\gamma_L^2)}{1-\gamma_S^2\gamma_L^2} \\ \\
+T_{max}=\frac{(1-\gamma_S^2)(1-\gamma_L^2)}{(1-\gamma_S\gamma_L)^2}\end{cases}$$&lt;/div&gt;
+&lt;p&gt;The minimum and maximum mismatch losses are:&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{cases}ML_{dB,min}=-20\log_{10}T_{max} \\ \\ ML_{dB, typical}=-20\log_{10}T_{typical} \\ \\ ML_{dB,max}=-20\log_{10}T_{min}\end{cases}$$&lt;/div&gt;
+&lt;p&gt;The uncertainty limits in the mismatch error is given in decibels (dB) by,&lt;/p&gt;
+&lt;div class="math"&gt;$$20\log_{10}(1\pm \gamma_S\gamma_L)$$&lt;/div&gt;
+&lt;p&gt;The power magnitude ripple in dB can be estimated as:&lt;/p&gt;
+&lt;div class="math"&gt;$$ripple_{mag}=10\log_{10}\frac{1+\gamma_S\gamma_L}{1-\gamma_S\gamma_L}$$&lt;/div&gt;
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width &lt; 768) ? "left" : align;
+        indent = (screen.width &lt; 768) ? "0em" : indent;
+        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+&lt;/script&gt;</content><category term="RF System"></category><category term="RF"></category><category term="Microwave"></category><category term="System"></category></entry><entry><title>Linear Feedback Shift Register</title><link href="https://yunchizhang.github.io/posts/lfsr.html" rel="alternate"></link><published>2025-05-09T09:20:00-05:00</published><updated>2025-05-09T09:20:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2025-05-09:/posts/lfsr.html</id><summary type="html">&lt;p&gt;Describe details of linear feedback shift register (LFSR).&lt;/p&gt;</summary><content type="html">
 &lt;p&gt;A linear-feedback shift register (LFSR) is a shift register whose input bit is a linear function of
 its previous state.&lt;/p&gt;
 &lt;p&gt;The most commonly used linear function of single bits is exclusive-or (XOR). Thus, an LFSR is most
