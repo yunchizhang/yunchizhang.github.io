@@ -70,7 +70,7 @@ automatically.&lt;/p&gt;
 &lt;li&gt;
 &lt;p&gt;Consider a CI job or hook to auto-sync branches (e.g., GitHub Action that pushes to GitLab). That way developers only need to push once.&lt;/p&gt;
 &lt;/li&gt;
-&lt;/ul&gt;</content><category term="Content Creation"></category><category term="repository"></category><category term="git"></category><category term="remote"></category></entry><entry><title>Linear Feedback Shift Register</title><link href="https://yunchizhang.github.io/posts/lfsr.html" rel="alternate"></link><published>2025-05-09T09:20:00-05:00</published><updated>2025-05-09T09:20:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2025-05-09:/posts/lfsr.html</id><summary type="html">&lt;p&gt;Describe details of linear feedback shift register (LFSR).&lt;/p&gt;</summary><content type="html">
+&lt;/ul&gt;</content><category term="Coding"></category><category term="repository"></category><category term="git"></category><category term="remote"></category></entry><entry><title>Linear Feedback Shift Register</title><link href="https://yunchizhang.github.io/posts/lfsr.html" rel="alternate"></link><published>2025-05-09T09:20:00-05:00</published><updated>2025-05-09T09:20:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2025-05-09:/posts/lfsr.html</id><summary type="html">&lt;p&gt;Describe details of linear feedback shift register (LFSR).&lt;/p&gt;</summary><content type="html">
 &lt;p&gt;A linear-feedback shift register (LFSR) is a shift register whose input bit is a linear function of
 its previous state.&lt;/p&gt;
 &lt;p&gt;The most commonly used linear function of single bits is exclusive-or (XOR). Thus, an LFSR is most
