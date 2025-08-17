@@ -1,6 +1,6 @@
 Title: Synchronizing Multiple Remote Repositories
 Date: 2025-8-17 11:08
-Category: Content Creation
+Category: Coding
 Tags: repository, git, remote
 Slug: multi_remote_repos
 Authors: Yunchi Zhang
