@@ -15,18 +15,18 @@
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary">
 
-<meta name="keywords" content="RF, Microwave, System, RF System, RF Mismatch" />
+<meta name="keywords" content="repository, git, remote, Content Creation, Git, Repository" />
 
-<meta property="og:title" content="RF Mismatch Loss, Error and Uncertainty "/>
-<meta property="og:url" content="https://yunchizhang.github.io/posts/rf_mismatch_error.html" />
-<meta property="og:description" content="Analysis of RF mismatch between components." />
+<meta property="og:title" content="Synchronizing Multiple Remote Repositories "/>
+<meta property="og:url" content="https://yunchizhang.github.io/posts/multi_remote_repos.html" />
+<meta property="og:description" content="How to synchronize multiple remote repositories with a local one." />
 <meta property="og:site_name" content="Yzowledge" />
 <meta property="og:article:author" content="Yunchi Zhang" />
-<meta property="og:article:published_time" content="2025-07-14T09:20:00-05:00" />
-<meta name="twitter:title" content="RF Mismatch Loss, Error and Uncertainty ">
-<meta name="twitter:description" content="Analysis of RF mismatch between components.">
+<meta property="og:article:published_time" content="2025-08-17T11:08:00-05:00" />
+<meta name="twitter:title" content="Synchronizing Multiple Remote Repositories ">
+<meta name="twitter:description" content="How to synchronize multiple remote repositories with a local one.">
 
-        <title>RF Mismatch Loss, Error and Uncertainty  · Yzowledge
+        <title>Synchronizing Multiple Remote Repositories  · Yzowledge
 </title>
         <link rel="shortcut icon" href="https://yunchizhang.github.io/theme/images/favicon.ico" type="image/x-icon" />
         <link rel="icon" href="https://yunchizhang.github.io/theme/images/apple-touch-icon-152x152.png" type="image/png" />
@@ -80,8 +80,8 @@
 <div class="row-fluid">
     <header class="page-header span10 offset2">
         <h1>
-            <a href="https://yunchizhang.github.io/posts/rf_mismatch_error.html">
-                RF Mismatch Loss, Error and Uncertainty
+            <a href="https://yunchizhang.github.io/posts/multi_remote_repos.html">
+                Synchronizing Multiple Remote Repositories
             </a>
         </h1>
     </header>
@@ -93,8 +93,14 @@
         <h4>Contents</h4>
         <div class="toc">
 <ul>
-<li><a href="#transducer-power-transfer-efficiency">Transducer Power Transfer Efficiency</a></li>
-<li><a href="#mismatch-loss-and-uncertainty">Mismatch Loss and Uncertainty</a></li>
+<li><a href="#multiple-remote-git-repositories">Multiple Remote Git Repositories</a><ul>
+<li><a href="#1-add-both-remotes">1. Add Both Remotes</a></li>
+<li><a href="#2-keeping-both-in-sync">2. Keeping Both in Sync</a></li>
+<li><a href="#3-avoiding-divergence">3. Avoiding Divergence</a></li>
+<li><a href="#4-automating-multi-push">4. Automating Multi-Push</a></li>
+<li><a href="#5-best-practices">5. Best Practices</a></li>
+</ul>
+</li>
 </ul>
 </div>
         </nav>
@@ -102,144 +108,77 @@
     <div class="span8 article-content">
             
             
-<p>For maximum transfer of the power from any RF source component, the total input impedance of the
-component connected to the source must be equal to the conjugate of the source impedance. In
-practice, there is always some degree of impedance mismatch between the source and connected
-component. The power loss due to the impedance mismatch is the mismatch loss. Mismatch loss in
-transmission line theory is the amount of power expressed in decibels that will not be available on
-the output due to impedance mismatches and reflections.</p>
-<p>The impedance mismatch is expressed in terms of reflection coefficient <span class="math">\(\Gamma\)</span>, voltage standing
-wave ratio (<em>VSWR</em>) and return loss (<em>RL</em>). These quantities are interrelated:</p>
-<div class="math">$$\Gamma=\frac{Z-Z_0}{Z+Z_0}$$</div>
-<div class="math">$$|\Gamma|=\frac{VSWR-1}{VSWR+1}$$</div>
-<div class="math">$$RL=-20\log_{10}|\Gamma|$$</div>
-<p>If there are two components in cascade, the resultant mismatch loss is not only due to the
-mismatches from the individual components, but also from the reflections from each component and
-their combination. The overall mismatch loss cannot be calculated by just adding up the individual
-loss contributions from each component. Depending on how the multiple reflections combine, the
-overall system loss may be lower or higher than the sum of the mismatch loss from each component.
-The uncertainty associated in the evaluation of the mismatch error is known as the mismatch
-uncertainty and expressed in dB.</p>
-<h2 id="transducer-power-transfer-efficiency">Transducer Power Transfer Efficiency</h2>
-<p>For two cascaded RF components, defined as source and load, given:</p>
+<h2 id="multiple-remote-git-repositories">Multiple Remote Git Repositories</h2>
+<p>Synchronizing two remote Git repositories is often needed if, for example, you’re mirroring between
+<a href="https://github.com">GitHub</a> and <a href="https://gitlab.com">GitLab</a>, or keeping a company’s internal Git server in sync with
+a public one. There are several approaches depending on you needs. The following workflow is an example of having two
+repositories (say GitHub + GitLab, or company server + external host) that both accept pushes, and developers might
+push to either.</p>
+<p>That's what I'd call a <em>collaborative multi-remote workflow</em>. The steps are:</p>
+<h3 id="1-add-both-remotes">1. Add Both Remotes</h3>
+<p>Suppose you cloned from server A:</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>git@serverA:user/repo.git
+<span class="nb">cd</span><span class="w"> </span>repo
+</code></pre></div>
+<p>Now add server B:</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>serverB<span class="w"> </span>git@serverB:user/repo.git
+</code></pre></div>
+<p>You’ll now have:</p>
 <ul>
-<li>Source with output reflection coefficient <span class="math">\(\Gamma_S\)</span></li>
-<li>Load with input reflection coefficient <span class="math">\(\Gamma_L\)</span></li>
-<li>Source and Load are connected</li>
+<li><strong>origin</strong> → server A</li>
+<li><strong>serverB</strong> → server B</li>
 </ul>
-<p>Let <span class="math">\(a\)</span> be the incident wave toward the load and <span class="math">\(b=\Gamma_La\)</span> be the reflected wave from the load,
-then the net power delivered to the load is:</p>
-<div class="math">$$P_L=|a|^2-|b|^2=|a|^2(1-|\Gamma_L|^2)$$</div>
-<p>But <span class="math">\(a\)</span> is not necessarily equal to the wave that the source would deliver under matched
-conditions. It is reduced due to reflection from the load and mismatch at the source.</p>
-<p><span class="math">\(a\)</span> can be written as a geometric series due to multiple reflections between source and load:</p>
-<div class="math">$$a=a_S[1+\Gamma_S\Gamma_L+(\Gamma_S\Gamma_L)^2+...]=\frac{a_S}{1-\Gamma_S\Gamma_L}$$</div>
-<p>where <span class="math">\(a_S\)</span> is the wave provided by the source.</p>
-<p>The delivered power is:</p>
-<div class="math">$$P_L=|a|^2(1-|\Gamma_L|^2)=|a_S|^2\cdot \frac{1-|\Gamma_L|^2}{|1-\Gamma_S\Gamma_L|^2}$$</div>
-<p>The maximum available power from the source is the power the source would deliver if the load was
-conjugately matched to it:</p>
-<div class="math">$$P_{avail}=|a_S|^2\cdot
-\frac{1-|\Gamma_S|^2}{|1-\Gamma_S\Gamma_S^*|^2}=\frac{|a_S|^2}{1-|\Gamma_S|^2}$$</div>
-<p>Therefore, the transducer power efficiency is:</p>
-<div class="math">$$T=\frac{P_L}{P_{avail}}=|a_S|^2\cdot \frac{1-|\Gamma_L|^2}{|1-\Gamma_S\Gamma_L|^2}\cdot
-\frac{1-|\Gamma_S|^2}{|a_S|^2}$$</div>
-<div class="math">$$T=\frac{(1-|\Gamma_S|^2)(1-|\Gamma_L|^2)}{|1-\Gamma_S\Gamma_L|^2}$$</div>
-<p>The mismatch loss is:</p>
-<div class="math">$$ML=\frac{1}{T}\Rightarrow ML_{dB}=-10\log_{10}T$$</div>
-<p>The <span class="math">\(Z_0\)</span> mismatch losses associated with the source and the load are given by <span class="math">\(1-|\Gamma_S|^2\)</span> and
-<span class="math">\(1-|\Gamma_L|^2\)</span>, respectively, while the uncertainty in the power transfer is given by <span class="math">\(|1-\Gamma_S\Gamma_L|^2\)</span>.</p>
-<h2 id="mismatch-loss-and-uncertainty">Mismatch Loss and Uncertainty</h2>
-<p>In practical cascade analysis, the phase difference between source and load reflection coefficients
-<span class="math">\(\Gamma_S\)</span> and <span class="math">\(\Gamma_L\)</span> is usually unknown, unless a full S-parameter or EM simulation is
-available.</p>
-<p>The minimum and maximum power transfer efficiencies are:</p>
-<div class="math">$$T_{min}=\frac{(1-|\Gamma_S|^2)(1-|\Gamma_L|^2)}{(1+|\Gamma_S||\Gamma_L|)^2}$$</div>
-<div class="math">$$T_{max}=\frac{(1-|\Gamma_S|^2)(1-|\Gamma_L|^2)}{(1-|\Gamma_S||\Gamma_L|)^2}$$</div>
-<p>Assuming the phase between reflections is unknown and uniformly distributed over <span class="math">\((0,2\pi)\)</span>, the
-typical-case or mean power transfer efficiency can be estimated.</p>
-<p>Let:</p>
+<p>Check with:</p>
+<div class="highlight"><pre><span></span><code>git remote -v
+</code></pre></div>
+<h3 id="2-keeping-both-in-sync">2. Keeping Both in Sync</h3>
+<p>Since developers may push to either, you’ll want to <em>fetch and merge/rebase</em> changes from both regularly:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Fetch all branches from both</span>
+git<span class="w"> </span>fetch<span class="w"> </span>origin
+git<span class="w"> </span>fetch<span class="w"> </span>serverB
+</code></pre></div>
+<p>Now, update your local branch:</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>checkout<span class="w"> </span>main
+git<span class="w"> </span>pull<span class="w"> </span>origin<span class="w"> </span>main
+git<span class="w"> </span>pull<span class="w"> </span>serverB<span class="w"> </span>main
+</code></pre></div>
+<p>That merges in changes from both sides.
+Then push back to both:</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>main
+git<span class="w"> </span>push<span class="w"> </span>serverB<span class="w"> </span>main
+</code></pre></div>
+<h3 id="3-avoiding-divergence">3. Avoiding Divergence</h3>
+<p>If people are working on feature branches, do the same process:</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>checkout<span class="w"> </span>feature-x
+git<span class="w"> </span>pull<span class="w"> </span>origin<span class="w"> </span>feature-x
+git<span class="w"> </span>pull<span class="w"> </span>serverB<span class="w"> </span>feature-x
+git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>feature-x
+git<span class="w"> </span>push<span class="w"> </span>serverB<span class="w"> </span>feature-x
+</code></pre></div>
+<p>If there are conflicts, you’ll resolve them locally and push the resolved history to both remotes.</p>
+<h3 id="4-automating-multi-push">4. Automating Multi-Push</h3>
+<p>You can configure Git so one push command updates both:</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>remote<span class="w"> </span>set-url<span class="w"> </span>--add<span class="w"> </span>--push<span class="w"> </span>origin<span class="w"> </span>git@serverA:user/repo.git
+git<span class="w"> </span>remote<span class="w"> </span>set-url<span class="w"> </span>--add<span class="w"> </span>--push<span class="w"> </span>origin<span class="w"> </span>git@serverB:user/repo.git
+</code></pre></div>
+<p>Now:</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>main
+</code></pre></div>
+<p>will push to both A and B.</p>
+<p>But pulls are still separate — you’ll need to git pull from both remotes, because Git doesn’t merge multiple fetches
+automatically.</p>
+<h3 id="5-best-practices">5. Best Practices</h3>
 <ul>
-<li><span class="math">\(\gamma_S=|\Gamma_S|\)</span></li>
-<li><span class="math">\(\gamma_L=|\Gamma_L|\)</span></li>
-<li><span class="math">\(\theta=\angle(\Gamma_S\Gamma_L)\)</span>, the unknown phase combination</li>
+<li>
+<p>Decide on a primary remote for coordination (e.g., GitHub). Pull from both, but if conflicts arise, resolve and push to both.</p>
+</li>
+<li>
+<p>Use branch protection rules on both servers if you want consistent workflow (reviews, CI/CD, etc.).</p>
+</li>
+<li>
+<p>Consider a CI job or hook to auto-sync branches (e.g., GitHub Action that pushes to GitLab). That way developers only need to push once.</p>
+</li>
 </ul>
-<p>Then:</p>
-<div class="math">$$T(\theta)=\frac{(1-\gamma_S^2)(1-\gamma_L^2)}{1-2\gamma_S\gamma_L\cos(\theta)+\gamma_S^2\gamma_L^2}$$</div>
-<p>The mean power transfer efficiency is given by:</p>
-<div class="math">$$\bar{T}=\frac{1}{2\pi}\int_0^{2\pi}T(\theta)d\theta=\frac{(1-\gamma_S^2)(1-\gamma_L^2)}{1-\gamma_S^2\gamma_L^2}$$</div>
-<p>Therefore,</p>
-<div class="math">$$\begin{cases}T_{min}=\frac{(1-\gamma_S^2)(1-\gamma_L^2)}{(1+\gamma_S\gamma_L)^2} \\ \\
-T_{typical}=\frac{(1-\gamma_S^2)(1-\gamma_L^2)}{1-\gamma_S^2\gamma_L^2} \\ \\
-T_{max}=\frac{(1-\gamma_S^2)(1-\gamma_L^2)}{(1-\gamma_S\gamma_L)^2}\end{cases}$$</div>
-<p>The minimum and maximum mismatch losses are:</p>
-<div class="math">$$\begin{cases}ML_{dB,min}=-20\log_{10}T_{max} \\ \\ ML_{dB, typical}=-20\log_{10}T_{typical} \\ \\ ML_{dB,max}=-20\log_{10}T_{min}\end{cases}$$</div>
-<p>The uncertainty limits in the mismatch error is given in decibels (dB) by,</p>
-<div class="math">$$20\log_{10}(1\pm \gamma_S\gamma_L)$$</div>
-<p>The power magnitude ripple in dB can be estimated as:</p>
-<div class="math">$$ripple_{mag}=10\log_{10}\frac{1+\gamma_S\gamma_L}{1-\gamma_S\gamma_L}$$</div>
-<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
-    var align = "center",
-        indent = "0em",
-        linebreak = "false";
-
-    if (false) {
-        align = (screen.width < 768) ? "left" : align;
-        indent = (screen.width < 768) ? "0em" : indent;
-        linebreak = (screen.width < 768) ? 'true' : linebreak;
-    }
-
-    var mathjaxscript = document.createElement('script');
-    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
-    mathjaxscript.type = 'text/javascript';
-    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
-
-    var configscript = document.createElement('script');
-    configscript.type = 'text/x-mathjax-config';
-    configscript[(window.opera ? "innerHTML" : "text")] =
-        "MathJax.Hub.Config({" +
-        "    config: ['MMLorHTML.js']," +
-        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
-        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
-        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
-        "    displayAlign: '"+ align +"'," +
-        "    displayIndent: '"+ indent +"'," +
-        "    showMathMenu: true," +
-        "    messageStyle: 'normal'," +
-        "    tex2jax: { " +
-        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
-        "        displayMath: [ ['$$','$$'] ]," +
-        "        processEscapes: true," +
-        "        preview: 'TeX'," +
-        "    }, " +
-        "    'HTML-CSS': { " +
-        "        availableFonts: ['STIX', 'TeX']," +
-        "        preferredFont: 'STIX'," +
-        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
-        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
-        "    }, " +
-        "}); " +
-        "if ('default' !== 'default') {" +
-            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-        "}";
-
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
-}
-</script>
 
 
              
@@ -264,8 +203,8 @@ T_{max}=\frac{(1-\gamma_S^2)(1-\gamma_L^2)}{(1-\gamma_S\gamma_L)^2}\end{cases}$$
                 <a class="accordion-toggle disqus-comment-count comment-count collapsed"
                    data-toggle="collapse"
                    data-parent="#accordion2"
-                   data-disqus-identifier="https://yunchizhang.github.io/posts/rf_mismatch_error.html"
-                   href="https://yunchizhang.github.io/posts/rf_mismatch_error.html#comment_thread"
+                   data-disqus-identifier="https://yunchizhang.github.io/posts/multi_remote_repos.html"
+                   href="https://yunchizhang.github.io/posts/multi_remote_repos.html#comment_thread"
                    id="comment-accordion-toggle">
                     Comments
                 </a>
@@ -283,8 +222,8 @@ T_{max}=\frac{(1-\gamma_S^2)(1-\gamma_L^2)}{(1-\gamma_S\gamma_L)^2}\end{cases}$$
         (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
     }());
 
-    var disqus_identifier = 'https://yunchizhang.github.io/posts/rf_mismatch_error.html';
-    var disqus_url = 'https://yunchizhang.github.io/posts/rf_mismatch_error.html';
+    var disqus_identifier = 'https://yunchizhang.github.io/posts/multi_remote_repos.html';
+    var disqus_url = 'https://yunchizhang.github.io/posts/multi_remote_repos.html';
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -317,18 +256,18 @@ T_{max}=\frac{(1-\gamma_S^2)(1-\gamma_L^2)}{(1-\gamma_S\gamma_L)^2}\end{cases}$$
         </div>
         <section id="article-sidebar" class="span2">
             <h4>Published</h4>
-            <time itemprop="dateCreated" datetime="2025-07-14T09:20:00-05:00">Mon 14 July 2025</time>
+            <time itemprop="dateCreated" datetime="2025-08-17T11:08:00-05:00">Sun 17 August 2025</time>
             <h4>Category</h4>
-            <a class="category-link" href="https://yunchizhang.github.io/categories#rf-system-ref">RF System</a>
+            <a class="category-link" href="https://yunchizhang.github.io/categories#content-creation-ref">Content Creation</a>
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
-                <li><a href="https://yunchizhang.github.io/tags#microwave-ref">Microwave
+                <li><a href="https://yunchizhang.github.io/tags#git-ref">git
                     <span class="superscript">1</span>
 </a></li>
-                <li><a href="https://yunchizhang.github.io/tags#rf-ref">RF
+                <li><a href="https://yunchizhang.github.io/tags#remote-ref">remote
                     <span class="superscript">1</span>
 </a></li>
-                <li><a href="https://yunchizhang.github.io/tags#system-ref">System
+                <li><a href="https://yunchizhang.github.io/tags#repository-ref">repository
                     <span class="superscript">1</span>
 </a></li>
             </ul>
