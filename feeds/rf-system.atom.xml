@@ -145,7 +145,7 @@ T_{max}=\frac{(1-\gamma_S^2)(1-\gamma_L^2)}{(1-\gamma_S\gamma_L)^2}\end{cases}$$
 &lt;/div&gt;
 &lt;div class="jp-InputArea jp-Cell-inputArea"&gt;&lt;div class="jp-InputPrompt jp-InputArea-prompt"&gt;
 &lt;/div&gt;&lt;div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown"&gt;
-&lt;h2 id="RFI-And-Transmission-OOBE"&gt;RFI And Transmission OOBE&lt;a class="anchor-link" href="#RFI-And-Transmission-OOBE"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;This notebook is developed to assist the study of RF interference (RFI) and transmission
+&lt;p&gt;This notebook is developed to assist the study of RF interference (RFI) and transmission
 out-of-band emission (OOBE) related topics.&lt;/p&gt;
 &lt;h3 id="RFI-Category"&gt;RFI Category&lt;a class="anchor-link" href="#RFI-Category"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;In-Band RFI&lt;ul&gt;

@@ -1539,7 +1539,7 @@ produce:&lt;/p&gt;
 &lt;li&gt;Sub-item 2, four space indent&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;/ol&gt;</content><category term="Content Creation"></category><category term="pelican"></category><category term="github"></category><category term="python"></category><category term="webpage"></category></entry><entry><title>RFI and OOBE</title><link href="https://yunchizhang.github.io/posts/rfi_and_oobe.html" rel="alternate"></link><published>2024-04-01T09:20:00-05:00</published><updated>2024-04-01T09:20:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2024-04-01:/posts/rfi_and_oobe.html</id><summary type="html">Describe details of RFI and OOBE.</summary><content type="html">
+&lt;/ol&gt;</content><category term="Content Creation"></category><category term="pelican"></category><category term="github"></category><category term="python"></category><category term="webpage"></category></entry><entry><title>JPL Horizon Query</title><link href="https://yunchizhang.github.io/posts/jpl_horizon_query.html" rel="alternate"></link><published>2024-07-11T09:20:00-05:00</published><updated>2024-07-11T09:20:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2024-07-11:/posts/jpl_horizon_query.html</id><summary type="html">Describe details of JPL Horizon Query in Python.</summary><content type="html">
 &lt;main&gt;
 &lt;div class="jp-Cell jp-MarkdownCell jp-Notebook-cell"&gt;
 &lt;div class="jp-Cell-inputWrapper" tabindex="0"&gt;
@@ -1547,7 +1547,259 @@ produce:&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="jp-InputArea jp-Cell-inputArea"&gt;&lt;div class="jp-InputPrompt jp-InputArea-prompt"&gt;
 &lt;/div&gt;&lt;div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown"&gt;
-&lt;h2 id="RFI-And-Transmission-OOBE"&gt;RFI And Transmission OOBE&lt;a class="anchor-link" href="#RFI-And-Transmission-OOBE"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;This notebook is developed to assist the study of RF interference (RFI) and transmission
+&lt;p&gt;The JPL Horizons system provides solar system ephemerides (positions, velocities, orbital elements, etc.), and you can query it directly in &lt;code&gt;Python&lt;/code&gt; using the &lt;code&gt;astroquery&lt;/code&gt; library, which has a dedicated &lt;code&gt;JPLHorizons&lt;/code&gt; module.&lt;/p&gt;
+&lt;h3 id="astroquery"&gt;astroquery&lt;a class="anchor-link" href="#astroquery"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;Installation&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="w"&gt;    &lt;/span&gt;pip&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;astroquery
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ol start="2"&gt;
+&lt;li&gt;Query Horizons in Python&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The following snippet demonstrates how to query Horizons.&lt;/p&gt;
+&lt;p&gt;Notes&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;id can be the name ("Mars", "Ceres") or numeric ID (499, 2000433, etc.).&lt;/li&gt;
+&lt;li&gt;location can be:&lt;ul&gt;
+&lt;li&gt;"500@399" → Earth geocenter&lt;/li&gt;
+&lt;li&gt;"500@10" → Sun&lt;/li&gt;
+&lt;li&gt;"@0" → Solar System Barycenter&lt;/li&gt;
+&lt;li&gt;Or even specific observatory codes.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;epochs can be:&lt;ul&gt;
+&lt;li&gt;A dictionary with start, stop, and step&lt;/li&gt;
+&lt;li&gt;A single Julian date or list of Julian dates&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;div class="jp-Cell jp-CodeCell jp-Notebook-cell"&gt;
+&lt;div class="jp-Cell-inputWrapper" tabindex="0"&gt;
+&lt;div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser"&gt;
+&lt;/div&gt;
+&lt;div class="jp-InputArea jp-Cell-inputArea"&gt;
+&lt;div class="jp-InputPrompt jp-InputArea-prompt"&gt;In [8]:&lt;/div&gt;
+&lt;div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline"&gt;
+&lt;div class="cm-editor cm-s-jupyter"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;astroquery.jplhorizons&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Horizons&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Object ID for Mars = 499&lt;/span&gt;
+&lt;span class="n"&gt;obj&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Horizons&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="nb"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'499'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;                   &lt;span class="c1"&gt;# Mars ID (can also use 'Mars')&lt;/span&gt;
+    &lt;span class="n"&gt;location&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'500@399'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;         &lt;span class="c1"&gt;# Location: 500@399 means "Earth geocenter"&lt;/span&gt;
+    &lt;span class="n"&gt;epochs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;'start'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'2025-01-01'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'stop'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'2025-01-10'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'step'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'1d'&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Ephemerides (RA, Dec, distance, etc.)&lt;/span&gt;
+&lt;span class="n"&gt;eph&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;obj&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ephemerides&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;eph&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="jp-Cell-outputWrapper"&gt;
+&lt;div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser"&gt;
+&lt;/div&gt;
+&lt;div class="jp-OutputArea jp-Cell-outputArea"&gt;
+&lt;div class="jp-OutputArea-child"&gt;
+&lt;div class="jp-OutputPrompt jp-OutputArea-prompt"&gt;&lt;/div&gt;
+&lt;div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0"&gt;
+&lt;pre&gt;targetname    datetime_str   datetime_jd ... alpha_true  PABLon  PABLat
+   ---            ---             d      ...    deg       deg     deg
+---------- ----------------- ----------- ... ---------- -------- ------
+Mars (499) 2025-Jan-01 00:00   2460676.5 ...    12.8817 115.2137 2.7681
+Mars (499) 2025-Jan-02 00:00   2460677.5 ...     12.103 115.2803 2.7876
+Mars (499) 2025-Jan-03 00:00   2460678.5 ...    11.3183  115.342 2.8064
+Mars (499) 2025-Jan-04 00:00   2460679.5 ...    10.5288 115.3991 2.8246
+Mars (499) 2025-Jan-05 00:00   2460680.5 ...     9.7359 115.4518 2.8422
+Mars (499) 2025-Jan-06 00:00   2460681.5 ...     8.9415 115.5007 2.8591
+Mars (499) 2025-Jan-07 00:00   2460682.5 ...     8.1478 115.5459 2.8753
+Mars (499) 2025-Jan-08 00:00   2460683.5 ...     7.3577 115.5879 2.8908
+Mars (499) 2025-Jan-09 00:00   2460684.5 ...     6.5754  115.627 2.9056
+Mars (499) 2025-Jan-10 00:00   2460685.5 ...     5.8066 115.6637 2.9197
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="jp-Cell jp-MarkdownCell jp-Notebook-cell"&gt;
+&lt;div class="jp-Cell-inputWrapper" tabindex="0"&gt;
+&lt;div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser"&gt;
+&lt;/div&gt;
+&lt;div class="jp-InputArea jp-Cell-inputArea"&gt;&lt;div class="jp-InputPrompt jp-InputArea-prompt"&gt;
+&lt;/div&gt;&lt;div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown"&gt;
+&lt;h3 id="STK-File-Generation"&gt;STK File Generation&lt;a class="anchor-link" href="#STK-File-Generation"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;The following simple Python code can be employed to generate a STK .e file.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;div class="jp-Cell jp-CodeCell jp-Notebook-cell"&gt;
+&lt;div class="jp-Cell-inputWrapper" tabindex="0"&gt;
+&lt;div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser"&gt;
+&lt;/div&gt;
+&lt;div class="jp-InputArea jp-Cell-inputArea"&gt;
+&lt;div class="jp-InputPrompt jp-InputArea-prompt"&gt;In [ ]:&lt;/div&gt;
+&lt;div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline"&gt;
+&lt;div class="cm-editor cm-s-jupyter"&gt;
+&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;astroquery.jplhorizons&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Horizons&lt;/span&gt;
+
+&lt;span class="c1"&gt;# create Horizon object&lt;/span&gt;
+&lt;span class="nb"&gt;id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'Euclid'&lt;/span&gt;  &lt;span class="c1"&gt;# 'Euclid', 'LRO', 'STEREO-A' # spacecraft id/name&lt;/span&gt;
+&lt;span class="n"&gt;location&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'500@0'&lt;/span&gt; &lt;span class="c1"&gt;# Coordinate center or observer location&lt;/span&gt;
+&lt;span class="c1"&gt;#epochs: time format 'YYYY-MM-DD [HH:MM:SS]', step format: n[y|d|m|s]&lt;/span&gt;
+&lt;span class="n"&gt;epochs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;'start'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'2026-01-01'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'stop'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'2026-02-01'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'step'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'1m'&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="n"&gt;space_craft&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Horizons&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nb"&gt;id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;location&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;location&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;epochs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;epochs&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;space_craft&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Load Vectors&lt;/span&gt;
+&lt;span class="n"&gt;sta_vecs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;space_craft&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;vectors&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="n"&gt;refplane&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'earth'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="c1"&gt;# Reference plane for all output. use 'earth' for equator and equinox reference epoch&lt;/span&gt;
+    &lt;span class="n"&gt;aberrations&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'geometric'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="c1"&gt;# print(sta_vecs)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# change vector unit&lt;/span&gt;
+&lt;span class="n"&gt;pos_name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'x'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'y'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'z'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'range'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;pos_name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;sta_vecs&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;convert_unit_to&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'km'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;vel_name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'vx'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'vy'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'vz'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'range_rate'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;vel_name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;sta_vecs&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;convert_unit_to&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'km/s'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sta_vecs&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# write to file&lt;/span&gt;
+&lt;span class="n"&gt;file_name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s1"&gt;'./stk_files/&lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="nb"&gt;id&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s1"&gt;_&lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;epochs&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"start"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s1"&gt;_to_&lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;epochs&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"stop"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s1"&gt;.e'&lt;/span&gt;
+&lt;span class="n"&gt;pvecs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;sta_vecs&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;to_pandas&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pvecs&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;pvecs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pvecs&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;drop&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;columns&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'targetname'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'datetime_str'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'lighttime'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'range'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'range_rate'&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+
+&lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;file_name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'w'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="c1"&gt;# write stk .e file header&lt;/span&gt;
+    &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+        &lt;span class="s2"&gt;"stk.v.12.2&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;BEGIN Ephemeris&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;
+        &lt;span class="s2"&gt;"    InterpolationMethod         Lagrange&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;
+        &lt;span class="s2"&gt;"    InterpolationOrder          5&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;
+        &lt;span class="s2"&gt;"    DistanceUnit                Kilometers&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;
+        &lt;span class="s2"&gt;"    CentralBoday                Earth&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;
+        &lt;span class="s2"&gt;"    CoordinateSystem            ICRF&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;
+        &lt;span class="s2"&gt;"    TimeFormat JDate&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;
+        &lt;span class="s2"&gt;"    EphemerisTimePosVel&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="c1"&gt;# write trajectory x y z vz vy vz&lt;/span&gt;
+    &lt;span class="n"&gt;pvecs&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;to_csv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;header&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sep&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;' '&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;lineterminator&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;float_format&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="si"&gt;%17.15E&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="c1"&gt;# write stk .e file end&lt;/span&gt;
+    &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"END Ephemeris&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="jp-Cell-outputWrapper"&gt;
+&lt;div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser"&gt;
+&lt;/div&gt;
+&lt;div class="jp-OutputArea jp-Cell-outputArea"&gt;
+&lt;div class="jp-OutputArea-child"&gt;
+&lt;div class="jp-OutputPrompt jp-OutputArea-prompt"&gt;&lt;/div&gt;
+&lt;div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0"&gt;
+&lt;pre&gt;JPLHorizons instance "Euclid"; location=500@0, epochs={'start': '2026-01-01', 'stop': '2026-02-01', 'step': '1m'}, id_type=None
+        targetname            datetime_jd    ...      range_rate
+           ---                     d         ...        km / s
+-------------------------- ----------------- ... -------------------
+Euclid (spacecraft) (-680)         2461041.5 ... 0.12543125118897902
+Euclid (spacecraft) (-680) 2461041.500694444 ... 0.12543580735418441
+Euclid (spacecraft) (-680) 2461041.501388889 ... 0.12544036347364362
+Euclid (spacecraft) (-680) 2461041.502083333 ... 0.12544491954739148
+Euclid (spacecraft) (-680) 2461041.502777778 ... 0.12544947557536493
+Euclid (spacecraft) (-680) 2461041.503472222 ... 0.12545403155761528
+Euclid (spacecraft) (-680) 2461041.504166667 ... 0.12545858749406943
+Euclid (spacecraft) (-680) 2461041.504861111 ... 0.12546314338485318
+Euclid (spacecraft) (-680) 2461041.505555556 ... 0.12546769922986406
+                       ...               ... ...                 ...
+Euclid (spacecraft) (-680)     2461072.49375 ... 0.31416519504300416
+Euclid (spacecraft) (-680) 2461072.494444444 ... 0.31416958947121465
+Euclid (spacecraft) (-680) 2461072.495138889 ... 0.31417398392618673
+Euclid (spacecraft) (-680) 2461072.495833333 ...  0.3141783784079299
+Euclid (spacecraft) (-680) 2461072.496527778 ...  0.3141827729163825
+Euclid (spacecraft) (-680) 2461072.497222222 ...  0.3141871674516792
+Euclid (spacecraft) (-680) 2461072.497916667 ...  0.3141915620137396
+Euclid (spacecraft) (-680) 2461072.498611111 ... 0.31419595660257077
+Euclid (spacecraft) (-680) 2461072.499305556 ... 0.31420035121816664
+Euclid (spacecraft) (-680)         2461072.5 ...  0.3142047458605888
+Length = 44641 rows
+                       targetname   datetime_jd  \
+0      Euclid (spacecraft) (-680)  2.461042e+06
+1      Euclid (spacecraft) (-680)  2.461042e+06
+2      Euclid (spacecraft) (-680)  2.461042e+06
+3      Euclid (spacecraft) (-680)  2.461042e+06
+4      Euclid (spacecraft) (-680)  2.461042e+06
+...                           ...           ...
+44636  Euclid (spacecraft) (-680)  2.461072e+06
+44637  Euclid (spacecraft) (-680)  2.461072e+06
+44638  Euclid (spacecraft) (-680)  2.461072e+06
+44639  Euclid (spacecraft) (-680)  2.461072e+06
+44640  Euclid (spacecraft) (-680)  2.461072e+06
+
+                         datetime_str             x             y  \
+0      A.D. 2026-Jan-01 00:00:00.0000 -2.697655e+07  1.333629e+08
+1      A.D. 2026-Jan-01 00:01:00.0000 -2.697834e+07  1.333626e+08
+2      A.D. 2026-Jan-01 00:02:00.0000 -2.698013e+07  1.333623e+08
+3      A.D. 2026-Jan-01 00:03:00.0000 -2.698192e+07  1.333620e+08
+4      A.D. 2026-Jan-01 00:04:00.0000 -2.698371e+07  1.333617e+08
+...                               ...           ...           ...
+44636  A.D. 2026-Jan-31 23:56:00.0000 -9.919541e+07  1.014018e+08
+44637  A.D. 2026-Jan-31 23:57:00.0000 -9.919678e+07  1.014007e+08
+44638  A.D. 2026-Jan-31 23:58:00.0000 -9.919814e+07  1.013996e+08
+44639  A.D. 2026-Jan-31 23:59:00.0000 -9.919951e+07  1.013985e+08
+44640  A.D. 2026-Feb-01 00:00:00.0000 -9.920088e+07  1.013974e+08
+
+                  z         vx         vy        vz  lighttime         range  \
+0      5.827147e+07 -29.831410  -4.965222 -2.128077   0.005714  1.480167e+08
+1      5.827134e+07 -29.831344  -4.965553 -2.128224   0.005714  1.480168e+08
+2      5.827121e+07 -29.831277  -4.965884 -2.128371   0.005714  1.480168e+08
+3      5.827109e+07 -29.831211  -4.966215 -2.128518   0.005714  1.480168e+08
+4      5.827096e+07 -29.831144  -4.966546 -2.128664   0.005714  1.480168e+08
+...             ...        ...        ...       ...        ...           ...
+44636  4.429223e+07 -22.793509 -18.319788 -8.052453   0.005737  1.486064e+08
+44637  4.429175e+07 -22.793268 -18.320041 -8.052565   0.005737  1.486064e+08
+44638  4.429126e+07 -22.793027 -18.320294 -8.052677   0.005737  1.486064e+08
+44639  4.429078e+07 -22.792785 -18.320547 -8.052789   0.005737  1.486065e+08
+44640  4.429030e+07 -22.792544 -18.320800 -8.052902   0.005737  1.486065e+08
+
+       range_rate
+0        0.125431
+1        0.125436
+2        0.125440
+3        0.125445
+4        0.125449
+...           ...
+44636    0.314187
+44637    0.314192
+44638    0.314196
+44639    0.314200
+44640    0.314205
+
+[44641 rows x 12 columns]
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/main&gt;
+</content><category term="Satellite"></category><category term="JPL Horizon, Python"></category><category term="JPL, Horizon, Query, astroquery"></category></entry><entry><title>RFI and OOBE</title><link href="https://yunchizhang.github.io/posts/rfi_and_oobe.html" rel="alternate"></link><published>2024-04-01T09:20:00-05:00</published><updated>2024-04-01T09:20:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2024-04-01:/posts/rfi_and_oobe.html</id><summary type="html">Describe details of RFI and OOBE.</summary><content type="html">
+&lt;main&gt;
+&lt;div class="jp-Cell jp-MarkdownCell jp-Notebook-cell"&gt;
+&lt;div class="jp-Cell-inputWrapper" tabindex="0"&gt;
+&lt;div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser"&gt;
+&lt;/div&gt;
+&lt;div class="jp-InputArea jp-Cell-inputArea"&gt;&lt;div class="jp-InputPrompt jp-InputArea-prompt"&gt;
+&lt;/div&gt;&lt;div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown"&gt;
+&lt;p&gt;This notebook is developed to assist the study of RF interference (RFI) and transmission
 out-of-band emission (OOBE) related topics.&lt;/p&gt;
 &lt;h3 id="RFI-Category"&gt;RFI Category&lt;a class="anchor-link" href="#RFI-Category"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;In-Band RFI&lt;ul&gt;
