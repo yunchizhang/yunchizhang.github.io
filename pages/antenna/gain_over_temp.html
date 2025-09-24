@@ -12,23 +12,23 @@
 
         <meta name="author" content="Yunchi Zhang" />
 
-        <meta name="description" content="Monopulse This page is about antenna tracking using Monopulse. Introduction Tracking moving objects with high accuracy is essential in defense, aerospace, and communications. Conventional tracking methods, such as conical scanning, estimate the direction of a target by mechanically or electronically moving a beam across it, which requires multiple pulses and …" />
+        <meta name="description" content="Antenna G/T This page is about antenna gain over temperature (G/T). It is currently under development." />
 
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary">
 
-        <meta property="og:title" content="Monopulse  - Pages "/>
-<meta property="og:url" content="https://yunchizhang.github.io/pages/antenna/monopulse.html" />
-<meta property="og:description" content="Monopulse This page is about antenna tracking using Monopulse. Introduction Tracking moving objects with high accuracy is essential in defense, aerospace, and communications. Conventional tracking methods, such as conical scanning, estimate the direction of a target by mechanically or electronically moving a beam across it, which requires multiple pulses and …" />
+        <meta property="og:title" content="Antenna G/T  - Pages "/>
+<meta property="og:url" content="https://yunchizhang.github.io/pages/antenna/gain_over_temp.html" />
+<meta property="og:description" content="Antenna G/T This page is about antenna gain over temperature (G/T). It is currently under development." />
 <meta property="og:site_name" content="Yzowledge" />
 <meta property="og:article:author" content="Yunchi Zhang" />
-<meta property="og:article:published_time" content="2025-04-30T18:23:00-05:00" />
-<meta name="twitter:title" content="Monopulse  - Pages ">
-<meta name="twitter:description" content="Monopulse This page is about antenna tracking using Monopulse. Introduction Tracking moving objects with high accuracy is essential in defense, aerospace, and communications. Conventional tracking methods, such as conical scanning, estimate the direction of a target by mechanically or electronically moving a beam across it, which requires multiple pulses and …">
+<meta property="og:article:published_time" content="2023-07-21T18:23:00-05:00" />
+<meta name="twitter:title" content="Antenna G/T  - Pages ">
+<meta name="twitter:description" content="Antenna G/T This page is about antenna gain over temperature (G/T). It is currently under development.">
 
 
         <title>
-        Monopulse - Pages · Yzowledge
+        Antenna G/T - Pages · Yzowledge
         </title>
 
         <link rel="shortcut icon" href="https://yunchizhang.github.io/theme/images/favicon.ico" type="image/x-icon" />
@@ -85,83 +85,19 @@
 
         <div class="sidenav-main">
             <nav id="sidebar">
-                <h2><a href="https://yunchizhang.github.io/pages/antenna/monopulse.html"> Monopulse <br> <small> Pages
+                <h2><a href="https://yunchizhang.github.io/pages/antenna/gain_over_temp.html"> Antenna G/T <br> <small> Pages
                         </small>  </a></h2>
-                <div class="nav-link" data-file="https://yunchizhang.github.io/pages/antenna/monopulse/monopulse_concept.html">Monopulse Concept</div>
-                    <div class="submenu">
-                        <a href="#basic-concept">Basic Concept</a>
-                    </div>
-                <div class="nav-link" data-file="https://yunchizhang.github.io/pages/antenna/monopulse/page2.html">Page 2</div>
-                <div class="nav-link" data-file="https://yunchizhang.github.io/pages/antenna/monopulse/page3.html">Page 3</div>
+                <div class="nav-link" data-file="https://yunchizhang.github.io/pages/antenna/gain_over_temp/page1.html">Page 1</div>
                     <div class="submenu">
                         <a href="#section-1">Section 1</a>
                         <a href="#section-2">Section 2</a>
                     </div>
+                <div class="nav-link" data-file="https://yunchizhang.github.io/pages/antenna/gain_over_temp/page2.html">Page 2</div>
             </nav>
 
             <div id="sidenav-content">
-                <h2 id="monopulse">Monopulse</h2>
-<p>This page is about antenna tracking using <strong>Monopulse</strong>.</p>
-<h3 id="introduction">Introduction</h3>
-<p>Tracking moving objects with high accuracy is essential in defense, aerospace, and communications. Conventional tracking methods, such as conical scanning, estimate the direction of a target by mechanically or electronically moving a beam across it, which requires multiple pulses and introduces lag. Monopulse technology overcomes these limitations by determining angular information from a single received signal, enabling instantaneous and precise tracking.</p>
-<p>Although originally developed for radar systems, monopulse is also widely used in satellite and deep-space communication ground stations, where precise antenna pointing is critical.</p>
-<h3 id="principle-of-monopulse">Principle of Monopulse</h3>
-<p>The fundamental idea of monopulse is to use multiple simultaneous antenna beams to measure angular errors.</p>
-<ul>
-<li>
-<p>In radar tracking systems, a transmitter sends out pulses that reflect from a target. The returning echoes are captured by multiple overlapping antenna beams (often arranged in quadrants). By comparing the amplitude or phase differences of these signals, the radar computes how far the target is from the antenna boresight (centerline).</p>
-</li>
-<li>
-<p>In satellite ground station tracking, there is no reflected signal — the antenna directly receives the satellite’s transmission. The feed horn of the ground station antenna is designed with multiple offset elements. The received satellite signal arrives with slightly different strengths/phases across these elements, and by comparing them, the system calculates pointing errors in azimuth and elevation. These error signals are fed into the antenna’s servo system to keep the dish locked on the satellite.</p>
-</li>
-</ul>
-<p>Thus, whether dealing with an active radar return or a passive received signal, the monopulse method extracts instantaneous angular error information to ensure accurate tracking.</p>
-<h3 id="advantages-of-monopulse">Advantages of Monopulse</h3>
-<ul>
-<li>Instantaneous accuracy – Angular errors are determined from a single signal reception.</li>
-<li>High precision – Ideal for narrow-beam antennas at high frequencies (e.g., Ka-band).</li>
-<li>Robust against interference – Jamming or signal fluctuations have limited effect.</li>
-<li>Effective with moving targets – Works even when objects maneuver rapidly (aircraft, missiles, satellites in orbit).</li>
-<li>Reliable automation – Antenna control systems can stay continuously locked on target without human adjustment.</li>
-</ul>
-<h3 id="applications-of-monopulse-technology">Applications of Monopulse Technology</h3>
-<p>Monopulse has diverse applications across both defense and civilian space/communication fields:</p>
-<ul>
-<li>Military Radars and Missile Guidance<ul>
-<li>Fire-control radars for air defense.</li>
-<li>Missile seekers (air-to-air, surface-to-air, anti-ship).</li>
-<li>Precision tracking in electronic warfare environments.</li>
-</ul>
-</li>
-<li>Air Traffic Control and Weather Radars<ul>
-<li>Civil aviation radars for safe navigation.</li>
-<li>Meteorological radars for storm tracking.</li>
-</ul>
-</li>
-<li>Satellite Ground Stations<ul>
-<li>Large parabolic antennas use monopulse feeds for automatic pointing.</li>
-<li>Ensures reliable telemetry, tracking, and command (TT&amp;C) links.</li>
-<li>Critical for high-frequency bands (X-band, Ka-band) where beams are very narrow.</li>
-</ul>
-</li>
-<li>Deep-Space Communication<ul>
-<li>Used by space agencies to maintain links with planetary probes, rovers, and interplanetary missions.</li>
-<li>Essential for spacecraft where even a fraction of a degree misalignment could cause signal loss.</li>
-</ul>
-</li>
-<li>Launch Vehicle and Spacecraft Tracking<ul>
-<li>Tracking stations use monopulse to follow rockets during ascent.</li>
-<li>Provides precise trajectory data for mission control.</li>
-</ul>
-</li>
-<li>Test Ranges and Instrumentation<ul>
-<li>Monopulse radars track experimental aircraft, drones, and re-entry vehicles with high fidelity.</li>
-</ul>
-</li>
-</ul>
-<h3 id="summary">Summary</h3>
-<p>Monopulse technology is a versatile and indispensable method for tracking, whether it involves guiding a missile to a moving aircraft or keeping a ground antenna precisely locked on a satellite millions of kilometers away. Its unique ability to derive angular error from a single received signal makes it fast, accurate, and robust against interference.</p>
-<p>By bridging the needs of both radar-based systems and satellite communications, monopulse continues to be a cornerstone of modern tracking technology in defense, aerospace, and space exploration.</p>
+                <h2 id="antenna-gt">Antenna G/T</h2>
+<p>This page is about antenna gain over temperature (<em>G/T</em>). It is currently under development.</p>
             </div>
         </div>
 
