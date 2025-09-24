@@ -71,7 +71,10 @@ LANDING_PAGE_TITLE = "Yunchi Zhang, PhD"
 SOCIAL_PROFILE_LABEL = 'Stay in Touch'
 
 USE_SHORTCUT_ICONS = True
-STATIC_PATHS = ['theme/images', 'images', 'digital_related/images']
+STATIC_PATHS = ['theme/images', 'images',
+                'digital_related/images',
+                'antenna/monopulse/images',
+                ]
 PAGE_PATHS = ['pages', 'antenna']
 
 # projects

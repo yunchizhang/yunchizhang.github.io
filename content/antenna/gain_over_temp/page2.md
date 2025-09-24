@@ -1,14 +1,13 @@
-Title: Page 1
-Date: 2025-04-29 18:20
+Title: Page 2
+Date: 2023-07-29 18:30
 Status: hidden
-Slug: sidenav-page1
-Save_as: pages/antenna/monopulse/page1.html
-Url: pages/antenna/monopulse/page1.html
-Comments: True
+Slug: got-page2
+Save_as: pages/antenna/gain_over_temp/page2.html
+Url: pages/antenna/gain_over_temp/page2.html
+Comments: False
 Template: simple_page
 Authors: Yunchi Zhang
 
-[TOC]
 
 # Section 1
 

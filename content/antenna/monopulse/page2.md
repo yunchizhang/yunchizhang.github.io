@@ -1,7 +1,7 @@
 Title: Page 2
 Date: 2025-04-29 18:30
 Status: hidden
-Slug: sidenav-page2
+Slug: monopulse-page2
 Save_as: pages/antenna/monopulse/page2.html
 Url: pages/antenna/monopulse/page2.html
 Comments: False
