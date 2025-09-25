@@ -54,14 +54,233 @@
                 
 <p>Two-coordinate monopulse normally requires three receiver channels. However, systems that require
 only two channels or a single channel are also reported in the technical literature.</p>
-<h2 id="single-channel-processor">Single-Channel Processor</h2>
+<h1 id="single-channel-processor">Single-Channel Processor</h1>
 <p>One approach to minimizing receiver complexity and lack of accurate gain and phase tracking among
 the three receiver channels is to combine the sum and difference signals, either at RF or after
 conversion to IF. Therefore, a single-channel receiver system is sufficient.</p>
-<h3 id="digital-monoscan-using-periodic-phase-shifter">Digital Monoscan using Periodic Phase Shifter</h3>
+<h2 id="digital-monoscan-using-periodic-phase-shifter">Digital Monoscan using Periodic Phase Shifter</h2>
 <p><img alt="Digital monoscan with phase shifter" src="https://yunchizhang.github.io/antenna/monopulse/images/monoscan_with_phase_shifter.png"/></p>
 <p><em>Digital monoscan using periodic phase shifter</em></p>
-<p>TBA</p>
+<h3 id="sum-and-difference-signal">Sum and Difference Signal</h3>
+<p>The sum signal of feed source is:</p>
+<div class="math">$$\Sigma=\Re\left\{V_0e^{j\left[\omega_ct+\phi_m(t)
+\right]}\right\}=V_0\cos\left[\omega_ct+\phi_m(t)\right] $$</div>
+<p>The difference signal of feed source is:</p>
+<div class="math">$$\Delta=\Re\left\{\mu V_0\left(\Delta_{EL}+j\Delta_{AZ} \right)e^{-j\psi}e^{\left[\omega_ct+\phi_m(t)+\varphi
+\right]}\right\}=\mu V_0\Delta_{EL}\cos\left[\omega_ct+\phi_m(t)+\varphi-\psi\right]-\mu V_0\Delta_{AZ}\sin\left[\omega_ct+\phi_m(t)+\varphi-\psi\right] $$</div>
+<p>where <span class="math">\(\omega_c\)</span> is the carrier frequency, <span class="math">\(\varphi_m(t)\)</span> is phase modulated telemetry signal,
+<span class="math">\(\mu\)</span> is the difference slope, <span class="math">\(Δ_{EL}\)</span> is the elevation error, <span class="math">\(Δ_{AZ}\)</span> is the azimuth error,
+<span class="math">\(\varphi\)</span> is the phase difference between sum and difference signal paths, <span class="math">\(\psi\)</span> is the
+polarization angle with respect to horizon axis (0 for circular polarizations).</p>
+<h3 id="periodic-phase-shifter">Periodic Phase Shifter</h3>
+<p>The periodic phase shift function is <span class="math">\(e^{j\theta(t)}\)</span>, where <span class="math">\(\theta(t)\)</span> follows a periodic
+sequence.</p>
+<p><strong>For 90-degree periodic phase shifter</strong>:</p>
+<div class="math">$$\theta(t)=\begin{cases} 0, &amp;0 \le t &lt;T_s \\ \\ \frac{\pi}{2}, &amp; T_s \le t &lt;2T_s \\ \\ \pi, &amp; 2T_s \le t
+&lt;3T_s \\ \\ \frac{3\pi}{2}, &amp; 3T_s\le t &lt; 4T_s\end{cases}$$</div>
+<p>and</p>
+<div class="math">$$e^{\theta(t)}=\begin{cases} 1, &amp;0 \le t &lt;T_s \\ \\ j, &amp; T_s \le t &lt;2T_s \\ \\ -1, &amp; 2T_s \le t
+&lt;3T_s \\ \\ -j, &amp; 3T_s\le t &lt; 4T_s\end{cases}$$</div>
+<p>where <span class="math">\(T_s=2\pi/\omega_s\)</span>, <span class="math">\(\omega_s=2\pi f_s\)</span>, <span class="math">\(f_s\)</span> is the scan frequency. Since this pattern
+repeats every <span class="math">\(T_p=4T_s\)</span>, then <span class="math">\(e^{jθ(t)}\)</span> can be expanded as Fourier series.</p>
+<div class="math">$$e^{j\theta(t)}=\sum_{n=-\infty}^{\infty}C_ne^{jn\omega_pt} $$</div>
+<p>where <span class="math">\(\omega_p=\frac{2\pi}{T_p}=\frac{\pi}{2T_s}=\frac{\pi}{2}f_s\)</span>,
+<span class="math">\(f_p=\frac{1}{T_p}=\frac{f_s}{4}\)</span>, and</p>
+<div class="math">$$C_n=\frac{1}{T_p}\int_0^{T_p}e^{j\theta(t)}e^{-jn\omega_pt}dt=\begin{cases}\frac{2\sqrt{2}e^{-j\frac{\pi}{4}}}{n\pi},
+&amp;n=4k+1 \\ \\ 0, &amp; n=others\end{cases} $$</div>
+<p>Thus,</p>
+<div class="math">$$e^{j\theta(t)}=\sum_{k=-\infty}^{\infty}\frac{2\sqrt{2}e^{-j\frac{\pi}{4}}}{(4k+1)\pi}e^{j(4k+1)\omega_p
+t} $$</div>
+<p>The periodic 90-degree phase shifter results in discrete spectral components at <span class="math">\((4k+1)f_p=\frac{4k+1}{4}f_s\)</span>.</p>
+<p><strong>For 180-degree periodic phase shifter</strong>:</p>
+<div class="math">$$\theta(t)=\begin{cases}0, &amp; 0\le t&lt;T_s \\ \\ \pi, &amp; T_s\le t&lt;2T_s\end{cases}$$</div>
+<p>and</p>
+<div class="math">$$e^{j\theta(t)}=\begin{cases}1, &amp; 0 \le t&lt;T_s \\ \\ -1, &amp; T_s\le t&lt;2T_s\end{cases}=\sum_{k=-\infty}^{\infty}\frac{2j}{(2k+1)\pi}e^{j(2k+1)\omega_pt} $$</div>
+<p>where <span class="math">\(\omega_p=\frac{\pi}{T_s}=\pi f_s\)</span>  for 180-degree periodic phase shifter. The periodic 180-degree phase
+shifter results in discrete spectral components at <span class="math">\((2k+1)f_p=\frac{2k+1}{2} f_s\)</span>.</p>
+<h3 id="sum-and-difference-signal-combination-using-90-deg-periodic-phase-shifter">Sum and Difference Signal Combination (Using 90-deg Periodic Phase Shifter)</h3>
+<p>After phase shifter, the difference signal is:</p>
+<div class="math">$$\begin{split}\Delta&amp;=\Re\left\{\mu V_0\left(\Delta_{EL}+j\Delta_{AZ}
+\right)e^{-j\psi}e^{j\left[\omega_c t+\phi_m(t)+\varphi\right]}e^{j\theta(t)} \right\} \\ \\
+&amp;=\sum_{k=-\infty}^{\infty}\frac{2\sqrt{2}\mu
+V_0\Delta_{EL}}{(4k+1)\pi}\cos\left[\omega_ct+\phi_mt+\varphi-\psi-\frac{\pi}{4}+(4k+1)\omega_pt\right]
+\\ \\ &amp; -\sum_{k=-\infty}^{\infty}\frac{2\sqrt{2}\mu
+V_0\Delta_{AZ}}{(4k+1)\pi}\sin\left[\omega_ct+\phi_mt+\varphi-\psi-\frac{\pi}{4}+(4k+1)\omega_pt\right] \end{split}$$</div>
+<p>After summation of sum and difference channel, an amplitude and phase modulated composite signal is
+created. Thus, we have</p>
+<div class="math">$$\begin{split}v(t)&amp;=\sqrt{C}V_0\cos\left[\omega_ct+\phi_m(t)\right] \\ \\
+&amp;+\sum_{k=-\infty}^{\infty}\frac{2\sqrt{2}\mu
+V_0\Delta_{EL}}{(4k+1)\pi}\cos\left[\omega_ct+\phi_mt+\varphi-\psi-\frac{\pi}{4}+(4k+1)\omega_pt\right]
+\\ \\ &amp; -\sum_{k=-\infty}^{\infty}\frac{2\sqrt{2}\mu
+V_0\Delta_{AZ}}{(4k+1)\pi}\sin\left[\omega_ct+\phi_mt+\varphi-\psi-\frac{\pi}{4}+(4k+1)\omega_pt\right]
+\end{split}$$</div>
+<p>where <span class="math">\(C\)</span> is coupling value of the coupler. After down converter and AGC, this signal can be showed
+in the following form.</p>
+<div class="math">$$\begin{split}v(t)&amp;=\cos\left[\omega_{if}t+\phi_m(t)\right] \\ \\
+&amp;+\sum_{k=-\infty}^{\infty}\frac{2\sqrt{2}\mu
+\Delta_{EL}}{(4k+1)\pi\sqrt{C}}\cos\left[\omega_{if}t+\phi_mt+\varphi-\psi-\frac{\pi}{4}+(4k+1)\omega_pt\right]
+\\ \\ &amp; -\sum_{k=-\infty}^{\infty}\frac{2\sqrt{2}\mu
+\Delta_{AZ}}{(4k+1)\pi\sqrt{C}}\sin\left[\omega_{if}t+\phi_mt+\varphi-\psi-\frac{\pi}{4}+(4k+1)\omega_pt\right]
+\end{split}$$</div>
+<p>where <span class="math">\(\omega_{if}\)</span> is the intermediate frequency.</p>
+<h3 id="demodulation-of-signal">Demodulation of Signal</h3>
+<h4 id="bandpass-filtering-pre-detection-filter">Bandpass Filtering (Pre-Detection Filter)</h4>
+<p>To prevent telemetry from interfering with tracking extraction, a narrow band bandpass filter is
+applied. This ensures that tracking error extraction is not disturbed by data transitions. Higher
+order discrete components due to phase shifter will be filtered out as well.</p>
+<p>To simplify the derivation, we assume only the <span class="math">\(\omega_p\)</span> harmonic is kept since higher order harmonics
+can be filtered out after demodulation. Therefore, we have</p>
+<div class="math">$$\begin{split}v(t)&amp;=\cos\left[\omega_{if}t+\phi_m(t)\right] \\ \\
+&amp;+\frac{2\sqrt{2}\mu
+\Delta_{EL}}{\pi\sqrt{C}}\cos\left[\omega_{if}t+\phi_mt+\varphi-\psi-\frac{\pi}{4}+\omega_pt\right]
+\\ \\ &amp; -\frac{2\sqrt{2}\mu
+\Delta_{AZ}}{\pi\sqrt{C}}\sin\left[\omega_{if}t+\phi_mt+\varphi-\psi-\frac{\pi}{4}+\omega_pt\right]
+\end{split}$$</div>
+<h4 id="tracking-error-extraction">Tracking Error Extraction</h4>
+<p>To extract AM tracking errors, we can use square law to do the envelop detection. Thus we have the
+following expression by filtering out the DC and high frequency items:</p>
+<div class="math">$$\begin{split}V(t)=v^2(t)
+&amp;=\frac{2\sqrt{2}\mu
+\Delta_{EL}}{\pi\sqrt{C}}\cos\left[\omega_{if}t+\phi_m(t)\right]\cos\left[\omega_{if}t+\phi_mt+\varphi-\psi-\frac{\pi}{4}+\omega_pt\right]
+\\ \\ &amp; -\frac{2\sqrt{2}\mu
+\Delta_{AZ}}{\pi\sqrt{C}}\cos\left[\omega_{if}t+\phi_m(t)\right]\sin\left[\omega_{if}t+\phi_mt+\varphi-\psi-\frac{\pi}{4}+\omega_pt\right]
+\\ \\ &amp;=\frac{2\sqrt{2}\mu
+\Delta_{EL}}{\pi\sqrt{C}}\cos\left[\varphi-\psi-\frac{\pi}{4}+\omega_pt\right]-\frac{2\sqrt{2}\mu
+\Delta_{AZ}}{\pi\sqrt{C}}\sin\left[\varphi-\psi-\frac{\pi}{4}+\omega_pt\right]
+\end{split}$$</div>
+<p>We can make <span class="math">\(\varphi−\psi−\frac{\pi}{4}=0\)</span> by calibration (<span class="math">\(\psi\)</span> can be obtained from polarizer for linear polarization
+case), thus the tracking error signal is:</p>
+<div class="math">$$V(t)=\frac{2\sqrt{2}\mu
+\Delta_{EL}}{\pi\sqrt{C}}\cos\left(\omega_pt\right)-\frac{2\sqrt{2}\mu
+\Delta_{AZ}}{\pi\sqrt{C}}\sin\left(\omega_pt\right) $$</div>
+<h4 id="synchronous-demodulation-of-azel-errors">Synchronous Demodulation of Az/El Errors</h4>
+<p>The extracted tracking error signals can be coherently demodulated using the scan frequency:</p>
+<ul>
+<li>Multiplying with <span class="math">\(\cos⁡(\omega_p t)\)</span>  to extract <span class="math">\(\frac{2\sqrt{2}\mu\Delta_{EL}}{\pi\sqrt{C}}\)</span>  (Elevation error)</li>
+<li>Multiplying with <span class="math">\(\sin⁡(\omega_p t)\)</span>to extract <span class="math">\(\frac{2\sqrt{2}\mu\Delta_{AZ}}{\pi\sqrt{C}}\)</span> (Azimuth error).</li>
+<li>Low-pass filtering removes residual high-frequency components.</li>
+</ul>
+<h2 id="monoscan">Monoscan</h2>
+<p><img alt="Monoscan" src="https://yunchizhang.github.io/antenna/monopulse/images/monoscan.png"/></p>
+<h3 id="sum-and-difference-signal-combination">Sum and Difference Signal Combination</h3>
+<p>The sum signal of feed source is:</p>
+<div class="math">$$\Sigma=V_0\cos\left[\omega_c t+\phi_m(t) \right] $$</div>
+<p>The difference signal of feed source is:</p>
+<div class="math">$$\Delta=\mu V_0\Delta_{EL}\cos\left[\omega_ct+\phi_m(t)+\varphi-\psi \right]\cos(\omega_st)+\mu V_0\Delta_{AZ}\cos\left[\omega_ct+\phi_m(t)+\varphi-\psi \right]\sin(\omega_st) $$</div>
+<p>where <span class="math">\(\omega_c\)</span> is carrier frequency, <span class="math">\(\phi_m (t)\)</span> is phase modulated telemetry signal, <span class="math">\(\mu\)</span> is the difference
+slope, <span class="math">\(\Delta_{EL}\)</span> is the elevation error, <span class="math">\(\Delta_{AZ}\)</span> is the azimuth error, <span class="math">\(\varphi\)</span> is the phase difference between
+sum and difference signal paths, <span class="math">\(\psi\)</span> is the polarization angle with respect to horizon axis (0 for
+circular polarizations), <span class="math">\(\omega_s\)</span> is the scan frequency.</p>
+<p>After monoscan and summation of sum and difference channel, an amplitude and phase modulated
+composite signal is  created. Thus, we have:</p>
+<div class="math">$$v(t)=\sqrt{C}V_0\cos\left[\omega_ct+\phi_m(t) \right]+ \mu V_0\Delta_{EL}\cos\left[\omega_ct+\phi_m(t)+\varphi-\psi \right]\cos(\omega_st)+\mu V_0\Delta_{AZ}\cos\left[\omega_ct+\phi_m(t)+\varphi-\psi \right]\sin(\omega_st) $$</div>
+<p>where <span class="math">\(C\)</span> is coupling value of the coupler. After down converter and AGC, this signal can be showed
+in the following form:</p>
+<div class="math">$$v(t)=\cos\left[\omega_{if}t+\phi_m(t) \right]+ \frac{\mu}{\sqrt{C}}\Delta_{EL}\cos\left[\omega_{if}t+\phi_m(t)+\varphi-\psi \right]\cos(\omega_st)+\frac{\mu}{\sqrt{C}}\Delta_{AZ}\cos\left[\omega_{if}t+\phi_m(t)+\varphi-\psi \right]\sin(\omega_st) $$</div>
+<p>where <span class="math">\(ω_{if}\)</span> is the intermediate frequency.</p>
+<h3 id="demodulation-of-signal_1">Demodulation of Signal</h3>
+<h4 id="bandpass-filtering-pre-detection-filter_1">Bandpass Filtering (Pre-Detection Filter)</h4>
+<p>To prevent telemetry from interfering with tracking extraction, a narrow band bandpass filter is
+applied. This ensures that tracking error extraction is not disturbed by data transitions.</p>
+<h4 id="tracking-error-extraction_1">Tracking Error Extraction</h4>
+<p>To extract AM tracking errors, the square law envelope detection can be employed and we can have:</p>
+<div class="math">$$V(t)=\frac{\mu}{\sqrt{C}}\Delta_{EL}\cos\left[\varphi-\psi-\eta \right]\cos(\omega_st)+\frac{\mu}{\sqrt{C}}\Delta_{AZ}\cos\left[\varphi-\psi-\eta \right]\sin(\omega_st) $$</div>
+<p>We can make <span class="math">\(\phi−\psi−\eta=0\)</span> by calibrating, thus the tracking errors are:</p>
+<div class="math">$$V(t)=\frac{\mu}{\sqrt{C}}\Delta_{EL}\cos(\omega_st)+\frac{\mu}{\sqrt{C}}\Delta_{AZ}\sin(\omega_st) $$</div>
+<h4 id="synchronous-demodulation-of-azel-errors_1">Synchronous Demodulation of Az/El Errors</h4>
+<p>The extracted tracking error signal can be coherently demodulated using the scan frequency:</p>
+<ul>
+<li>Multiplying with <span class="math">\(\cos(\omega_s t)\)</span> extracts <span class="math">\(\frac{\mu}{\sqrt{C}}\Delta_{EL}\)</span> (Elevation error).</li>
+<li>Multiplying with <span class="math">\(\sin(\omega_s t)\)</span>  extracts <span class="math">\(\frac{\mu}{\sqrt{C}}\Delta_{AZ}\)</span> (Azimuth error).</li>
+<li>Low-pass filtering removes residual high-frequency components.</li>
+</ul>
+<h2 id="time-multiplexing">Time Multiplexing</h2>
+<p><img alt="Time multiplexing" src="https://yunchizhang.github.io/antenna/monopulse/images/time_multiplexing.png"/></p>
+<h2 id="frequency-multiplexing">Frequency Multiplexing</h2>
+<p>Under Development</p>
+<h2 id="scamp">SCAMP</h2>
+<p><img alt="SCAMP" src="https://yunchizhang.github.io/antenna/monopulse/images/scamp_monopulse.png"/></p>
+<h1 id="two-channel-processor">Two-Channel Processor</h1>
+<h2 id="using-s-pm-d">Using <span class="math">\(s \pm d\)</span></h2>
+<p><img alt="Two Channel Processor" src="https://yunchizhang.github.io/antenna/monopulse/images/two_channel_processor.png"/></p>
+<h1 id="three-channel-processor">Three-Channel Processor</h1>
+<p>In the diagram of the various processors in this section only a single angle channel will be shown.
+It is to be understood that if monopulse is used in both angular coordinates, a corresponding
+processor must be added for the other coordinate.</p>
+<h2 id="using-phases-and-linear-amplitudes-of-s-and-d">Using Phases and Linear Amplitudes of s and d</h2>
+<p><img alt="Three s&amp;d Channel Processor" src="https://yunchizhang.github.io/antenna/monopulse/images/three_channel_s_d_processor.png"/></p>
+<h2 id="using-i-and-q">Using I and Q</h2>
+<p><img alt="Three I&amp;Q Channel Processor" src="https://yunchizhang.github.io/antenna/monopulse/images/three_channel_I_Q_processor.png"/></p>
+<h2 id="using-phases-and-logarithmic-amplitudes">Using Phases and Logarithmic Amplitudes</h2>
+<p><img alt="Three P&amp;logM Channel Processor" src="https://yunchizhang.github.io/antenna/monopulse/images/three_channel_phase_logm_processor.png"/></p>
+<h2 id="using-dot-product-detector-with-agc">Using Dot-Product Detector With AGC</h2>
+<p><img alt="Three Channel dot-product Processor" src="https://yunchizhang.github.io/antenna/monopulse/images/three_channel_dot_product_processor.png"/></p>
+<h2 id="noncoherent-processor-using-sum-and-difference">Noncoherent Processor Using Sum and Difference</h2>
+<p><img alt="Three Channel noncoherent s&amp;d Processor" src="https://yunchizhang.github.io/antenna/monopulse/images/three_channel_noncoho_s_d_processor.png"/></p>
+<h2 id="using-s-pm-jd">Using <span class="math">\( s \pm jd\)</span></h2>
+<p><img alt="Three Channel complex s&amp;d Processor" src="https://yunchizhang.github.io/antenna/monopulse/images/three_channel_complex_s_d_processor.png"/></p>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
                 <!--                 
 
 
