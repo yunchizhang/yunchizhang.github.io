@@ -54,7 +54,7 @@ $$\theta(t)=\begin{cases} 0, &0 \le t <T_s \\ \\ \frac{\pi}{2}, & T_s \le t <2T_
 
 and
 
-$$e^{\theta(t)}=\begin{cases} 1, &0 \le t <T_s \\ \\ j, & T_s \le t <2T_s \\ \\ -1, & 2T_s \le t
+$$e^{j\theta(t)}=\begin{cases} 1, &0 \le t <T_s \\ \\ j, & T_s \le t <2T_s \\ \\ -1, & 2T_s \le t
 <3T_s \\ \\ -j, & 3T_s\le t < 4T_s\end{cases}$$
 
 where $T_s=2\pi/\omega_s$, $\omega_s=2\pi f_s$, $f_s$ is the scan frequency. Since this pattern
