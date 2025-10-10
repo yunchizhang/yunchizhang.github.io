@@ -4,7 +4,7 @@ Status: hidden
 Slug: monopulse-te21-tracking
 Save_as: pages/antenna/monopulse/monopulse_te21_tracking.html
 Url: pages/antenna/monopulse/monopulse_te21_tracking.html
-Comments: False
+Comments: True
 Template: simple_page
 Authors: Yunchi Zhang
 

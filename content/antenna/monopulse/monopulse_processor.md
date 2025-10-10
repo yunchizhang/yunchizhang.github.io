@@ -4,7 +4,7 @@ Status: hidden
 Slug: monopulse-processor
 Save_as: pages/antenna/monopulse/monopulse_processor.html
 Url: pages/antenna/monopulse/monopulse_processor.html
-Comments: False
+Comments: True
 Template: simple_page
 Authors: Yunchi Zhang
 

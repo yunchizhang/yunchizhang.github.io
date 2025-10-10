@@ -4,7 +4,7 @@ Status: hidden
 Slug: monopulse-higher-mode
 Save_as: pages/antenna/monopulse/monopulse_higher_mode_tracking.html
 Url: pages/antenna/monopulse/monopulse_higher_mode_tracking.html
-Comments: False
+Comments: True
 Template: simple_page
 Authors: Yunchi Zhang
 
