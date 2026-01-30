@@ -1,5 +1,192 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Yzowledge</title><link href="https://yunchizhang.github.io/" rel="alternate"></link><link href="https://yunchizhang.github.io/feeds/all.atom.xml" rel="self"></link><id>https://yunchizhang.github.io/</id><updated>2025-08-17T11:08:00-05:00</updated><subtitle>Knowledge and Experience</subtitle><entry><title>Synchronizing Multiple Remote Repositories</title><link href="https://yunchizhang.github.io/posts/multi_remote_repos.html" rel="alternate"></link><published>2025-08-17T11:08:00-05:00</published><updated>2025-08-17T11:08:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2025-08-17:/posts/multi_remote_repos.html</id><summary type="html">&lt;p&gt;How to synchronize multiple remote repositories with a local one.&lt;/p&gt;</summary><content type="html">
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Yzowledge</title><link href="https://yunchizhang.github.io/" rel="alternate"/><link href="https://yunchizhang.github.io/feeds/all.atom.xml" rel="self"/><id>https://yunchizhang.github.io/</id><updated>2026-01-30T15:00:00-05:00</updated><subtitle>Knowledge and Experience</subtitle><entry><title>Directory Tree in Windows</title><link href="https://yunchizhang.github.io/posts/directory_tree_windows.html" rel="alternate"/><published>2026-01-30T15:00:00-05:00</published><updated>2026-01-30T15:00:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2026-01-30:/posts/directory_tree_windows.html</id><summary type="html">&lt;p&gt;Generate directory tree in Windows operating system.&lt;/p&gt;</summary><content type="html">
+&lt;p&gt;In Windows, if you want to see the directory structure up to a specific depth level. &lt;strong&gt;PowerShell&lt;/strong&gt;
+script can be used. Windows has a built-in &lt;code&gt;tree&lt;/code&gt; command. While it doesn't have a "depth" flag,
+you can simulate it in &lt;strong&gt;PowerShell&lt;/strong&gt; by filtering the output, though it's a bit "hacky."&lt;/p&gt;
+&lt;p&gt;For a cleaner approach, I recommend sticking to &lt;strong&gt;PowerShell&lt;/strong&gt; objects.&lt;/p&gt;
+&lt;h2 id="the-custom-tree-script"&gt;The "Custom Tree" Script&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="nb"&gt;Show-Tree&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="cm"&gt;&amp;lt;#&lt;/span&gt;
+&lt;span class="sd"&gt;.SYNOPSIS&lt;/span&gt;
+&lt;span class="cm"&gt;Displays a directory tree with configurable depth.&lt;/span&gt;
+
+&lt;span class="sd"&gt;.DESCRIPTION&lt;/span&gt;
+&lt;span class="cm"&gt;Show-Tree outputs a tree-like view of folders (and optionally files),&lt;/span&gt;
+&lt;span class="cm"&gt;starting from a given path. Supports depth control, Unicode characters,&lt;/span&gt;
+&lt;span class="cm"&gt;and optional inclusion of hidden files.Indent is internal; use -IncludeFiles,&lt;/span&gt;
+&lt;span class="cm"&gt;-Unicode, and -ShowHidden as needed.&lt;/span&gt;
+
+&lt;span class="sd"&gt;.PARAMETER&lt;/span&gt;&lt;span class="cm"&gt; Path&lt;/span&gt;
+&lt;span class="cm"&gt;Root directory. Defaults to current directory.&lt;/span&gt;
+
+&lt;span class="sd"&gt;.PARAMETER&lt;/span&gt;&lt;span class="cm"&gt; Depth&lt;/span&gt;
+&lt;span class="cm"&gt;Maximum recursion depth.&lt;/span&gt;
+
+&lt;span class="sd"&gt;.PARAMETER&lt;/span&gt;&lt;span class="cm"&gt; IncludeFiles&lt;/span&gt;
+&lt;span class="cm"&gt;Include files in output.&lt;/span&gt;
+
+&lt;span class="sd"&gt;.PARAMETER&lt;/span&gt;&lt;span class="cm"&gt; Unicode&lt;/span&gt;
+&lt;span class="cm"&gt;Use Unicode tree characters (runtime-safe).&lt;/span&gt;
+
+&lt;span class="sd"&gt;.PARAMETER&lt;/span&gt;&lt;span class="cm"&gt; ShowHidden&lt;/span&gt;
+&lt;span class="cm"&gt;Include hidden items.&lt;/span&gt;
+
+&lt;span class="sd"&gt;.EXAMPLE&lt;/span&gt;
+&lt;span class="cm"&gt;Show-Tree&lt;/span&gt;
+&lt;span class="cm"&gt;- Displays the current directory tree up to the default depth (2), showing only folders.&lt;/span&gt;
+
+&lt;span class="sd"&gt;.EXAMPLE&lt;/span&gt;
+&lt;span class="cm"&gt;Show-Tree -Depth 3&lt;/span&gt;
+&lt;span class="cm"&gt;- Displays the current directory tree up to 3 levels deep, showing only folders.&lt;/span&gt;
+
+&lt;span class="sd"&gt;.EXAMPLE&lt;/span&gt;
+&lt;span class="cm"&gt;Show-Tree -IncludeFiles&lt;/span&gt;
+&lt;span class="cm"&gt;- Displays folders and files under the current directory up to the default depth (2).&lt;/span&gt;
+
+&lt;span class="sd"&gt;.EXAMPLE&lt;/span&gt;
+&lt;span class="cm"&gt;Show-Tree -Path C:\Projects -IncludeFiles -Depth 4 -Unicode&lt;/span&gt;
+&lt;span class="cm"&gt;- Displays a Unicode tree of folders and files under C:\Projects up to 4 levels deep.&lt;/span&gt;
+
+&lt;span class="sd"&gt;.EXAMPLE&lt;/span&gt;
+&lt;span class="cm"&gt;Show-Tree -Path D:\Work -IncludeFiles -Depth 2 -ShowHidden&lt;/span&gt;
+&lt;span class="cm"&gt;- Displays folders and files under D:\Work up to 2 levels, including hidden items.&lt;/span&gt;
+
+&lt;span class="sd"&gt;.NOTES&lt;/span&gt;
+&lt;span class="cm"&gt;Author: ChatGPT&lt;/span&gt;
+&lt;span class="cm"&gt;Compatible with Windows PowerShell 5.1 and PowerShell 7+&lt;/span&gt;
+&lt;span class="cm"&gt;#&amp;gt;&lt;/span&gt;
+
+    &lt;span class="k"&gt;param&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+        &lt;span class="no"&gt;[string]&lt;/span&gt;&lt;span class="nv"&gt;$Path&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"."&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="no"&gt;[int]&lt;/span&gt;&lt;span class="nv"&gt;$Depth&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="no"&gt;[string]&lt;/span&gt;&lt;span class="nv"&gt;$Indent&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;""&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="no"&gt;[switch]&lt;/span&gt;&lt;span class="nv"&gt;$IncludeFiles&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="no"&gt;[switch]&lt;/span&gt;&lt;span class="nv"&gt;$Unicode&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="no"&gt;[switch]&lt;/span&gt;&lt;span class="nv"&gt;$ShowHidden&lt;/span&gt;
+    &lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$Depth&lt;/span&gt; &lt;span class="o"&gt;-lt&lt;/span&gt; &lt;span class="n"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="c"&gt;# Runtime-safe Unicode characters&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$Unicode&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="nv"&gt;$CHAR_TEE&lt;/span&gt;  &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="no"&gt;[char]&lt;/span&gt;&lt;span class="n"&gt;0x251C&lt;/span&gt;  &lt;span class="c"&gt;# ├&lt;/span&gt;
+        &lt;span class="nv"&gt;$CHAR_ELB&lt;/span&gt;  &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="no"&gt;[char]&lt;/span&gt;&lt;span class="n"&gt;0x2514&lt;/span&gt;  &lt;span class="c"&gt;# └&lt;/span&gt;
+        &lt;span class="nv"&gt;$CHAR_VERT&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="no"&gt;[char]&lt;/span&gt;&lt;span class="n"&gt;0x2502&lt;/span&gt;  &lt;span class="c"&gt;# │&lt;/span&gt;
+        &lt;span class="nv"&gt;$CHAR_HORZ&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="no"&gt;[char]&lt;/span&gt;&lt;span class="n"&gt;0x2500&lt;/span&gt;  &lt;span class="c"&gt;# ─&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="nv"&gt;$gciParams&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="p"&gt;@{&lt;/span&gt; &lt;span class="n"&gt;Path&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;$Path&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$ShowHidden&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nv"&gt;$gciParams&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Force&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;$true&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="c"&gt;# Sort folders first, then files&lt;/span&gt;
+    &lt;span class="nv"&gt;$items&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;Get-ChildItem&lt;/span&gt; &lt;span class="nv"&gt;@gciParams&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt;
+        &lt;span class="nb"&gt;Sort-Object&lt;/span&gt; &lt;span class="p"&gt;@{&lt;/span&gt; &lt;span class="n"&gt;Expression&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'PSIsContainer'&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;Descending&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;$true&lt;/span&gt; &lt;span class="p"&gt;},&lt;/span&gt; &lt;span class="n"&gt;Name&lt;/span&gt;
+
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$i&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nv"&gt;$i&lt;/span&gt; &lt;span class="o"&gt;-lt&lt;/span&gt; &lt;span class="nv"&gt;$items&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Count&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nv"&gt;$i&lt;/span&gt;&lt;span class="p"&gt;++)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="nv"&gt;$item&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;$items&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;$i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;-not&lt;/span&gt; &lt;span class="nv"&gt;$IncludeFiles&lt;/span&gt; &lt;span class="o"&gt;-and&lt;/span&gt; &lt;span class="o"&gt;-not&lt;/span&gt; &lt;span class="nv"&gt;$item&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;PSIsContainer&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="k"&gt;continue&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+
+        &lt;span class="nv"&gt;$isLast&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$i&lt;/span&gt; &lt;span class="o"&gt;-eq&lt;/span&gt; &lt;span class="nv"&gt;$items&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Count&lt;/span&gt; &lt;span class="p"&gt;-&lt;/span&gt; &lt;span class="n"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="c"&gt;# Decide branch and indent safely&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$Unicode&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$isLast&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+                &lt;span class="nv"&gt;$branch&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"$CHAR_ELB$CHAR_HORZ$CHAR_HORZ "&lt;/span&gt;
+                &lt;span class="nv"&gt;$nextIndent&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;$Indent&lt;/span&gt; &lt;span class="p"&gt;+&lt;/span&gt; &lt;span class="s2"&gt;"    "&lt;/span&gt;
+            &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+                &lt;span class="nv"&gt;$branch&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"$CHAR_TEE$CHAR_HORZ$CHAR_HORZ "&lt;/span&gt;
+                &lt;span class="nv"&gt;$nextIndent&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;$Indent&lt;/span&gt; &lt;span class="p"&gt;+&lt;/span&gt; &lt;span class="s2"&gt;"$CHAR_VERT   "&lt;/span&gt;
+            &lt;span class="p"&gt;}&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$isLast&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+                &lt;span class="nv"&gt;$branch&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"|-- "&lt;/span&gt;
+            &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+                &lt;span class="nv"&gt;$branch&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"|-- "&lt;/span&gt;
+            &lt;span class="p"&gt;}&lt;/span&gt;
+            &lt;span class="nv"&gt;$nextIndent&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;$Indent&lt;/span&gt; &lt;span class="p"&gt;+&lt;/span&gt; &lt;span class="s2"&gt;"    "&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+
+        &lt;span class="nb"&gt;Write-Output&lt;/span&gt; &lt;span class="s2"&gt;"$Indent$branch&lt;/span&gt;&lt;span class="p"&gt;$(&lt;/span&gt;&lt;span class="nv"&gt;$item&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$item&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;PSIsContainer&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="nb"&gt;Show-Tree&lt;/span&gt; &lt;span class="p"&gt;`&lt;/span&gt;
+                &lt;span class="n"&gt;-Path&lt;/span&gt; &lt;span class="nv"&gt;$item&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;FullName&lt;/span&gt; &lt;span class="p"&gt;`&lt;/span&gt;
+                &lt;span class="n"&gt;-Depth&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$Depth&lt;/span&gt; &lt;span class="p"&gt;-&lt;/span&gt; &lt;span class="n"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;`&lt;/span&gt;
+                &lt;span class="n"&gt;-Indent&lt;/span&gt; &lt;span class="nv"&gt;$nextIndent&lt;/span&gt; &lt;span class="p"&gt;`&lt;/span&gt;
+                &lt;span class="n"&gt;-IncludeFiles&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nv"&gt;$IncludeFiles&lt;/span&gt; &lt;span class="p"&gt;`&lt;/span&gt;
+                &lt;span class="n"&gt;-Unicode&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nv"&gt;$Unicode&lt;/span&gt; &lt;span class="p"&gt;`&lt;/span&gt;
+                &lt;span class="n"&gt;-ShowHidden&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nv"&gt;$ShowHidden&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id="add-to-powershell-profile"&gt;Add to PowerShell Profile&lt;/h2&gt;
+&lt;h3 id="step-1-open-your-profile"&gt;Step 1: Open your Profile&lt;/h3&gt;
+&lt;p&gt;Run this command to open your profile script in Notepad:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;notepad&lt;/span&gt; &lt;span class="nv"&gt;$PROFILE&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="admonition note"&gt;
+&lt;p class="admonition-title"&gt;Note&lt;/p&gt;
+&lt;p&gt;If it says "the system cannot find the path specified," run &lt;code&gt;New-Item -Path $PROFILE -Type File -Force&lt;/code&gt; first, then try the notepad command again.&lt;/p&gt;
+&lt;/div&gt;
+&lt;h3 id="step-2-paste-the-function"&gt;Step 2: Paste the Function&lt;/h3&gt;
+&lt;p&gt;Copy and paste this code into the Notepad window and save it.&lt;/p&gt;
+&lt;h3 id="step-3-refresh-and-use"&gt;Step 3: Refresh and Use&lt;/h3&gt;
+&lt;p&gt;Close Notepad and refresh your session by running:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="nv"&gt;$PROFILE&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now you can use it anywhere just like a built-in command!&lt;/p&gt;
+&lt;h2 id="examples"&gt;Examples&lt;/h2&gt;
+&lt;h3 id="folders-only-depth-1"&gt;Folders only, Depth 1&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nb"&gt;PS &lt;/span&gt;&lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="p"&gt;:\&lt;/span&gt;&lt;span class="n"&gt;Temp&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;Show-Tree&lt;/span&gt; &lt;span class="n"&gt;-Depth&lt;/span&gt; &lt;span class="n"&gt;1&lt;/span&gt; &lt;span class="n"&gt;-Unicode&lt;/span&gt;
+&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;DCU&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="n"&gt;Logs&lt;/span&gt;
+&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;Dummy1&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;Dummy1_1&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;Dummy1_2&lt;/span&gt;
+&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;Dummy2&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;Dummy2_1&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;Dummy2_2&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id="folders-only-depth-2"&gt;Folders only, Depth 2&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nb"&gt;PS &lt;/span&gt;&lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="p"&gt;:\&lt;/span&gt;&lt;span class="n"&gt;Temp&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;Show-Tree&lt;/span&gt; &lt;span class="n"&gt;-Depth&lt;/span&gt; &lt;span class="n"&gt;2&lt;/span&gt; &lt;span class="n"&gt;-Unicode&lt;/span&gt;
+&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;DCU&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="n"&gt;Logs&lt;/span&gt;
+&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;Dummy1&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;Dummy1_1&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;Dummy1_1_1&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;Dummy1_2&lt;/span&gt;
+&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;Dummy2&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;Dummy2_1&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;Dummy2_1_1&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;Dummy2_2&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id="with-files-depth-2"&gt;With Files, Depth 2&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nb"&gt;PS &lt;/span&gt;&lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="p"&gt;:\&lt;/span&gt;&lt;span class="n"&gt;Temp&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;Show-Tree&lt;/span&gt; &lt;span class="n"&gt;-Depth&lt;/span&gt; &lt;span class="n"&gt;2&lt;/span&gt; &lt;span class="n"&gt;-Unicode&lt;/span&gt; &lt;span class="n"&gt;-IncludeFiles&lt;/span&gt;
+&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;DCU&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="n"&gt;Logs&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;       &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;DCUApply&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;log&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;       &lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="n"&gt;DCUScan&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;log&lt;/span&gt;
+&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;Dummy1&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;Dummy1_1&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;Dummy1_1_1&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="n"&gt;Dummy1_1_1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;txt&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;Dummy1_2&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="n"&gt;dummy1_1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;txt&lt;/span&gt;
+&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;Dummy2&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;Dummy2_1&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;Dummy2_1_1&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="n"&gt;Dummy2_1_1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;txt&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;Dummy2_2&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="n"&gt;dummy2_1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;txt&lt;/span&gt;
+&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;Dummy1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;txt&lt;/span&gt;
+&lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="n"&gt;Dummy2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;txt&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id="output-to-file"&gt;Output to file&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nb"&gt;PS &lt;/span&gt;&lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="p"&gt;:\&lt;/span&gt;&lt;span class="n"&gt;Temp&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;Show-Tree&lt;/span&gt; &lt;span class="n"&gt;-Depth&lt;/span&gt; &lt;span class="n"&gt;2&lt;/span&gt; &lt;span class="n"&gt;-Unicode&lt;/span&gt; &lt;span class="n"&gt;-IncludeFiles&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nb"&gt;Out-File&lt;/span&gt; &lt;span class="n"&gt;tree&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;txt&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="Coding"/><category term="PowerShell"/><category term="Windows"/><category term="Directory"/></entry><entry><title>Synchronizing Multiple Remote Repositories</title><link href="https://yunchizhang.github.io/posts/multi_remote_repos.html" rel="alternate"/><published>2025-08-17T11:08:00-05:00</published><updated>2025-08-17T11:08:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2025-08-17:/posts/multi_remote_repos.html</id><summary type="html">&lt;p&gt;How to synchronize multiple remote repositories with a local one.&lt;/p&gt;</summary><content type="html">
 &lt;h2 id="multiple-remote-git-repositories"&gt;Multiple Remote Git Repositories&lt;/h2&gt;
 &lt;p&gt;Synchronizing two remote Git repositories is often needed if, for example, you’re mirroring between
 &lt;a href="https://github.com"&gt;GitHub&lt;/a&gt; and &lt;a href="https://gitlab.com"&gt;GitLab&lt;/a&gt;, or keeping a company’s internal Git server in sync with
@@ -70,7 +257,7 @@ automatically.&lt;/p&gt;
 &lt;li&gt;
 &lt;p&gt;Consider a CI job or hook to auto-sync branches (e.g., GitHub Action that pushes to GitLab). That way developers only need to push once.&lt;/p&gt;
 &lt;/li&gt;
-&lt;/ul&gt;</content><category term="Coding"></category><category term="repository"></category><category term="git"></category><category term="remote"></category></entry><entry><title>RF Mismatch Loss, Error and Uncertainty</title><link href="https://yunchizhang.github.io/posts/rf_mismatch_error.html" rel="alternate"></link><published>2025-07-14T09:20:00-05:00</published><updated>2025-07-14T09:20:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2025-07-14:/posts/rf_mismatch_error.html</id><summary type="html">&lt;p&gt;Analysis of RF mismatch between components.&lt;/p&gt;</summary><content type="html">
+&lt;/ul&gt;</content><category term="Coding"/><category term="repository"/><category term="git"/><category term="remote"/></entry><entry><title>RF Mismatch Loss, Error and Uncertainty</title><link href="https://yunchizhang.github.io/posts/rf_mismatch_error.html" rel="alternate"/><published>2025-07-14T09:20:00-05:00</published><updated>2025-07-14T09:20:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2025-07-14:/posts/rf_mismatch_error.html</id><summary type="html">&lt;p&gt;Analysis of RF mismatch between components.&lt;/p&gt;</summary><content type="html">
 &lt;p&gt;For maximum transfer of the power from any RF source component, the total input impedance of the
 component connected to the source must be equal to the conjugate of the source impedance. In
 practice, there is always some degree of impedance mismatch between the source and connected
@@ -208,7 +395,7 @@ T_{max}=\frac{(1-\gamma_S^2)(1-\gamma_L^2)}{(1-\gamma_S\gamma_L)^2}\end{cases}$$
     (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
-&lt;/script&gt;</content><category term="RF System"></category><category term="RF"></category><category term="Microwave"></category><category term="System"></category></entry><entry><title>Galois Field and Reed-Solomon Coding</title><link href="https://yunchizhang.github.io/posts/galois_field_RS_coding.html" rel="alternate"></link><published>2025-06-03T09:20:00-05:00</published><updated>2025-06-03T09:20:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2025-06-03:/posts/galois_field_RS_coding.html</id><summary type="html">Describe details of Galois Field and Reed-Solomon Coding.</summary><content type="html">
+&lt;/script&gt;</content><category term="RF System"/><category term="RF"/><category term="Microwave"/><category term="System"/></entry><entry><title>Galois Field and Reed-Solomon Coding</title><link href="https://yunchizhang.github.io/posts/galois_field_RS_coding.html" rel="alternate"/><published>2025-06-03T09:20:00-05:00</published><updated>2025-06-03T09:20:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2025-06-03:/posts/galois_field_RS_coding.html</id><summary type="html">Describe details of Galois Field and Reed-Solomon Coding.</summary><content type="html">
 &lt;main&gt;
 &lt;div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=61afe0f7"&gt;
 &lt;div class="jp-Cell-inputWrapper" tabindex="0"&gt;
@@ -794,7 +981,7 @@ Equality against original message: True
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/main&gt;
-</content><category term="Digital Communications"></category><category term="Galois Field, Digital, Communications"></category><category term="Galois Field, Reed-Solomon Coding, Digital Communications"></category></entry><entry><title>Linear Feedback Shift Register</title><link href="https://yunchizhang.github.io/posts/lfsr.html" rel="alternate"></link><published>2025-05-09T09:20:00-05:00</published><updated>2025-05-09T09:20:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2025-05-09:/posts/lfsr.html</id><summary type="html">&lt;p&gt;Describe details of linear feedback shift register (LFSR).&lt;/p&gt;</summary><content type="html">
+</content><category term="Digital Communications"/><category term="Galois Field, Digital, Communications"/><category term="Galois Field, Reed-Solomon Coding, Digital Communications"/></entry><entry><title>Linear Feedback Shift Register</title><link href="https://yunchizhang.github.io/posts/lfsr.html" rel="alternate"/><published>2025-05-09T09:20:00-05:00</published><updated>2025-05-09T09:20:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2025-05-09:/posts/lfsr.html</id><summary type="html">&lt;p&gt;Describe details of linear feedback shift register (LFSR).&lt;/p&gt;</summary><content type="html">
 &lt;p&gt;A linear-feedback shift register (LFSR) is a shift register whose input bit is a linear function of
 its previous state.&lt;/p&gt;
 &lt;p&gt;The most commonly used linear function of single bits is exclusive-or (XOR). Thus, an LFSR is most
@@ -1076,7 +1263,7 @@ two configurations.&lt;/p&gt;
     (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
-&lt;/script&gt;</content><category term="Digital Communications"></category><category term="LFSR"></category><category term="Digital"></category><category term="Communications"></category></entry><entry><title>Mathjax support in VS Code and Pelican</title><link href="https://yunchizhang.github.io/posts/mathjax_support.html" rel="alternate"></link><published>2025-05-02T15:20:00-05:00</published><updated>2025-05-02T15:20:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2025-05-02:/posts/mathjax_support.html</id><summary type="html">&lt;p&gt;Describe how to support Mathjax in VS Code and Pelican.&lt;/p&gt;</summary><content type="html">
+&lt;/script&gt;</content><category term="Digital Communications"/><category term="LFSR"/><category term="Digital"/><category term="Communications"/></entry><entry><title>Mathjax support in VS Code and Pelican</title><link href="https://yunchizhang.github.io/posts/mathjax_support.html" rel="alternate"/><published>2025-05-02T15:20:00-05:00</published><updated>2025-05-02T15:20:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2025-05-02:/posts/mathjax_support.html</id><summary type="html">&lt;p&gt;Describe how to support Mathjax in VS Code and Pelican.&lt;/p&gt;</summary><content type="html">
 &lt;h2 id="mathjax"&gt;Mathjax&lt;/h2&gt;
 &lt;p&gt;MathJax is an open-source JavaScript display engine for LaTeX, MathML, and AsciiMath notation that
 works in all modern browsers. Please refer to &lt;a class="ampl" href="https://www.mathjax.org/"&gt;Mathjax&lt;/a&gt;
@@ -1204,7 +1391,7 @@ $$&lt;/div&gt;
     (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
-&lt;/script&gt;</content><category term="Content Creation"></category><category term="pelican"></category><category term="markdown"></category><category term="webpage"></category><category term="mathjax"></category><category term="vs code"></category><category term="equation"></category></entry><entry><title>Markdown codeblock format for Pelican</title><link href="https://yunchizhang.github.io/posts/codeblock_markdown_pelican.html" rel="alternate"></link><published>2025-05-01T14:00:00-05:00</published><updated>2025-05-01T14:00:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2025-05-01:/posts/codeblock_markdown_pelican.html</id><summary type="html">&lt;p&gt;Describe how to write codeblock inside a list item in markdown.&lt;/p&gt;</summary><content type="html">
+&lt;/script&gt;</content><category term="Content Creation"/><category term="pelican"/><category term="markdown"/><category term="webpage"/><category term="mathjax"/><category term="vs code"/><category term="equation"/></entry><entry><title>Markdown codeblock format for Pelican</title><link href="https://yunchizhang.github.io/posts/codeblock_markdown_pelican.html" rel="alternate"/><published>2025-05-01T14:00:00-05:00</published><updated>2025-05-01T14:00:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2025-05-01:/posts/codeblock_markdown_pelican.html</id><summary type="html">&lt;p&gt;Describe how to write codeblock inside a list item in markdown.&lt;/p&gt;</summary><content type="html">
 &lt;h2 id="code-snippet-in-markdown"&gt;Code Snippet in Markdown&lt;/h2&gt;
 &lt;h3 id="inline-code"&gt;Inline Code&lt;/h3&gt;
 &lt;p&gt;The single &lt;strong&gt;backticks `&lt;/strong&gt; in Markdown can be used to indicate inline code. For example,
@@ -1386,7 +1573,7 @@ used.&lt;/p&gt;
         &lt;span class="s2"&gt;"markdown.extensions.codehilite"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;"css_class"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"highlight"&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
     &lt;span class="p"&gt;},&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="Content Creation"></category><category term="pelican"></category><category term="markdown"></category><category term="webpage"></category></entry><entry><title>Publish Pelican Webpages to Github Pages</title><link href="https://yunchizhang.github.io/posts/pelican_on_github.html" rel="alternate"></link><published>2024-09-29T10:46:00-05:00</published><updated>2025-05-02T12:44:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2024-09-29:/posts/pelican_on_github.html</id><summary type="html">&lt;p&gt;Describe how to publish Pelican generated webpages to Github pages.&lt;/p&gt;</summary><content type="html">
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="Content Creation"/><category term="pelican"/><category term="markdown"/><category term="webpage"/></entry><entry><title>Publish Pelican Webpages to Github Pages</title><link href="https://yunchizhang.github.io/posts/pelican_on_github.html" rel="alternate"/><published>2024-09-29T10:46:00-05:00</published><updated>2025-05-02T12:44:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2024-09-29:/posts/pelican_on_github.html</id><summary type="html">&lt;p&gt;Describe how to publish Pelican generated webpages to Github pages.&lt;/p&gt;</summary><content type="html">
 &lt;h1 id="pelican-and-github-pages"&gt;Pelican and Github Pages&lt;/h1&gt;
 &lt;p&gt;You can publish &lt;a href="https://getpelican.com/"&gt;Pelican&lt;/a&gt; generated site to &lt;a href="https://pages.github.com/"&gt;GitHub
 Pages&lt;/a&gt; for free. Your site will be published to &lt;code&gt;https://yourusername.github.io&lt;/code&gt;.&lt;/p&gt;
@@ -1539,7 +1726,7 @@ produce:&lt;/p&gt;
 &lt;li&gt;Sub-item 2, four space indent&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;/ol&gt;</content><category term="Content Creation"></category><category term="pelican"></category><category term="github"></category><category term="python"></category><category term="webpage"></category></entry><entry><title>JPL Horizon Query</title><link href="https://yunchizhang.github.io/posts/jpl_horizon_query.html" rel="alternate"></link><published>2024-07-11T09:20:00-05:00</published><updated>2024-07-11T09:20:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2024-07-11:/posts/jpl_horizon_query.html</id><summary type="html">Describe details of JPL Horizon Query in Python.</summary><content type="html">
+&lt;/ol&gt;</content><category term="Content Creation"/><category term="pelican"/><category term="github"/><category term="python"/><category term="webpage"/></entry><entry><title>JPL Horizon Query</title><link href="https://yunchizhang.github.io/posts/jpl_horizon_query.html" rel="alternate"/><published>2024-07-11T09:20:00-05:00</published><updated>2024-07-11T09:20:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2024-07-11:/posts/jpl_horizon_query.html</id><summary type="html">Describe details of JPL Horizon Query in Python.</summary><content type="html">
 &lt;main&gt;
 &lt;div class="jp-Cell jp-MarkdownCell jp-Notebook-cell"&gt;
 &lt;div class="jp-Cell-inputWrapper" tabindex="0"&gt;
@@ -1791,7 +1978,7 @@ Length = 44641 rows
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/main&gt;
-</content><category term="Satellite"></category><category term="JPL Horizon, Python"></category><category term="JPL, Horizon, Query, astroquery"></category></entry><entry><title>RFI and OOBE</title><link href="https://yunchizhang.github.io/posts/rfi_and_oobe.html" rel="alternate"></link><published>2024-04-01T09:20:00-05:00</published><updated>2024-04-01T09:20:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2024-04-01:/posts/rfi_and_oobe.html</id><summary type="html">Describe details of RFI and OOBE.</summary><content type="html">
+</content><category term="Satellite"/><category term="JPL Horizon, Python"/><category term="JPL, Horizon, Query, astroquery"/></entry><entry><title>RFI and OOBE</title><link href="https://yunchizhang.github.io/posts/rfi_and_oobe.html" rel="alternate"/><published>2024-04-01T09:20:00-05:00</published><updated>2024-04-01T09:20:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2024-04-01:/posts/rfi_and_oobe.html</id><summary type="html">Describe details of RFI and OOBE.</summary><content type="html">
 &lt;main&gt;
 &lt;div class="jp-Cell jp-MarkdownCell jp-Notebook-cell"&gt;
 &lt;div class="jp-Cell-inputWrapper" tabindex="0"&gt;
@@ -2044,4 +2231,4 @@ systems.&lt;/li&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/main&gt;
-</content><category term="RF System"></category><category term="RF, RFI, OOBE, System"></category></entry></feed>
+</content><category term="RF System"/><category term="RF, RFI, OOBE, System"/></entry></feed>

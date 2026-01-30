@@ -1,5 +1,192 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Yzowledge - Coding</title><link href="https://yunchizhang.github.io/" rel="alternate"></link><link href="https://yunchizhang.github.io/feeds/coding.atom.xml" rel="self"></link><id>https://yunchizhang.github.io/</id><updated>2025-08-17T11:08:00-05:00</updated><subtitle>Knowledge and Experience</subtitle><entry><title>Synchronizing Multiple Remote Repositories</title><link href="https://yunchizhang.github.io/posts/multi_remote_repos.html" rel="alternate"></link><published>2025-08-17T11:08:00-05:00</published><updated>2025-08-17T11:08:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2025-08-17:/posts/multi_remote_repos.html</id><summary type="html">&lt;p&gt;How to synchronize multiple remote repositories with a local one.&lt;/p&gt;</summary><content type="html">
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Yzowledge - Coding</title><link href="https://yunchizhang.github.io/" rel="alternate"/><link href="https://yunchizhang.github.io/feeds/coding.atom.xml" rel="self"/><id>https://yunchizhang.github.io/</id><updated>2026-01-30T15:00:00-05:00</updated><subtitle>Knowledge and Experience</subtitle><entry><title>Directory Tree in Windows</title><link href="https://yunchizhang.github.io/posts/directory_tree_windows.html" rel="alternate"/><published>2026-01-30T15:00:00-05:00</published><updated>2026-01-30T15:00:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2026-01-30:/posts/directory_tree_windows.html</id><summary type="html">&lt;p&gt;Generate directory tree in Windows operating system.&lt;/p&gt;</summary><content type="html">
+&lt;p&gt;In Windows, if you want to see the directory structure up to a specific depth level. &lt;strong&gt;PowerShell&lt;/strong&gt;
+script can be used. Windows has a built-in &lt;code&gt;tree&lt;/code&gt; command. While it doesn't have a "depth" flag,
+you can simulate it in &lt;strong&gt;PowerShell&lt;/strong&gt; by filtering the output, though it's a bit "hacky."&lt;/p&gt;
+&lt;p&gt;For a cleaner approach, I recommend sticking to &lt;strong&gt;PowerShell&lt;/strong&gt; objects.&lt;/p&gt;
+&lt;h2 id="the-custom-tree-script"&gt;The "Custom Tree" Script&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="nb"&gt;Show-Tree&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="cm"&gt;&amp;lt;#&lt;/span&gt;
+&lt;span class="sd"&gt;.SYNOPSIS&lt;/span&gt;
+&lt;span class="cm"&gt;Displays a directory tree with configurable depth.&lt;/span&gt;
+
+&lt;span class="sd"&gt;.DESCRIPTION&lt;/span&gt;
+&lt;span class="cm"&gt;Show-Tree outputs a tree-like view of folders (and optionally files),&lt;/span&gt;
+&lt;span class="cm"&gt;starting from a given path. Supports depth control, Unicode characters,&lt;/span&gt;
+&lt;span class="cm"&gt;and optional inclusion of hidden files.Indent is internal; use -IncludeFiles,&lt;/span&gt;
+&lt;span class="cm"&gt;-Unicode, and -ShowHidden as needed.&lt;/span&gt;
+
+&lt;span class="sd"&gt;.PARAMETER&lt;/span&gt;&lt;span class="cm"&gt; Path&lt;/span&gt;
+&lt;span class="cm"&gt;Root directory. Defaults to current directory.&lt;/span&gt;
+
+&lt;span class="sd"&gt;.PARAMETER&lt;/span&gt;&lt;span class="cm"&gt; Depth&lt;/span&gt;
+&lt;span class="cm"&gt;Maximum recursion depth.&lt;/span&gt;
+
+&lt;span class="sd"&gt;.PARAMETER&lt;/span&gt;&lt;span class="cm"&gt; IncludeFiles&lt;/span&gt;
+&lt;span class="cm"&gt;Include files in output.&lt;/span&gt;
+
+&lt;span class="sd"&gt;.PARAMETER&lt;/span&gt;&lt;span class="cm"&gt; Unicode&lt;/span&gt;
+&lt;span class="cm"&gt;Use Unicode tree characters (runtime-safe).&lt;/span&gt;
+
+&lt;span class="sd"&gt;.PARAMETER&lt;/span&gt;&lt;span class="cm"&gt; ShowHidden&lt;/span&gt;
+&lt;span class="cm"&gt;Include hidden items.&lt;/span&gt;
+
+&lt;span class="sd"&gt;.EXAMPLE&lt;/span&gt;
+&lt;span class="cm"&gt;Show-Tree&lt;/span&gt;
+&lt;span class="cm"&gt;- Displays the current directory tree up to the default depth (2), showing only folders.&lt;/span&gt;
+
+&lt;span class="sd"&gt;.EXAMPLE&lt;/span&gt;
+&lt;span class="cm"&gt;Show-Tree -Depth 3&lt;/span&gt;
+&lt;span class="cm"&gt;- Displays the current directory tree up to 3 levels deep, showing only folders.&lt;/span&gt;
+
+&lt;span class="sd"&gt;.EXAMPLE&lt;/span&gt;
+&lt;span class="cm"&gt;Show-Tree -IncludeFiles&lt;/span&gt;
+&lt;span class="cm"&gt;- Displays folders and files under the current directory up to the default depth (2).&lt;/span&gt;
+
+&lt;span class="sd"&gt;.EXAMPLE&lt;/span&gt;
+&lt;span class="cm"&gt;Show-Tree -Path C:\Projects -IncludeFiles -Depth 4 -Unicode&lt;/span&gt;
+&lt;span class="cm"&gt;- Displays a Unicode tree of folders and files under C:\Projects up to 4 levels deep.&lt;/span&gt;
+
+&lt;span class="sd"&gt;.EXAMPLE&lt;/span&gt;
+&lt;span class="cm"&gt;Show-Tree -Path D:\Work -IncludeFiles -Depth 2 -ShowHidden&lt;/span&gt;
+&lt;span class="cm"&gt;- Displays folders and files under D:\Work up to 2 levels, including hidden items.&lt;/span&gt;
+
+&lt;span class="sd"&gt;.NOTES&lt;/span&gt;
+&lt;span class="cm"&gt;Author: ChatGPT&lt;/span&gt;
+&lt;span class="cm"&gt;Compatible with Windows PowerShell 5.1 and PowerShell 7+&lt;/span&gt;
+&lt;span class="cm"&gt;#&amp;gt;&lt;/span&gt;
+
+    &lt;span class="k"&gt;param&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+        &lt;span class="no"&gt;[string]&lt;/span&gt;&lt;span class="nv"&gt;$Path&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"."&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="no"&gt;[int]&lt;/span&gt;&lt;span class="nv"&gt;$Depth&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="no"&gt;[string]&lt;/span&gt;&lt;span class="nv"&gt;$Indent&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;""&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="no"&gt;[switch]&lt;/span&gt;&lt;span class="nv"&gt;$IncludeFiles&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="no"&gt;[switch]&lt;/span&gt;&lt;span class="nv"&gt;$Unicode&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="no"&gt;[switch]&lt;/span&gt;&lt;span class="nv"&gt;$ShowHidden&lt;/span&gt;
+    &lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$Depth&lt;/span&gt; &lt;span class="o"&gt;-lt&lt;/span&gt; &lt;span class="n"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="c"&gt;# Runtime-safe Unicode characters&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$Unicode&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="nv"&gt;$CHAR_TEE&lt;/span&gt;  &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="no"&gt;[char]&lt;/span&gt;&lt;span class="n"&gt;0x251C&lt;/span&gt;  &lt;span class="c"&gt;# ├&lt;/span&gt;
+        &lt;span class="nv"&gt;$CHAR_ELB&lt;/span&gt;  &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="no"&gt;[char]&lt;/span&gt;&lt;span class="n"&gt;0x2514&lt;/span&gt;  &lt;span class="c"&gt;# └&lt;/span&gt;
+        &lt;span class="nv"&gt;$CHAR_VERT&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="no"&gt;[char]&lt;/span&gt;&lt;span class="n"&gt;0x2502&lt;/span&gt;  &lt;span class="c"&gt;# │&lt;/span&gt;
+        &lt;span class="nv"&gt;$CHAR_HORZ&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="no"&gt;[char]&lt;/span&gt;&lt;span class="n"&gt;0x2500&lt;/span&gt;  &lt;span class="c"&gt;# ─&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="nv"&gt;$gciParams&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="p"&gt;@{&lt;/span&gt; &lt;span class="n"&gt;Path&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;$Path&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$ShowHidden&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nv"&gt;$gciParams&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Force&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;$true&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="c"&gt;# Sort folders first, then files&lt;/span&gt;
+    &lt;span class="nv"&gt;$items&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;Get-ChildItem&lt;/span&gt; &lt;span class="nv"&gt;@gciParams&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt;
+        &lt;span class="nb"&gt;Sort-Object&lt;/span&gt; &lt;span class="p"&gt;@{&lt;/span&gt; &lt;span class="n"&gt;Expression&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'PSIsContainer'&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;Descending&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;$true&lt;/span&gt; &lt;span class="p"&gt;},&lt;/span&gt; &lt;span class="n"&gt;Name&lt;/span&gt;
+
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$i&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nv"&gt;$i&lt;/span&gt; &lt;span class="o"&gt;-lt&lt;/span&gt; &lt;span class="nv"&gt;$items&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Count&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nv"&gt;$i&lt;/span&gt;&lt;span class="p"&gt;++)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="nv"&gt;$item&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;$items&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;$i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;-not&lt;/span&gt; &lt;span class="nv"&gt;$IncludeFiles&lt;/span&gt; &lt;span class="o"&gt;-and&lt;/span&gt; &lt;span class="o"&gt;-not&lt;/span&gt; &lt;span class="nv"&gt;$item&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;PSIsContainer&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="k"&gt;continue&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+
+        &lt;span class="nv"&gt;$isLast&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$i&lt;/span&gt; &lt;span class="o"&gt;-eq&lt;/span&gt; &lt;span class="nv"&gt;$items&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Count&lt;/span&gt; &lt;span class="p"&gt;-&lt;/span&gt; &lt;span class="n"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="c"&gt;# Decide branch and indent safely&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$Unicode&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$isLast&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+                &lt;span class="nv"&gt;$branch&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"$CHAR_ELB$CHAR_HORZ$CHAR_HORZ "&lt;/span&gt;
+                &lt;span class="nv"&gt;$nextIndent&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;$Indent&lt;/span&gt; &lt;span class="p"&gt;+&lt;/span&gt; &lt;span class="s2"&gt;"    "&lt;/span&gt;
+            &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+                &lt;span class="nv"&gt;$branch&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"$CHAR_TEE$CHAR_HORZ$CHAR_HORZ "&lt;/span&gt;
+                &lt;span class="nv"&gt;$nextIndent&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;$Indent&lt;/span&gt; &lt;span class="p"&gt;+&lt;/span&gt; &lt;span class="s2"&gt;"$CHAR_VERT   "&lt;/span&gt;
+            &lt;span class="p"&gt;}&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$isLast&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+                &lt;span class="nv"&gt;$branch&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"|-- "&lt;/span&gt;
+            &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+                &lt;span class="nv"&gt;$branch&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"|-- "&lt;/span&gt;
+            &lt;span class="p"&gt;}&lt;/span&gt;
+            &lt;span class="nv"&gt;$nextIndent&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;$Indent&lt;/span&gt; &lt;span class="p"&gt;+&lt;/span&gt; &lt;span class="s2"&gt;"    "&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+
+        &lt;span class="nb"&gt;Write-Output&lt;/span&gt; &lt;span class="s2"&gt;"$Indent$branch&lt;/span&gt;&lt;span class="p"&gt;$(&lt;/span&gt;&lt;span class="nv"&gt;$item&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$item&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;PSIsContainer&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="nb"&gt;Show-Tree&lt;/span&gt; &lt;span class="p"&gt;`&lt;/span&gt;
+                &lt;span class="n"&gt;-Path&lt;/span&gt; &lt;span class="nv"&gt;$item&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;FullName&lt;/span&gt; &lt;span class="p"&gt;`&lt;/span&gt;
+                &lt;span class="n"&gt;-Depth&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$Depth&lt;/span&gt; &lt;span class="p"&gt;-&lt;/span&gt; &lt;span class="n"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;`&lt;/span&gt;
+                &lt;span class="n"&gt;-Indent&lt;/span&gt; &lt;span class="nv"&gt;$nextIndent&lt;/span&gt; &lt;span class="p"&gt;`&lt;/span&gt;
+                &lt;span class="n"&gt;-IncludeFiles&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nv"&gt;$IncludeFiles&lt;/span&gt; &lt;span class="p"&gt;`&lt;/span&gt;
+                &lt;span class="n"&gt;-Unicode&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nv"&gt;$Unicode&lt;/span&gt; &lt;span class="p"&gt;`&lt;/span&gt;
+                &lt;span class="n"&gt;-ShowHidden&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nv"&gt;$ShowHidden&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id="add-to-powershell-profile"&gt;Add to PowerShell Profile&lt;/h2&gt;
+&lt;h3 id="step-1-open-your-profile"&gt;Step 1: Open your Profile&lt;/h3&gt;
+&lt;p&gt;Run this command to open your profile script in Notepad:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;notepad&lt;/span&gt; &lt;span class="nv"&gt;$PROFILE&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="admonition note"&gt;
+&lt;p class="admonition-title"&gt;Note&lt;/p&gt;
+&lt;p&gt;If it says "the system cannot find the path specified," run &lt;code&gt;New-Item -Path $PROFILE -Type File -Force&lt;/code&gt; first, then try the notepad command again.&lt;/p&gt;
+&lt;/div&gt;
+&lt;h3 id="step-2-paste-the-function"&gt;Step 2: Paste the Function&lt;/h3&gt;
+&lt;p&gt;Copy and paste this code into the Notepad window and save it.&lt;/p&gt;
+&lt;h3 id="step-3-refresh-and-use"&gt;Step 3: Refresh and Use&lt;/h3&gt;
+&lt;p&gt;Close Notepad and refresh your session by running:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="nv"&gt;$PROFILE&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now you can use it anywhere just like a built-in command!&lt;/p&gt;
+&lt;h2 id="examples"&gt;Examples&lt;/h2&gt;
+&lt;h3 id="folders-only-depth-1"&gt;Folders only, Depth 1&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nb"&gt;PS &lt;/span&gt;&lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="p"&gt;:\&lt;/span&gt;&lt;span class="n"&gt;Temp&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;Show-Tree&lt;/span&gt; &lt;span class="n"&gt;-Depth&lt;/span&gt; &lt;span class="n"&gt;1&lt;/span&gt; &lt;span class="n"&gt;-Unicode&lt;/span&gt;
+&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;DCU&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="n"&gt;Logs&lt;/span&gt;
+&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;Dummy1&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;Dummy1_1&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;Dummy1_2&lt;/span&gt;
+&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;Dummy2&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;Dummy2_1&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;Dummy2_2&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id="folders-only-depth-2"&gt;Folders only, Depth 2&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nb"&gt;PS &lt;/span&gt;&lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="p"&gt;:\&lt;/span&gt;&lt;span class="n"&gt;Temp&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;Show-Tree&lt;/span&gt; &lt;span class="n"&gt;-Depth&lt;/span&gt; &lt;span class="n"&gt;2&lt;/span&gt; &lt;span class="n"&gt;-Unicode&lt;/span&gt;
+&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;DCU&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="n"&gt;Logs&lt;/span&gt;
+&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;Dummy1&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;Dummy1_1&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;Dummy1_1_1&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;Dummy1_2&lt;/span&gt;
+&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;Dummy2&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;Dummy2_1&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;Dummy2_1_1&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;Dummy2_2&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id="with-files-depth-2"&gt;With Files, Depth 2&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nb"&gt;PS &lt;/span&gt;&lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="p"&gt;:\&lt;/span&gt;&lt;span class="n"&gt;Temp&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;Show-Tree&lt;/span&gt; &lt;span class="n"&gt;-Depth&lt;/span&gt; &lt;span class="n"&gt;2&lt;/span&gt; &lt;span class="n"&gt;-Unicode&lt;/span&gt; &lt;span class="n"&gt;-IncludeFiles&lt;/span&gt;
+&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;DCU&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="n"&gt;Logs&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;       &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;DCUApply&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;log&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;       &lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="n"&gt;DCUScan&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;log&lt;/span&gt;
+&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;Dummy1&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;Dummy1_1&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;Dummy1_1_1&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="n"&gt;Dummy1_1_1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;txt&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;Dummy1_2&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="n"&gt;dummy1_1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;txt&lt;/span&gt;
+&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;Dummy2&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;Dummy2_1&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;Dummy2_1_1&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="n"&gt;Dummy2_1_1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;txt&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;Dummy2_2&lt;/span&gt;
+&lt;span class="err"&gt;│&lt;/span&gt;   &lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="n"&gt;dummy2_1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;txt&lt;/span&gt;
+&lt;span class="err"&gt;├──&lt;/span&gt; &lt;span class="n"&gt;Dummy1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;txt&lt;/span&gt;
+&lt;span class="err"&gt;└──&lt;/span&gt; &lt;span class="n"&gt;Dummy2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;txt&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id="output-to-file"&gt;Output to file&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nb"&gt;PS &lt;/span&gt;&lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="p"&gt;:\&lt;/span&gt;&lt;span class="n"&gt;Temp&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;Show-Tree&lt;/span&gt; &lt;span class="n"&gt;-Depth&lt;/span&gt; &lt;span class="n"&gt;2&lt;/span&gt; &lt;span class="n"&gt;-Unicode&lt;/span&gt; &lt;span class="n"&gt;-IncludeFiles&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nb"&gt;Out-File&lt;/span&gt; &lt;span class="n"&gt;tree&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;txt&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="Coding"/><category term="PowerShell"/><category term="Windows"/><category term="Directory"/></entry><entry><title>Synchronizing Multiple Remote Repositories</title><link href="https://yunchizhang.github.io/posts/multi_remote_repos.html" rel="alternate"/><published>2025-08-17T11:08:00-05:00</published><updated>2025-08-17T11:08:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2025-08-17:/posts/multi_remote_repos.html</id><summary type="html">&lt;p&gt;How to synchronize multiple remote repositories with a local one.&lt;/p&gt;</summary><content type="html">
 &lt;h2 id="multiple-remote-git-repositories"&gt;Multiple Remote Git Repositories&lt;/h2&gt;
 &lt;p&gt;Synchronizing two remote Git repositories is often needed if, for example, you’re mirroring between
 &lt;a href="https://github.com"&gt;GitHub&lt;/a&gt; and &lt;a href="https://gitlab.com"&gt;GitLab&lt;/a&gt;, or keeping a company’s internal Git server in sync with
@@ -70,4 +257,4 @@ automatically.&lt;/p&gt;
 &lt;li&gt;
 &lt;p&gt;Consider a CI job or hook to auto-sync branches (e.g., GitHub Action that pushes to GitLab). That way developers only need to push once.&lt;/p&gt;
 &lt;/li&gt;
-&lt;/ul&gt;</content><category term="Coding"></category><category term="repository"></category><category term="git"></category><category term="remote"></category></entry></feed>
+&lt;/ul&gt;</content><category term="Coding"/><category term="repository"/><category term="git"/><category term="remote"/></entry></feed>
