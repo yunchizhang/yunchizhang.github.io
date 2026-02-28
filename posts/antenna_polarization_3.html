@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://yunchizhang.github.io/theme/css/elegant.prod.9e9d5ce754.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="https://yunchizhang.github.io/theme/css/custom.css" media="screen">
+
+        <link rel="dns-prefetch" href="//fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+
+        <meta name="author" content="Yunchi Zhang" />
+
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="Antenna, Polarization, Antenna, Antenna Polarization" />
+
+<meta property="og:title" content="Polarization Match: Special Cases "/>
+<meta property="og:url" content="https://yunchizhang.github.io/posts/antenna_polarization_3.html" />
+<meta property="og:description" content="Wave polarization match factor of special cases." />
+<meta property="og:site_name" content="Yzowledge" />
+<meta property="og:article:author" content="Yunchi Zhang" />
+<meta property="og:article:published_time" content="2026-02-27T14:43:00-05:00" />
+<meta name="twitter:title" content="Polarization Match: Special Cases ">
+<meta name="twitter:description" content="Wave polarization match factor of special cases.">
+
+        <title>Polarization Match: Special Cases  · Yzowledge
+</title>
+        <link rel="shortcut icon" href="https://yunchizhang.github.io/theme/images/favicon.ico" type="image/x-icon" />
+        <link rel="icon" href="https://yunchizhang.github.io/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link rel="apple-touch-icon" href="https://yunchizhang.github.io/theme/images/apple-touch-icon.png"  type="image/png" />
+        <link rel="apple-touch-icon" sizes="57x57" href="https://yunchizhang.github.io/theme/images/apple-touch-icon-57x57.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="https://yunchizhang.github.io/theme/images/apple-touch-icon-72x72.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="76x76" href="https://yunchizhang.github.io/theme/images/apple-touch-icon-76x76.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="https://yunchizhang.github.io/theme/images/apple-touch-icon-114x114.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="120x120" href="https://yunchizhang.github.io/theme/images/apple-touch-icon-120x120.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="144x144" href="https://yunchizhang.github.io/theme/images/apple-touch-icon-144x144.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="https://yunchizhang.github.io/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="https://yunchizhang.github.io/theme/images/apple-touch-icon-180x180.png" type="image/png" />
+        <link href="https://yunchizhang.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Yzowledge - Full Atom Feed" />
+
+
+
+    </head>
+    <body>
+        <div id="content">
+            <div class="navbar navbar-static-top">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="https://yunchizhang.github.io/"><span class=site-name>Yzowledge</span></a>
+                        <div class="nav-collapse collapse">
+                            <ul class="nav pull-right top-menu">
+                                <li >
+                                    <a href=
+                                       https://yunchizhang.github.io
+                                    >Home</a>
+                                </li>
+                                <li ><a href="https://yunchizhang.github.io/pages/antenna">Antenna</a></li>
+                                <li ><a href="https://yunchizhang.github.io/pages/resume.html">Curriculum Vitae</a></li>
+                                <li ><a href="https://yunchizhang.github.io/categories">Categories</a></li>
+                                <li ><a href="https://yunchizhang.github.io/tags">Tags</a></li>
+                                <li ><a href="https://yunchizhang.github.io/archives">Archives</a></li>
+                                <li><form class="navbar-search" action="https://yunchizhang.github.io/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span1"></div>
+                    <div class="span10">
+<article itemscope>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+        <h1>
+            <a href="https://yunchizhang.github.io/posts/antenna_polarization_3.html">
+                Polarization Match: Special Cases
+            </a>
+        </h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+    <div class="span2 table-of-content">
+        <nav>
+        <h4>Contents</h4>
+        <div class="toc">
+<ul>
+<li><a href="#polarization-matched-antennas">Polarization-Matched Antennas</a></li>
+<li><a href="#cross-polarized-antennas">Cross-Polarized Antennas</a></li>
+<li><a href="#ideal-linear-polarization-to-elliptical-polarization">Ideal Linear Polarization to Elliptical Polarization</a></li>
+<li><a href="#practical-linear-to-practical-circular">Practical Linear to Practical Circular</a></li>
+</ul>
+</div>
+        </nav>
+    </div>
+    <div class="span8 article-content">
+            
+            
+<p>Special cases of polarization match in a transmit-receive system are studied herein.</p>
+<h2 id="polarization-matched-antennas">Polarization-Matched Antennas</h2>
+<p>If we have two polarization-matched antennas in a transmit-receive system, the polarization match
+factor is equal to 1. Thus</p>
+<div class="math">$$\begin{equation} \rho=\frac{(1+p_1p_2)(1+p_1^*p_2^*)}{(1+p_1p_1^*)(1+p_2p_2^*)}=1
+\end{equation}$$</div>
+<p>It gives:</p>
+<div class="math">$$\begin{equation}(p_1-p_2^*)(p_2-p_1^*)=0 \end{equation}$$</div>
+<p>which means</p>
+<div class="math">$$\begin{equation}p_1=p_2^* \end{equation}$$</div>
+<p>and</p>
+<div class="math">$$\begin{equation}q_1=q_2^* \end{equation}$$</div>
+<p>Therefore,</p>
+<div class="math">$$\begin{equation}\begin{cases}AR_1=AR_2 \\ \\ \tau_1=-\tau_2 \end{cases}\end{equation}$$</div>
+<p><span class="math">\(\tau_1\)</span> and <span class="math">\(\tau_2\)</span> are defined in different coordinate systems. <span class="math">\(\tau_1=-\tau_2\)</span> means the
+semi-major axes of the two polarizations are coincide. For polarization-match antennas,
+the rotation senses of the two polarization ellipses are identical when described in the
+appropriate coordinate systems.  If we think of both antennas transmitting a right elliptic wave,
+for example, the two waves will appear to rotate in opposite directions at a point in space at
+which they "meet."</p>
+<h2 id="cross-polarized-antennas">Cross-Polarized Antennas</h2>
+<p>Two antennas in a transmit-receive configuration that are so polarized that no signal is received
+are said to be cross-polarized. Thus, <span class="math">\(\rho=0\)</span>. Then,</p>
+<div class="math">$$\begin{equation}p_1=-\frac{1}{p_2} \end{equation}$$</div>
+<p>and</p>
+<div class="math">$$\begin{equation}q_1=-\frac{1}{q_2} \end{equation}$$</div>
+<p>Therefore,</p>
+<div class="math">$$\begin{equation}\begin{cases}AR_1=AR_2 \\ \\ \tau_1+\tau_2=\pm\frac{\pi}{2}
+\end{cases}\end{equation}$$</div>
+<p>For cross-polarized antennas, the major axis of one polarization ellipse coincides
+with the minor axis of the other. The rotation senses of the two polarization ellipses are
+different when described in the appropriate coordinate systems.</p>
+<h2 id="ideal-linear-polarization-to-elliptical-polarization">Ideal Linear Polarization to Elliptical Polarization</h2>
+<p>The polarization match factor between an ideal linear polarization and an elliptical polarization
+is:</p>
+<div class="math">$$\begin{equation}\rho=\frac{1}{2}+\frac{(AR^2-1)\cos2\beta}{2(AR^2+1)} \end{equation}$$</div>
+<p>where <span class="math">\(AR\)</span> is the axial ratio of the elliptical polarization, <span class="math">\(\beta\)</span> is the angle between the
+linear polarization and semi-major axis of the elliptical polarization.</p>
+<p>For linear polarization to circular polarization case, <span class="math">\(AR=1\)</span>, then <span class="math">\(\rho=\frac{1}{2}\)</span> which is the
+well known 3dB power mismatch loss.</p>
+<h2 id="practical-linear-to-practical-circular">Practical Linear to Practical Circular</h2>
+<p>In practical linear polarization antenna, there is always power leakage from colinear polarization
+to cross polarization. The power leakage is represented by cross polarization discrimination (XPD).
+The linear antenna field can be written as:</p>
+<div class="math">$$\begin{equation}\mathbf{E_{LP}}=E_{0,LP}\left(\hat{x}+\frac{1}{\sqrt{XPD_{LP}}}e^{j\phi}\hat{y}
+\right)=\frac{E_{0,LP}}{\sqrt{1+\gamma_{LP}^2}}\left(\hat{x}+\gamma_{LP}e^{j\phi}\hat{y} \right)
+\end{equation}$$</div>
+<p>where <span class="math">\(XPD_{LP}=\frac{|E_x|^2}{|E_y|^2}\)</span>, <span class="math">\(\gamma_{LP}=\frac{1}{\sqrt{XPD_{LP}}}\)</span>, <span class="math">\(\phi\)</span> is the
+phase difference between <span class="math">\(E_x\)</span> and <span class="math">\(E_y\)</span>, <span class="math">\(E_x\)</span> is considered as colinear direction. In practice,
+the linear polarization cross-pol phase is unknown and probably random.</p>
+<p>The practical linear polarization with limited XPD is actually an elliptical polarization whose
+semi-major axis direction depends on <span class="math">\(XPD_{LP}\)</span> and <span class="math">\(\phi\)</span> and is not necessarily aligned with the
+colinear direction.</p>
+<p>The practical circular polarization field is give as:</p>
+<div class="math">$$\begin{equation}\mathbf{E_{CP}}=\frac{E_{0,CP}}{\sqrt{\gamma_{CP}^2+1}}\left[\left(\cos\beta-js\gamma_{CP}\sin\beta
+\right)\hat{x}+\left(\sin\beta+js\gamma_{CP}\cos\beta\right)\hat{y}\right] \end{equation}$$</div>
+<p>where <span class="math">\(\gamma_{CP}=\frac{1}{AP_{CP}}\)</span>, <span class="math">\(AP_{CP}\)</span> is the axial ratio, <span class="math">\(\beta\)</span> is the angle between
+colinear direction of the linear polarization and semi-major axis of the circular polarization, and
+<span class="math">\(s=\pm 1\)</span> to indicate the rotation sense.</p>
+<p>The polarization match factor can be derived as:</p>
+<div class="math">$$\begin{equation}\begin{split}\rho(\phi)=\frac{|\mathbf{E_{LP}^*}\cdot\mathbf{E_{CP}}|^2}{|\mathbf{E_{LP}^*}|^2|\mathbf{E_{CP}}|^2}&amp;=\frac{1}{(1+\gamma_{LP}^2)(1+\gamma_{CP}^2)}\left|(\cos\beta-js\gamma_{CP}\sin\beta)+\gamma_{LP}e^{-j\phi}(\sin\beta+js\gamma_{CP}\cos\beta)\right|^2
+\\ \\
+&amp;=\frac{\cos^2\beta+\gamma_{CP}^2\sin^2\beta+\gamma_{LP}^2\left(\sin^2\beta+\gamma_{CP}^2\cos^2\beta\right)+2\gamma_{LP}\left[\left(1-\gamma_{CP}^2\right)\sin\beta\cos\beta\cos\phi+s\gamma_{CP}\sin\phi\right]}{(1+\gamma_{LP}^2)(1+\gamma_{CP}^2)}
+\\ \\ &amp;=
+\frac{1}{2}+\frac{(1-\gamma_{LP}^2)(1-\gamma_{CP}^2)\cos2\beta}{2(1+\gamma_{LP}^2)(1+\gamma_{CP}^2)}+\frac{\gamma_{LP}\sqrt{4\gamma_{CP}^2+(1-\gamma_{CP}^2)^2\sin^2
+2\beta}\cos(\phi-\phi_0)}{(1+\gamma_{LP}^2)(1+\gamma_{CP}^2)}\end{split}\end{equation}$$</div>
+<p>where <span class="math">\(\tan\phi_0=\frac{2s\gamma_{CP}}{(1-\gamma_{CP}^2)\sin2\beta}=\frac{s\tan 2\delta}{\sin 2\beta}\)</span>, <span class="math">\(\gamma_{CP}=\tan\delta\)</span>.</p>
+<p>In practical antenna, cross-pol phase <span class="math">\(\phi\)</span> is typically unknown and often varies with frequency or
+mechanical alignment. The extrema can be calculated:</p>
+<div class="math">$$\begin{equation}\begin{cases}\rho_{max}=\bar{\rho}+ \frac{\gamma_{LP}\sqrt{4\gamma_{CP}^2+(1-\gamma_{CP}^2)^2\sin^2
+2\beta}}{(1+\gamma_{LP}^2)(1+\gamma_{CP}^2)}, &amp;if\space \phi=\phi_0 \\ \\ \rho_{min}=\bar{\rho}- \frac{\gamma_{LP}\sqrt{4\gamma_{CP}^2+(1-\gamma_{CP}^2)^2\sin^2
+2\beta}}{(1+\gamma_{LP}^2)(1+\gamma_{CP}^2)}, &amp;if\space \phi=\pi+\phi_0 \end{cases} \end{equation}$$</div>
+<p>where <span class="math">\(\bar{\rho}\)</span> is the average term:</p>
+<div class="math">$$\begin{equation}\rho=\bar{\rho}=\frac{1}{2}+\frac{(1-\gamma_{LP}^2)(1-\gamma_{CP}^2)\cos2\beta}{2(1+\gamma_{LP}^2)(1+\gamma_{CP}^2)},
+\space if \space \phi=\pm\frac{\pi}{2}+\phi_0\end{equation}$$</div>
+<p>If <span class="math">\(\phi\)</span> is assumed to be random with a uniform distribution in <span class="math">\([0,2\pi]\)</span>, then</p>
+<div class="math">$$\begin{equation}\begin{cases}\left&lt;\cos\phi \right&gt;=0 \\ \\ \left&lt;\sin\phi \right&gt;=0 \\ \\
+\left&lt;e^{-j\phi} \right&gt;=0 \end{cases}\end{equation}$$</div>
+<p>The cross terms vanish. Thus, the averaged polarization match factor is:</p>
+<div class="math">$$\begin{equation}\left&lt;\rho \right&gt;=\bar{\rho}\end{equation}$$</div>
+<p>In practice, <span class="math">\(\beta\)</span> is also unknown. The global extrema of <span class="math">\(\rho\)</span> are:</p>
+<div class="math">$$\begin{equation}\begin{cases}\rho_{gmax}=\frac{(1+\gamma_{LP}\gamma_{CP})^2}{(1+\gamma_{LP}^2)(1+\gamma_{CP}^2)},&amp;if
+\space \beta=0,\phi=\pm\frac{\pi}{2} \\ \\
+\rho_{gmin}=\frac{(1-\gamma_{LP}\gamma_{CP})^2}{(1+\gamma_{LP}^2)(1+\gamma_{CP}^2)},&amp;if \space
+\beta=0,\phi=\mp\frac{\pi}{2}\end{cases}\end{equation}$$</div>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+
+
+             
+ 
+            
+            
+            
+
+
+
+
+
+
+
+<section>
+    <h6 style="display:none;">Comments</h6>
+    <p id="comment-message"> </p>
+
+    <div class="accordion" id="accordion2">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                <a class="accordion-toggle disqus-comment-count comment-count collapsed"
+                   data-toggle="collapse"
+                   data-parent="#accordion2"
+                   data-disqus-identifier="https://yunchizhang.github.io/posts/antenna_polarization_3.html"
+                   href="https://yunchizhang.github.io/posts/antenna_polarization_3.html#comment_thread"
+                   id="comment-accordion-toggle">
+                    Comments
+                </a>
+            </div>
+            <div id="comment_thread" class="accordion-body collapse">
+                <div class="accordion-inner">
+                    <div class="comments">
+                        <div id="disqus_thread"></div>
+                        <script>
+    var disqus_shortname = 'yunchizhang';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+
+    var disqus_identifier = 'https://yunchizhang.github.io/posts/antenna_polarization_3.html';
+    var disqus_url = 'https://yunchizhang.github.io/posts/antenna_polarization_3.html';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+
+<noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+            <hr/>
+<section>
+    <h2>Related Posts</h2>
+<ul class="related-posts-list">
+<li><a href="https://yunchizhang.github.io/posts/antenna_polarization_1.html" title="Polarizations Concept">Polarizations Concept</a></li>
+<li><a href="https://yunchizhang.github.io/posts/antenna_polarization_2.html" title="Polarization Match">Polarization Match</a></li>
+</ul>
+<hr />
+</section>
+            <aside>
+            <nav>
+            <ul class="articles-timeline">
+                <li class="previous-article">« <a href="https://yunchizhang.github.io/posts/antenna_polarization_2.html" title="Previous: Polarization Match">Polarization Match</a></li>
+            </ul>
+            </nav>
+            </aside>
+        </div>
+        <section id="article-sidebar" class="span2">
+            <h4>Published</h4>
+            <time itemprop="dateCreated" datetime="2026-02-27T14:43:00-05:00">Fri 27 February 2026</time>
+        <h4>Polarizations</h4>
+    <ul class="multi-parts-list">
+            <li >
+            <a href="https://yunchizhang.github.io/posts/antenna_polarization_1.html" title="Polarizations Concept">Part 1: Polarizations Concept</a>
+            </li>
+            <li >
+            <a href="https://yunchizhang.github.io/posts/antenna_polarization_2.html" title="Polarization Match">Part 2: Polarization Match</a>
+            </li>
+            <li  class="active-part">
+            Part 3: Polarization Match: Special Cases
+            </li>
+    </ul>
+            <h4>Category</h4>
+            <a class="category-link" href="https://yunchizhang.github.io/categories#antenna-ref">Antenna</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="https://yunchizhang.github.io/tags#antenna-ref">Antenna
+                    <span class="superscript">3</span>
+</a></li>
+                <li><a href="https://yunchizhang.github.io/tags#polarization-ref">Polarization
+                    <span class="superscript">3</span>
+</a></li>
+            </ul>
+<h4>Stay in Touch</h4>
+<div id="sidebar-social-link">
+    <a href="https://www.linkedin.com/in/yunchi-zhang-1b26a59" title="" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="LinkedIn" role="img" viewBox="0 0 512 512" fill="#fff"><rect width="512" height="512" rx="15%" fill="#0077b5"/><circle cx="142" cy="138" r="37"/><path stroke="#fff" stroke-width="66" d="M244 194v198M142 194v198"/><path d="M276 282c0-20 13-40 36-40 24 0 33 18 33 45v105h66V279c0-61-32-89-76-89-34 0-51 19-59 32"/></svg>
+    </a>
+    <a href="https://github.com/archer-yz" title="" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="GitHub" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#1B1817"/><path fill="#fff" d="M335 499c14 0 12 17 12 17H165s-2-17 12-17c13 0 16-6 16-12l-1-50c-71 16-86-28-86-28-12-30-28-37-28-37-24-16 1-16 1-16 26 2 40 26 40 26 22 39 59 28 74 22 2-17 9-28 16-35-57-6-116-28-116-126 0-28 10-51 26-69-3-6-11-32 3-67 0 0 21-7 70 26 42-12 86-12 128 0 49-33 70-26 70-26 14 35 6 61 3 67 16 18 26 41 26 69 0 98-60 120-117 126 10 8 18 24 18 48l-1 70c0 6 3 12 16 12z"/></svg>
+    </a>
+</div>
+            
+
+
+
+
+
+            
+
+
+
+
+
+        </section>
+</div>
+</article>
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides.
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>                    </div>
+                    <div class="span1"></div>
+                </div>
+            </div>
+        </div>
+<footer>
+    <div>
+        All Rights Reserved. Copyright © 2025 <a href="mailto:yunchi.zhang@gmail.com">Yunchi Zhang</a>.
+    </div>
+
+    <div>
+        <span class="site-name">Yzowledge</span> - Knowledge and Experience
+    </div>
+
+
+
+    <div id="fpowered">
+        Powered by: <a href="http://getpelican.com/" title="Pelican Home Page" target="_blank" rel="nofollow noopener noreferrer">Pelican</a>
+        Theme: <a href="https://github.com/yunchizhang/elegant" title="Theme Elegant Home Page" target="_blank" rel="nofollow noopener noreferrer">Customized Elegant</a>
+    </div>
+</footer>            <script src="//code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script src="https://yunchizhang.github.io/theme/js/elegant.prod.9e9d5ce754.js"></script>
+        <script>
+            window.MathJax = {
+                tex: {
+                    inlineMath: [['$', '$'], ['\\(', '\\)']],
+                    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                    tags: 'ams'  // Enables equation numbering and \label/\ref support
+                }
+            };
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+    <script>
+    (function () {
+        if (window.location.hash.match(/^#comment-\d+$/)) {
+            $('#comment_thread').collapse('show');
+        }
+    })();
+    window.onhashchange=function(){
+        if (window.location.hash.match(/^#comment-\d+$/))
+            window.location.reload(true);
+    }
+    $('#comment_thread').on('shown', function () {
+        var link = document.getElementById('comment-accordion-toggle');
+        var old_innerHTML = link.innerHTML;
+        $(link).fadeOut(200, function() {
+            $(this).text('Click here to hide comments').fadeIn(200);
+        });
+        $('#comment_thread').on('hidden', function () {
+            $(link).fadeOut(200, function() {
+                $(this).text(old_innerHTML).fadeIn(200);
+            });
+        })
+    })
+</script>
+
+    </body>
+    <!-- Theme: Elegant built for Pelican
+        License : MIT -->
+</html>

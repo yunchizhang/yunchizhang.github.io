@@ -1,5 +1,454 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Yzowledge</title><link href="https://yunchizhang.github.io/" rel="alternate"/><link href="https://yunchizhang.github.io/feeds/all.atom.xml" rel="self"/><id>https://yunchizhang.github.io/</id><updated>2026-01-30T15:00:00-05:00</updated><subtitle>Knowledge and Experience</subtitle><entry><title>Directory Tree in Windows</title><link href="https://yunchizhang.github.io/posts/directory_tree_windows.html" rel="alternate"/><published>2026-01-30T15:00:00-05:00</published><updated>2026-01-30T15:00:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2026-01-30:/posts/directory_tree_windows.html</id><summary type="html">&lt;p&gt;Generate directory tree in Windows operating system.&lt;/p&gt;</summary><content type="html">
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Yzowledge</title><link href="https://yunchizhang.github.io/" rel="alternate"/><link href="https://yunchizhang.github.io/feeds/all.atom.xml" rel="self"/><id>https://yunchizhang.github.io/</id><updated>2026-02-27T14:43:00-05:00</updated><subtitle>Knowledge and Experience</subtitle><entry><title>Polarization Match: Special Cases</title><link href="https://yunchizhang.github.io/posts/antenna_polarization_3.html" rel="alternate"/><published>2026-02-27T14:43:00-05:00</published><updated>2026-02-27T14:43:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2026-02-27:/posts/antenna_polarization_3.html</id><summary type="html">&lt;p&gt;Wave polarization match factor of special cases.&lt;/p&gt;</summary><content type="html">
+&lt;p&gt;Special cases of polarization match in a transmit-receive system are studied herein.&lt;/p&gt;
+&lt;h2 id="polarization-matched-antennas"&gt;Polarization-Matched Antennas&lt;/h2&gt;
+&lt;p&gt;If we have two polarization-matched antennas in a transmit-receive system, the polarization match
+factor is equal to 1. Thus&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation} \rho=\frac{(1+p_1p_2)(1+p_1^*p_2^*)}{(1+p_1p_1^*)(1+p_2p_2^*)}=1
+\end{equation}$$&lt;/div&gt;
+&lt;p&gt;It gives:&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}(p_1-p_2^*)(p_2-p_1^*)=0 \end{equation}$$&lt;/div&gt;
+&lt;p&gt;which means&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}p_1=p_2^* \end{equation}$$&lt;/div&gt;
+&lt;p&gt;and&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}q_1=q_2^* \end{equation}$$&lt;/div&gt;
+&lt;p&gt;Therefore,&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}\begin{cases}AR_1=AR_2 \\ \\ \tau_1=-\tau_2 \end{cases}\end{equation}$$&lt;/div&gt;
+&lt;p&gt;&lt;span class="math"&gt;\(\tau_1\)&lt;/span&gt; and &lt;span class="math"&gt;\(\tau_2\)&lt;/span&gt; are defined in different coordinate systems. &lt;span class="math"&gt;\(\tau_1=-\tau_2\)&lt;/span&gt; means the
+semi-major axes of the two polarizations are coincide. For polarization-match antennas,
+the rotation senses of the two polarization ellipses are identical when described in the
+appropriate coordinate systems.  If we think of both antennas transmitting a right elliptic wave,
+for example, the two waves will appear to rotate in opposite directions at a point in space at
+which they "meet."&lt;/p&gt;
+&lt;h2 id="cross-polarized-antennas"&gt;Cross-Polarized Antennas&lt;/h2&gt;
+&lt;p&gt;Two antennas in a transmit-receive configuration that are so polarized that no signal is received
+are said to be cross-polarized. Thus, &lt;span class="math"&gt;\(\rho=0\)&lt;/span&gt;. Then,&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}p_1=-\frac{1}{p_2} \end{equation}$$&lt;/div&gt;
+&lt;p&gt;and&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}q_1=-\frac{1}{q_2} \end{equation}$$&lt;/div&gt;
+&lt;p&gt;Therefore,&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}\begin{cases}AR_1=AR_2 \\ \\ \tau_1+\tau_2=\pm\frac{\pi}{2}
+\end{cases}\end{equation}$$&lt;/div&gt;
+&lt;p&gt;For cross-polarized antennas, the major axis of one polarization ellipse coincides
+with the minor axis of the other. The rotation senses of the two polarization ellipses are
+different when described in the appropriate coordinate systems.&lt;/p&gt;
+&lt;h2 id="ideal-linear-polarization-to-elliptical-polarization"&gt;Ideal Linear Polarization to Elliptical Polarization&lt;/h2&gt;
+&lt;p&gt;The polarization match factor between an ideal linear polarization and an elliptical polarization
+is:&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}\rho=\frac{1}{2}+\frac{(AR^2-1)\cos2\beta}{2(AR^2+1)} \end{equation}$$&lt;/div&gt;
+&lt;p&gt;where &lt;span class="math"&gt;\(AR\)&lt;/span&gt; is the axial ratio of the elliptical polarization, &lt;span class="math"&gt;\(\beta\)&lt;/span&gt; is the angle between the
+linear polarization and semi-major axis of the elliptical polarization.&lt;/p&gt;
+&lt;p&gt;For linear polarization to circular polarization case, &lt;span class="math"&gt;\(AR=1\)&lt;/span&gt;, then &lt;span class="math"&gt;\(\rho=\frac{1}{2}\)&lt;/span&gt; which is the
+well known 3dB power mismatch loss.&lt;/p&gt;
+&lt;h2 id="practical-linear-to-practical-circular"&gt;Practical Linear to Practical Circular&lt;/h2&gt;
+&lt;p&gt;In practical linear polarization antenna, there is always power leakage from colinear polarization
+to cross polarization. The power leakage is represented by cross polarization discrimination (XPD).
+The linear antenna field can be written as:&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}\mathbf{E_{LP}}=E_{0,LP}\left(\hat{x}+\frac{1}{\sqrt{XPD_{LP}}}e^{j\phi}\hat{y}
+\right)=\frac{E_{0,LP}}{\sqrt{1+\gamma_{LP}^2}}\left(\hat{x}+\gamma_{LP}e^{j\phi}\hat{y} \right)
+\end{equation}$$&lt;/div&gt;
+&lt;p&gt;where &lt;span class="math"&gt;\(XPD_{LP}=\frac{|E_x|^2}{|E_y|^2}\)&lt;/span&gt;, &lt;span class="math"&gt;\(\gamma_{LP}=\frac{1}{\sqrt{XPD_{LP}}}\)&lt;/span&gt;, &lt;span class="math"&gt;\(\phi\)&lt;/span&gt; is the
+phase difference between &lt;span class="math"&gt;\(E_x\)&lt;/span&gt; and &lt;span class="math"&gt;\(E_y\)&lt;/span&gt;, &lt;span class="math"&gt;\(E_x\)&lt;/span&gt; is considered as colinear direction. In practice,
+the linear polarization cross-pol phase is unknown and probably random.&lt;/p&gt;
+&lt;p&gt;The practical linear polarization with limited XPD is actually an elliptical polarization whose
+semi-major axis direction depends on &lt;span class="math"&gt;\(XPD_{LP}\)&lt;/span&gt; and &lt;span class="math"&gt;\(\phi\)&lt;/span&gt; and is not necessarily aligned with the
+colinear direction.&lt;/p&gt;
+&lt;p&gt;The practical circular polarization field is give as:&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}\mathbf{E_{CP}}=\frac{E_{0,CP}}{\sqrt{\gamma_{CP}^2+1}}\left[\left(\cos\beta-js\gamma_{CP}\sin\beta
+\right)\hat{x}+\left(\sin\beta+js\gamma_{CP}\cos\beta\right)\hat{y}\right] \end{equation}$$&lt;/div&gt;
+&lt;p&gt;where &lt;span class="math"&gt;\(\gamma_{CP}=\frac{1}{AP_{CP}}\)&lt;/span&gt;, &lt;span class="math"&gt;\(AP_{CP}\)&lt;/span&gt; is the axial ratio, &lt;span class="math"&gt;\(\beta\)&lt;/span&gt; is the angle between
+colinear direction of the linear polarization and semi-major axis of the circular polarization, and
+&lt;span class="math"&gt;\(s=\pm 1\)&lt;/span&gt; to indicate the rotation sense.&lt;/p&gt;
+&lt;p&gt;The polarization match factor can be derived as:&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}\begin{split}\rho(\phi)=\frac{|\mathbf{E_{LP}^*}\cdot\mathbf{E_{CP}}|^2}{|\mathbf{E_{LP}^*}|^2|\mathbf{E_{CP}}|^2}&amp;amp;=\frac{1}{(1+\gamma_{LP}^2)(1+\gamma_{CP}^2)}\left|(\cos\beta-js\gamma_{CP}\sin\beta)+\gamma_{LP}e^{-j\phi}(\sin\beta+js\gamma_{CP}\cos\beta)\right|^2
+\\ \\
+&amp;amp;=\frac{\cos^2\beta+\gamma_{CP}^2\sin^2\beta+\gamma_{LP}^2\left(\sin^2\beta+\gamma_{CP}^2\cos^2\beta\right)+2\gamma_{LP}\left[\left(1-\gamma_{CP}^2\right)\sin\beta\cos\beta\cos\phi+s\gamma_{CP}\sin\phi\right]}{(1+\gamma_{LP}^2)(1+\gamma_{CP}^2)}
+\\ \\ &amp;amp;=
+\frac{1}{2}+\frac{(1-\gamma_{LP}^2)(1-\gamma_{CP}^2)\cos2\beta}{2(1+\gamma_{LP}^2)(1+\gamma_{CP}^2)}+\frac{\gamma_{LP}\sqrt{4\gamma_{CP}^2+(1-\gamma_{CP}^2)^2\sin^2
+2\beta}\cos(\phi-\phi_0)}{(1+\gamma_{LP}^2)(1+\gamma_{CP}^2)}\end{split}\end{equation}$$&lt;/div&gt;
+&lt;p&gt;where &lt;span class="math"&gt;\(\tan\phi_0=\frac{2s\gamma_{CP}}{(1-\gamma_{CP}^2)\sin2\beta}=\frac{s\tan 2\delta}{\sin 2\beta}\)&lt;/span&gt;, &lt;span class="math"&gt;\(\gamma_{CP}=\tan\delta\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;In practical antenna, cross-pol phase &lt;span class="math"&gt;\(\phi\)&lt;/span&gt; is typically unknown and often varies with frequency or
+mechanical alignment. The extrema can be calculated:&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}\begin{cases}\rho_{max}=\bar{\rho}+ \frac{\gamma_{LP}\sqrt{4\gamma_{CP}^2+(1-\gamma_{CP}^2)^2\sin^2
+2\beta}}{(1+\gamma_{LP}^2)(1+\gamma_{CP}^2)}, &amp;amp;if\space \phi=\phi_0 \\ \\ \rho_{min}=\bar{\rho}- \frac{\gamma_{LP}\sqrt{4\gamma_{CP}^2+(1-\gamma_{CP}^2)^2\sin^2
+2\beta}}{(1+\gamma_{LP}^2)(1+\gamma_{CP}^2)}, &amp;amp;if\space \phi=\pi+\phi_0 \end{cases} \end{equation}$$&lt;/div&gt;
+&lt;p&gt;where &lt;span class="math"&gt;\(\bar{\rho}\)&lt;/span&gt; is the average term:&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}\rho=\bar{\rho}=\frac{1}{2}+\frac{(1-\gamma_{LP}^2)(1-\gamma_{CP}^2)\cos2\beta}{2(1+\gamma_{LP}^2)(1+\gamma_{CP}^2)},
+\space if \space \phi=\pm\frac{\pi}{2}+\phi_0\end{equation}$$&lt;/div&gt;
+&lt;p&gt;If &lt;span class="math"&gt;\(\phi\)&lt;/span&gt; is assumed to be random with a uniform distribution in &lt;span class="math"&gt;\([0,2\pi]\)&lt;/span&gt;, then&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}\begin{cases}\left&amp;lt;\cos\phi \right&amp;gt;=0 \\ \\ \left&amp;lt;\sin\phi \right&amp;gt;=0 \\ \\
+\left&amp;lt;e^{-j\phi} \right&amp;gt;=0 \end{cases}\end{equation}$$&lt;/div&gt;
+&lt;p&gt;The cross terms vanish. Thus, the averaged polarization match factor is:&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}\left&amp;lt;\rho \right&amp;gt;=\bar{\rho}\end{equation}$$&lt;/div&gt;
+&lt;p&gt;In practice, &lt;span class="math"&gt;\(\beta\)&lt;/span&gt; is also unknown. The global extrema of &lt;span class="math"&gt;\(\rho\)&lt;/span&gt; are:&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}\begin{cases}\rho_{gmax}=\frac{(1+\gamma_{LP}\gamma_{CP})^2}{(1+\gamma_{LP}^2)(1+\gamma_{CP}^2)},&amp;amp;if
+\space \beta=0,\phi=\pm\frac{\pi}{2} \\ \\
+\rho_{gmin}=\frac{(1-\gamma_{LP}\gamma_{CP})^2}{(1+\gamma_{LP}^2)(1+\gamma_{CP}^2)},&amp;amp;if \space
+\beta=0,\phi=\mp\frac{\pi}{2}\end{cases}\end{equation}$$&lt;/div&gt;
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width &lt; 768) ? "left" : align;
+        indent = (screen.width &lt; 768) ? "0em" : indent;
+        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+&lt;/script&gt;</content><category term="Antenna"/><category term="Antenna"/><category term="Polarization"/></entry><entry><title>Polarization Match</title><link href="https://yunchizhang.github.io/posts/antenna_polarization_2.html" rel="alternate"/><published>2026-02-22T10:00:00-05:00</published><updated>2026-02-22T10:00:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2026-02-22:/posts/antenna_polarization_2.html</id><summary type="html">&lt;p&gt;Wave polarization match factor.&lt;/p&gt;</summary><content type="html">
+&lt;p&gt;It is obvious that when two antennas are used in a communication system, they should be matched in
+polarization so that the available power at the receiving antenna can be fully utilized. A polarization match
+factor is developed and can be given in terms of the standard polarization parameters.&lt;/p&gt;
+&lt;h2 id="effective-length-of-an-antenna"&gt;Effective Length of An Antenna&lt;/h2&gt;
+&lt;p&gt;The transmitted field of any antenna can be written as:&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}\mathbf{E}^t(r,\theta,\phi)=\frac{jZ_0I}{2\lambda
+r}e^{-jkr}\mathbf{h}(\theta,\phi)\end{equation}$$&lt;/div&gt;
+&lt;p&gt;where &lt;span class="math"&gt;\(Z_0\)&lt;/span&gt; is the intrinsic impedance of free space, &lt;span class="math"&gt;\(k\)&lt;/span&gt; is the free space propagation constant,
+&lt;span class="math"&gt;\(\lambda\)&lt;/span&gt; is the wavelength, and &lt;span class="math"&gt;\(I\)&lt;/span&gt; is an input current at an arbitrary pair of terminals.
+&lt;span class="math"&gt;\(\mathbf{h}(\theta,\phi)\)&lt;/span&gt; is &lt;em&gt;effective length&lt;/em&gt; of a general antenna. The effective length does not
+necessarily correspond to a physical length of the antenna. &lt;span class="math"&gt;\(\mathbf{h}\)&lt;/span&gt; is a complex vector to
+describe an elliptical polarized field. With proper choice of coordinate system, &lt;span class="math"&gt;\(\mathbf{E}^t\)&lt;/span&gt; and
+&lt;span class="math"&gt;\(\mathbf{h}\)&lt;/span&gt; will have only two components since in the radiation zone &lt;span class="math"&gt;\(\mathbf{E}^t\)&lt;/span&gt; has no radial
+component.&lt;/p&gt;
+&lt;h2 id="received-voltage"&gt;Received Voltage&lt;/h2&gt;
+&lt;p&gt;The open-circuit voltage induced in a receiving antenna by an externally produced field is
+proportional to its effective length. The received voltage across the open terminals of the
+receiving antenna is:&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}V_r=\mathbf{E}^i\cdot\mathbf{h} \end{equation}$$&lt;/div&gt;
+&lt;p&gt;where &lt;span class="math"&gt;\(mathbf{h}\)&lt;/span&gt; is the effective length of the receiving antenna.&lt;/p&gt;
+&lt;p&gt;For maximum received power, the relationship between &lt;span class="math"&gt;\(\mathbf{h}\)&lt;/span&gt; and &lt;span class="math"&gt;\(\mathbf{E}^i\)&lt;/span&gt; is:&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}\frac{h_\phi}{h_\theta}=\left(\frac{E_\phi^i}{E_\theta^i}\right)^*
+\end{equation}$$&lt;/div&gt;
+&lt;h2 id="polarization-match-factor"&gt;Polarization Match Factor&lt;/h2&gt;
+&lt;p&gt;The polarization match factor is the ratio of actual power received to that received under the most
+favorable circumstances of matched polarization:&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}\rho=\frac{\left|\mathbf{E}^i\cdot\mathbf{h}
+\right|^2}{\left|\mathbf{E}^i\right|^2\left|\mathbf{h}\right|^2} \end{equation}$$&lt;/div&gt;
+&lt;p&gt;The polarization match factor is sometimes called polarization efficiency, and &lt;span class="math"&gt;\(0\le\rho\le1\)&lt;/span&gt;. The
+polarization match factor shows how well a receiving antenna of effective length h is matched in
+polarization to an incoming wave.&lt;/p&gt;
+&lt;p&gt;When two antennas are in transmit-receive configuration, both antennas will be described in its
+polarization properties by the right-handed coordinate system adjacent to itself. The following
+image shows the coordinate systems of two such antennas with opposite x-axis and z-axis. The
+reason is that antenna polarization is normally based on a right-handed system with z-axis pointing
+in the direction of outward wave from antenna.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Antenna Coordinate Systems" src="https://yunchizhang.github.io/RF_related/images/ant_coordinate_systems.png"/&gt;&lt;/p&gt;
+&lt;p&gt;The incident wave from antenna 1 may be written as:&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation} \mathbf{E_1}^i=E_{01}\left(\hat{x}+p_1e^{-j\frac{\pi}{2}}\hat{y} \right) \end{equation}$$&lt;/div&gt;
+&lt;p&gt;The effective length of antenna 2 may be written as:&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation} \mathbf{h}_2=h_{02}\left(\hat{x'}+p_2e^{-j\frac{\pi}{2}}\hat{y'}
+\right)\end{equation}$$&lt;/div&gt;
+&lt;p&gt;If the tilt angle of antenna 2 in the x'y'z'-system is &lt;span class="math"&gt;\(\tau_2\)&lt;/span&gt;, then it will be &lt;span class="math"&gt;\(\pi-\tau_2\)&lt;/span&gt; in xyz-system.&lt;/p&gt;
+&lt;p&gt;Therefore, the induced voltage on antenna 2 is:&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}V_2=\mathbf{E_1}^i\cdot\mathbf{h_2}=-E_{01}h_{02}(1+p_1p_2) \end{equation}$$&lt;/div&gt;
+&lt;p&gt;Also,&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation} \left|\mathbf{E_1}^i \right|^2=\left|E_{01} \right|^2(1+p_1p_1^*)
+\end{equation}$$&lt;/div&gt;
+&lt;p&gt;and&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}|\mathbf{h_2}|^2=|h_{02}|^2(1+p_2p_2^*) \end{equation}$$&lt;/div&gt;
+&lt;p&gt;Then, the polarization match factor is:&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}\rho=\frac{(1+p_1p_2)(1+p_1^*p_2^*)}{(1+p_1p_1^*)(1+p_2p_2^*)}=\frac{(1-P_1P_2)(1-P_1^*P_2^*)}{(1+P_1P_1^*)(1+P_2P_2^*)} \end{equation}$$&lt;/div&gt;
+&lt;p&gt;&lt;span class="math"&gt;\(\rho\)&lt;/span&gt; can be written in terms of &lt;span class="math"&gt;\(q\)&lt;/span&gt; as:&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}\rho=\frac{(1+q_1q_2)(1+q_1^*q_2^*)}{(1+q_1q_1^*)(1+q_2q_2^*)} \end{equation}$$&lt;/div&gt;
+&lt;p&gt;It is not surprising that &lt;span class="math"&gt;\(p\)&lt;/span&gt; has the same form in &lt;span class="math"&gt;\(q\)&lt;/span&gt; as in &lt;span class="math"&gt;\(p\)&lt;/span&gt;, since the form for &lt;span class="math"&gt;\(q\)&lt;/span&gt; in
+terms of &lt;span class="math"&gt;\(p\)&lt;/span&gt; is the same as for &lt;span class="math"&gt;\(p\)&lt;/span&gt; in terms of &lt;span class="math"&gt;\(q\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;span class="math"&gt;\(\rho\)&lt;/span&gt; can also be written in terms of axial ratio as:&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}\rho=\frac{1}{2}+\frac{4AR_1AR_2+(AR_1^2-1)(AR_2^2-1)\cos2\beta}{2(AR_1^2+1)(AR_2^2+1)}
+\end{equation}$$&lt;/div&gt;
+&lt;p&gt;where &lt;span class="math"&gt;\(\beta=\tau_1+\tau_2\)&lt;/span&gt; is the angle between semi-major axes of the two elliptical
+polarizations.&lt;/p&gt;
+&lt;p&gt;Axial ratio does not provide the rotation sense information of the polarization. If axial ratio is
+purposely defined as positive for right-hand rotation and negative for left-hand rotation, then
+the formula can be used for cases with polarizations having either same or different rotation
+senses.&lt;/p&gt;
+&lt;p&gt;If inverse axial ratio &lt;span class="math"&gt;\(\gamma=\frac{1}{AR}\)&lt;/span&gt; (&lt;span class="math"&gt;\(0\le\gamma\le1\)&lt;/span&gt;) is used, then the polarization
+match factor can be written as:&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}\rho=\frac{1}{2}+\frac{4\gamma_1\gamma_2+(1-\gamma_1^2)(1-\gamma_2^2)\cos2\beta}{2(1+\gamma_1^2)(1+\gamma_2^2)}\end{equation}$$&lt;/div&gt;
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width &lt; 768) ? "left" : align;
+        indent = (screen.width &lt; 768) ? "0em" : indent;
+        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+&lt;/script&gt;</content><category term="Antenna"/><category term="Antenna"/><category term="Polarization"/></entry><entry><title>Polarizations Concept</title><link href="https://yunchizhang.github.io/posts/antenna_polarization_1.html" rel="alternate"/><published>2026-02-16T15:47:00-05:00</published><updated>2026-02-16T15:47:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2026-02-16:/posts/antenna_polarization_1.html</id><summary type="html">&lt;p&gt;Wave polarization concept.&lt;/p&gt;</summary><content type="html">
+&lt;p&gt;Electromagnetic (EM) wave polarization describes the geometric orientation and time evolution of
+the electric field vector &lt;strong&gt;E&lt;/strong&gt; at a fixed point in space. Because the magnetic field &lt;strong&gt;B&lt;/strong&gt; is orthogonal
+to &lt;strong&gt;E&lt;/strong&gt; and to the direction of propagation (from Maxwell’s equations), polarization is fully
+characterized by the behavior of &lt;strong&gt;E&lt;/strong&gt; in the transverse plane.&lt;/p&gt;
+&lt;p&gt;For a monochromatic plane wave propagating in the +z direction:&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\begin{equation}
+\mathbf{E}(z,t) = \mathfrak{R}\left\{(E_x\hat{x}+E_y\hat{y})e^{j(\omega t-kz)} \right\} \label{eq:gen_wave_pol}
+\end{equation}
+$$&lt;/div&gt;
+&lt;p&gt;Polarization depends on the relative amplitudes and phase difference between &lt;span class="math"&gt;\(E_x\)&lt;/span&gt; and &lt;span class="math"&gt;\(E_y\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;A general case of tilted elliptical polarization is illustrated in the following figure.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Tilted polarization ellipse" src="https://yunchizhang.github.io/RF_related/images/ellip_polarization.png"/&gt;&lt;/p&gt;
+&lt;h2 id="polarization-in-cartesian-coordinate-system"&gt;Polarization in Cartesian Coordinate System&lt;/h2&gt;
+&lt;p&gt;The time-invariant &lt;span class="math"&gt;\(\mathbf{E}\)&lt;/span&gt; field of Equation [\ref{eq:gen_wave_pol}] may also be written as&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\begin{equation}
+\mathbf{E}=E_0\left(a\hat{x}+be^{j\phi}\hat{y}\right) \label{eq:xy_wave_pol}
+\end{equation}
+$$&lt;/div&gt;
+&lt;p&gt;For convenience, the distance and time phase term has been dropped. Without loss of generality,
+&lt;span class="math"&gt;\(E_0\)&lt;/span&gt; and &lt;span class="math"&gt;\(\phi\)&lt;/span&gt; are chosen so that &lt;span class="math"&gt;\(a\)&lt;/span&gt; and &lt;span class="math"&gt;\(b\)&lt;/span&gt; are nonnegative real and &lt;span class="math"&gt;\(a^2+b^2=1\)&lt;/span&gt;. The value of &lt;span class="math"&gt;\(E_0\)&lt;/span&gt; does
+not affect the wave polarization in any way except in questions concerned with power. So &lt;span class="math"&gt;\(E_0\)&lt;/span&gt; will
+be neglected.&lt;/p&gt;
+&lt;p&gt;The polarization ratio, &lt;span class="math"&gt;\(P\)&lt;/span&gt;, is defined as&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}P=\frac{E_y}{E_x}=\frac{b}{a}e^{j\phi}\end{equation}$$&lt;/div&gt;
+&lt;p&gt;The &lt;em&gt;modified polarization ratio&lt;/em&gt;, &lt;span class="math"&gt;\(p\)&lt;/span&gt;, is defined as&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}p=jP=j\frac{b}{a}e^{j\phi} \end{equation}$$&lt;/div&gt;
+&lt;p&gt;Axial ratio of elliptical polarization is defined as the ratio of semi-major axis to semi-minor
+axis. The axial ratio can be calculated in terms of &lt;span class="math"&gt;\(p\)&lt;/span&gt;:&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}AR=\left|\frac{|1+p|+|1-p|}{|1+p|-|1-p|}
+\right|=\left|\frac{a^2+b^2+\sqrt{a^4+b^4+2a^2b^2\cos(2\phi)}}{2ab\sin\phi} \right| \end{equation} $$&lt;/div&gt;
+&lt;p&gt;The tilt angle, &lt;span class="math"&gt;\(\tau\)&lt;/span&gt;, can be found as&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}\tan 2\tau =\tan 2\alpha\cos\phi\end{equation}$$&lt;/div&gt;
+&lt;p&gt;where the angle &lt;span class="math"&gt;\(\alpha\)&lt;/span&gt; is defined as&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}\tan \alpha = \frac{b}{a}\quad 0\le\alpha\le\frac{\pi}{2} \end{equation}$$&lt;/div&gt;
+&lt;p&gt;&lt;span class="math"&gt;\(\tau\)&lt;/span&gt; can also be found as&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}e^{-j2\tau}=\frac{(1-p)/(1+p)}{|(1-p)/(1+p)|} \end{equation}$$&lt;/div&gt;
+&lt;p&gt;The &lt;span class="math"&gt;\(\mathbf{E}\)&lt;/span&gt; filed can also be written in terms of &lt;span class="math"&gt;\(AR\)&lt;/span&gt; and &lt;span class="math"&gt;\(\tau\)&lt;/span&gt; as:&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}\mathbf{E}=\frac{E_0}{\sqrt{AR^2+1}}\left[\left(AR\cos\tau-js\sin\tau
+\right)\hat{x}+\left(AR\sin\tau+js\cos\tau\right)\hat{y}\right] \end{equation}$$&lt;/div&gt;
+&lt;p&gt;where &lt;span class="math"&gt;\(s=\pm1\)&lt;/span&gt; is for rotation sense. &lt;span class="math"&gt;\(s=+1\)&lt;/span&gt; for left-handed polarization and &lt;span class="math"&gt;\(s=-1\)&lt;/span&gt; for
+right-handed polarization.&lt;/p&gt;
+&lt;p&gt;It can be written in terms of inverse axial ratio &lt;span class="math"&gt;\(\gamma=\frac{1}{AR}\)&lt;/span&gt; (&lt;span class="math"&gt;\(0\le\gamma\le1\)&lt;/span&gt;) as:&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}\mathbf{E}=\frac{E_0}{\sqrt{\gamma^2+1}}\left[\left(\cos\tau-js\gamma\sin\tau
+\right)\hat{x}+\left(\sin\tau+js\gamma\cos\tau\right)\hat{y}\right] \end{equation}$$&lt;/div&gt;
+&lt;h3 id="linear-polarization"&gt;Linear Polarization&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;when &lt;span class="math"&gt;\(a=0\)&lt;/span&gt;, the polarization is vertical polarization, and &lt;span class="math"&gt;\(\phi\)&lt;/span&gt; is irrelevant. The axial ratio is
+infinite and tilt angle is 90 degree.&lt;/li&gt;
+&lt;li&gt;When &lt;span class="math"&gt;\(b=0\)&lt;/span&gt;, the polarization is horizontal polarization. The axial ratio is infinite and tilt angle
+is 0 degree.&lt;/li&gt;
+&lt;li&gt;When &lt;span class="math"&gt;\(\phi=0\)&lt;/span&gt;, the polarization is a linear polarization. The axial ratio is infinite and tilt
+angle is same as &lt;span class="math"&gt;\(\alpha\)&lt;/span&gt;.&lt;/li&gt;
+&lt;li&gt;When &lt;span class="math"&gt;\(\phi=\pi\)&lt;/span&gt;, the polarization is a linear polarization. The axial ratio is infinite and tilt
+angle is same as &lt;span class="math"&gt;\({\pi}-\alpha\)&lt;/span&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="elliptical-polarization"&gt;Elliptical Polarization&lt;/h3&gt;
+&lt;p&gt;For scenarios other than linear polarizations, the polarizations will be elliptical polarizations
+(including circular polarizations). To determine the rotation sense, an auxiliary angle &lt;span class="math"&gt;\(\delta\)&lt;/span&gt; is
+defined as&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}\sin 2\delta=\sin 2\alpha\sin\phi \end{equation}$$&lt;/div&gt;
+&lt;p&gt;The axial ratio can be calculated as&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}AR=\left|\frac{1}{\tan\delta}\right| \end{equation}$$&lt;/div&gt;
+&lt;p&gt;The rotation sense can be determined as&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation} \begin{cases}\sin 2\delta&amp;lt;0, &amp;amp; right-hand \\ \\ \sin 2\delta&amp;gt;0, &amp;amp;
+left-hand\end{cases}\end{equation}$$&lt;/div&gt;
+&lt;p&gt;Therefore, the sign of &lt;span class="math"&gt;\(\sin\phi\)&lt;/span&gt; defines the rotation sense since &lt;span class="math"&gt;\(\sin 2\alpha&amp;gt;0\)&lt;/span&gt;.&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}\begin{cases}\pi&amp;lt;\phi&amp;lt;2\pi,&amp;amp; right-hand \\ \\ 0&amp;lt;\phi&amp;lt;\pi,&amp;amp;left-hand\end{cases} \end{equation}$$&lt;/div&gt;
+&lt;p&gt;Also, &lt;span class="math"&gt;\(Re(p)=-\frac{b}{a}\sin\phi\)&lt;/span&gt;, thus&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}\begin{cases}Re(p)&amp;gt;0,&amp;amp; right-hand \\ \\ Re(p)&amp;lt;0,&amp;amp;left-hand\end{cases} \end{equation}$$&lt;/div&gt;
+&lt;p&gt;When &lt;span class="math"&gt;\(\phi=\frac{\pi}{2}\)&lt;/span&gt; and &lt;span class="math"&gt;\(a\ne b\)&lt;/span&gt;, the tilt angle will be 0 degree if &lt;span class="math"&gt;\(a&amp;gt;b\)&lt;/span&gt; or 90 degree if &lt;span class="math"&gt;\(a&amp;lt;b\)&lt;/span&gt;, which
+means the x and y axes are aligned with semi-major and semi-minor axes of the polarization ellipse.
+The axial ratio &lt;span class="math"&gt;\(AR = max\{\frac{a}{b},\frac{b}{a}\}\)&lt;/span&gt;. The rotation sense will be left-hand since
+&lt;span class="math"&gt;\(\sin 2\delta&amp;gt;0\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;When &lt;span class="math"&gt;\(\phi=-\frac{\pi}{2}\)&lt;/span&gt; and &lt;span class="math"&gt;\(a\ne b\)&lt;/span&gt;, the tilt angle and axial ratio are sames as &lt;span class="math"&gt;\(\phi=\frac{\pi}{2}\)&lt;/span&gt; case.
+The rotation sense will be right-hand since &lt;span class="math"&gt;\(\sin 2\delta&amp;lt;0\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;When &lt;span class="math"&gt;\(a=b\)&lt;/span&gt; and &lt;span class="math"&gt;\(\phi \ne \pm \frac{\pi}{2}\)&lt;/span&gt;, the tile angle will be always 45 degree if &lt;span class="math"&gt;\(\cos
+\phi&amp;gt;0\)&lt;/span&gt; and always 135 degree if &lt;span class="math"&gt;\(\cos \phi &amp;lt; 0\)&lt;/span&gt;.&lt;/p&gt;
+&lt;h3 id="circular-polarization"&gt;Circular Polarization&lt;/h3&gt;
+&lt;p&gt;Circular polarization is a special case of elliptical polarization. It occurs when &lt;span class="math"&gt;\(a=b\)&lt;/span&gt; and
+&lt;span class="math"&gt;\(\phi=\pm\frac{\pi}{2}\)&lt;/span&gt;. It is left-hand when &lt;span class="math"&gt;\(\phi=\frac{\pi}{2}\)&lt;/span&gt; and right-hand when
+&lt;span class="math"&gt;\(\phi=-\frac{\pi}{2}\)&lt;/span&gt;. Tilt angle is irrelevant and axial ratio is 1.&lt;/p&gt;
+&lt;h2 id="circular-wave-components"&gt;Circular Wave Components&lt;/h2&gt;
+&lt;p&gt;Consider the complex vectors:&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}\begin{cases}\mathbf{\omega_L}=\frac{1}{\sqrt{2}}\left(\hat{x}+j\hat{y} \right)
+\\ \\ \mathbf{\omega_R}=\frac{1}{\sqrt{2}}\left(\hat{x}-j\hat{y} \right)\end{cases}\end{equation}$$&lt;/div&gt;
+&lt;p&gt;It is clear that &lt;span class="math"&gt;\(\mathbf{\omega_L}\)&lt;/span&gt; is a left circular wave (&lt;span class="math"&gt;\(a=b\)&lt;/span&gt;, &lt;span class="math"&gt;\(\phi=\frac{\pi}{2}\)&lt;/span&gt;), and
+&lt;span class="math"&gt;\(\mathbf{\omega_R}\)&lt;/span&gt; is a right circular wave. The field &lt;span class="math"&gt;\(\mathbf{E}\)&lt;/span&gt; can be expanded in terms of
+&lt;span class="math"&gt;\(\mathbf{\omega_L}\)&lt;/span&gt; and &lt;span class="math"&gt;\(\mathbf{\omega_R}\)&lt;/span&gt;, giving&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}\mathbf{E}=E_0\left(a\hat{x}+be^{j\phi}\hat{y}
+\right)=E_0\left(L\mathbf{\omega_L}+Re^{j\theta}\mathbf{\omega_R}
+\right)=E_L\mathbf{\omega_L}+E_R\mathbf{\omega_R} \end{equation}$$&lt;/div&gt;
+&lt;p&gt;Solving for &lt;span class="math"&gt;\(L\)&lt;/span&gt; and &lt;span class="math"&gt;\(Re^{j\theta}\)&lt;/span&gt; gives,&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}\begin{cases}L=\frac{1}{\sqrt{2}}\left(a-jbe^{j\phi} \right)\\ \\
+R=\frac{1}{\sqrt{2}}\left(a+jbe^{j\phi} \right) \end{cases} \end{equation}$$&lt;/div&gt;
+&lt;p&gt;Circular polarization ratio, &lt;span class="math"&gt;\(q\)&lt;/span&gt;, is defined as&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}q=\frac{E_L}{E_R}=\frac{L}{R}e^{-j\theta}=\frac{a-jbe^{j\phi}}{a+jbe^{j\phi}}=\frac{1-p}{1+p}
+\end{equation}$$&lt;/div&gt;
+&lt;p&gt;The modified polarization ratio can be obtained as&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}p = \frac{1-q}{1+q} \end{equation}$$&lt;/div&gt;
+&lt;p&gt;The axial ratio can be given in terms of &lt;span class="math"&gt;\(q\)&lt;/span&gt; as&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}AR=\left|\frac{1+|q|}{1-|q|} \right| \end{equation}$$&lt;/div&gt;
+&lt;p&gt;The tilt angle is given by&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}\begin{cases}\tau=\frac{\theta}{2}, &amp;amp; if\space\theta\ge0 \\
+\\\pi+\frac{\theta}{2}, &amp;amp;if \space\theta\le0 \end{cases} \end{equation}$$&lt;/div&gt;
+&lt;p&gt;The magnitude of &lt;span class="math"&gt;\(q\)&lt;/span&gt; defines rotation sense as&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}\begin{cases}|q|&amp;lt;1,&amp;amp; right-hand \\ \\ |q|&amp;gt;1,&amp;amp;left-hand\end{cases}
+\end{equation}$$&lt;/div&gt;
+&lt;p&gt;&lt;span class="math"&gt;\(|q|&amp;lt;1\)&lt;/span&gt; corresponds to &lt;span class="math"&gt;\(|L|&amp;lt;|R|\)&lt;/span&gt;, which results in a right-hand rotation.&lt;/p&gt;
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width &lt; 768) ? "left" : align;
+        indent = (screen.width &lt; 768) ? "0em" : indent;
+        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+&lt;/script&gt;</content><category term="Antenna"/><category term="Antenna"/><category term="Polarization"/></entry><entry><title>Directory Tree in Windows</title><link href="https://yunchizhang.github.io/posts/directory_tree_windows.html" rel="alternate"/><published>2026-01-30T15:00:00-05:00</published><updated>2026-01-30T15:00:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2026-01-30:/posts/directory_tree_windows.html</id><summary type="html">&lt;p&gt;Generate directory tree in Windows operating system.&lt;/p&gt;</summary><content type="html">
 &lt;p&gt;In Windows, if you want to see the directory structure up to a specific depth level. &lt;strong&gt;PowerShell&lt;/strong&gt;
 script can be used. Windows has a built-in &lt;code&gt;tree&lt;/code&gt; command. While it doesn't have a "depth" flag,
 you can simulate it in &lt;strong&gt;PowerShell&lt;/strong&gt; by filtering the output, though it's a bit "hacky."&lt;/p&gt;
