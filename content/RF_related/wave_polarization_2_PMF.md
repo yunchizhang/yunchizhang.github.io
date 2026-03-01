@@ -1,4 +1,4 @@
-Title: Polarization Match
+Title: Polarizations Part 2: Polarization Match
 series: Polarizations
 series_index: 2
 Date: 2026-2-22 10:00

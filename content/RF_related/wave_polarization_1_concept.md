@@ -1,4 +1,4 @@
-Title: Polarizations Concept
+Title: Polarizations Part 1: Concept
 series: Polarizations
 series_index: 1
 Date: 2026-2-16 15:47

@@ -1,4 +1,4 @@
-Title: Polarization Match: Special Cases
+Title: Polarizations Part 3: Polarization Match Special Cases
 series: Polarizations
 series_index: 3
 Date: 2026-2-27 14:43
