@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Yzowledge - RF System</title><link href="https://yunchizhang.github.io/" rel="alternate"/><link href="https://yunchizhang.github.io/feeds/rf-system.atom.xml" rel="self"/><id>https://yunchizhang.github.io/</id><updated>2025-07-14T09:20:00-05:00</updated><subtitle>Knowledge and Experience</subtitle><entry><title>RF Mismatch Loss, Error and Uncertainty</title><link href="https://yunchizhang.github.io/posts/rf_mismatch_error.html" rel="alternate"/><published>2025-07-14T09:20:00-05:00</published><updated>2025-07-14T09:20:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2025-07-14:/posts/rf_mismatch_error.html</id><summary type="html">&lt;p&gt;Analysis of RF mismatch between components.&lt;/p&gt;</summary><content type="html">
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Yzowledge - RF System</title><link href="https://yunchizhang.github.io/" rel="alternate"></link><link href="https://yunchizhang.github.io/feeds/rf-system.atom.xml" rel="self"></link><id>https://yunchizhang.github.io/</id><updated>2025-07-14T09:20:00-05:00</updated><subtitle>Knowledge and Experience</subtitle><entry><title>RF Mismatch Loss, Error and Uncertainty</title><link href="https://yunchizhang.github.io/posts/rf_mismatch_error.html" rel="alternate"></link><published>2025-07-14T09:20:00-05:00</published><updated>2025-07-14T09:20:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2025-07-14:/posts/rf_mismatch_error.html</id><summary type="html">&lt;p&gt;Analysis of RF mismatch between components.&lt;/p&gt;</summary><content type="html">
 &lt;p&gt;For maximum transfer of the power from any RF source component, the total input impedance of the
 component connected to the source must be equal to the conjugate of the source impedance. In
 practice, there is always some degree of impedance mismatch between the source and connected
@@ -137,7 +137,7 @@ T_{max}=\frac{(1-\gamma_S^2)(1-\gamma_L^2)}{(1-\gamma_S\gamma_L)^2}\end{cases}$$
     (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
-&lt;/script&gt;</content><category term="RF System"/><category term="RF"/><category term="Microwave"/><category term="System"/></entry><entry><title>RFI and OOBE</title><link href="https://yunchizhang.github.io/posts/rfi_and_oobe.html" rel="alternate"/><published>2024-04-01T09:20:00-05:00</published><updated>2024-04-01T09:20:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2024-04-01:/posts/rfi_and_oobe.html</id><summary type="html">Describe details of RFI and OOBE.</summary><content type="html">
+&lt;/script&gt;</content><category term="RF System"></category><category term="RF"></category><category term="Microwave"></category><category term="System"></category></entry><entry><title>RFI and OOBE</title><link href="https://yunchizhang.github.io/posts/rfi_and_oobe.html" rel="alternate"></link><published>2024-04-01T09:20:00-05:00</published><updated>2024-04-01T09:20:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2024-04-01:/posts/rfi_and_oobe.html</id><summary type="html">Describe details of RFI and OOBE.</summary><content type="html">
 &lt;main&gt;
 &lt;div class="jp-Cell jp-MarkdownCell jp-Notebook-cell"&gt;
 &lt;div class="jp-Cell-inputWrapper" tabindex="0"&gt;
@@ -390,4 +390,4 @@ systems.&lt;/li&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/main&gt;
-</content><category term="RF System"/><category term="RF, RFI, OOBE, System"/></entry></feed>
+</content><category term="RF System"></category><category term="RF, RFI, OOBE, System"></category></entry></feed>

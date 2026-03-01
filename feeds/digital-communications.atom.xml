@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Yzowledge - Digital Communications</title><link href="https://yunchizhang.github.io/" rel="alternate"/><link href="https://yunchizhang.github.io/feeds/digital-communications.atom.xml" rel="self"/><id>https://yunchizhang.github.io/</id><updated>2025-06-03T09:20:00-05:00</updated><subtitle>Knowledge and Experience</subtitle><entry><title>Galois Field and Reed-Solomon Coding</title><link href="https://yunchizhang.github.io/posts/galois_field_RS_coding.html" rel="alternate"/><published>2025-06-03T09:20:00-05:00</published><updated>2025-06-03T09:20:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2025-06-03:/posts/galois_field_RS_coding.html</id><summary type="html">Describe details of Galois Field and Reed-Solomon Coding.</summary><content type="html">
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Yzowledge - Digital Communications</title><link href="https://yunchizhang.github.io/" rel="alternate"></link><link href="https://yunchizhang.github.io/feeds/digital-communications.atom.xml" rel="self"></link><id>https://yunchizhang.github.io/</id><updated>2025-06-03T09:20:00-05:00</updated><subtitle>Knowledge and Experience</subtitle><entry><title>Galois Field and Reed-Solomon Coding</title><link href="https://yunchizhang.github.io/posts/galois_field_RS_coding.html" rel="alternate"></link><published>2025-06-03T09:20:00-05:00</published><updated>2025-06-03T09:20:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2025-06-03:/posts/galois_field_RS_coding.html</id><summary type="html">Describe details of Galois Field and Reed-Solomon Coding.</summary><content type="html">
 &lt;main&gt;
 &lt;div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=61afe0f7"&gt;
 &lt;div class="jp-Cell-inputWrapper" tabindex="0"&gt;
@@ -585,7 +585,7 @@ Equality against original message: True
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/main&gt;
-</content><category term="Digital Communications"/><category term="Galois Field, Digital, Communications"/><category term="Galois Field, Reed-Solomon Coding, Digital Communications"/></entry><entry><title>Linear Feedback Shift Register</title><link href="https://yunchizhang.github.io/posts/lfsr.html" rel="alternate"/><published>2025-05-09T09:20:00-05:00</published><updated>2025-05-09T09:20:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2025-05-09:/posts/lfsr.html</id><summary type="html">&lt;p&gt;Describe details of linear feedback shift register (LFSR).&lt;/p&gt;</summary><content type="html">
+</content><category term="Digital Communications"></category><category term="Galois Field, Digital, Communications"></category><category term="Galois Field, Reed-Solomon Coding, Digital Communications"></category></entry><entry><title>Linear Feedback Shift Register</title><link href="https://yunchizhang.github.io/posts/lfsr.html" rel="alternate"></link><published>2025-05-09T09:20:00-05:00</published><updated>2025-05-09T09:20:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2025-05-09:/posts/lfsr.html</id><summary type="html">&lt;p&gt;Describe details of linear feedback shift register (LFSR).&lt;/p&gt;</summary><content type="html">
 &lt;p&gt;A linear-feedback shift register (LFSR) is a shift register whose input bit is a linear function of
 its previous state.&lt;/p&gt;
 &lt;p&gt;The most commonly used linear function of single bits is exclusive-or (XOR). Thus, an LFSR is most
@@ -867,4 +867,4 @@ two configurations.&lt;/p&gt;
     (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
-&lt;/script&gt;</content><category term="Digital Communications"/><category term="LFSR"/><category term="Digital"/><category term="Communications"/></entry></feed>
+&lt;/script&gt;</content><category term="Digital Communications"></category><category term="LFSR"></category><category term="Digital"></category><category term="Communications"></category></entry></feed>

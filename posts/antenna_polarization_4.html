@@ -15,18 +15,18 @@
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary">
 
-<meta name="keywords" content="Antenna, Polarization, Antenna, Antenna Polarization" />
+<meta name="keywords" content="Antenna, Polarization, Axial Ratio, Antenna, Antenna Polarization" />
 
-<meta property="og:title" content="Polarizations Part 2: Polarization Match "/>
-<meta property="og:url" content="https://yunchizhang.github.io/posts/antenna_polarization_2.html" />
-<meta property="og:description" content="Wave polarization match factor." />
+<meta property="og:title" content="Polarizations Part 4: Axial Ratio Measurement "/>
+<meta property="og:url" content="https://yunchizhang.github.io/posts/antenna_polarization_4.html" />
+<meta property="og:description" content="Axial ratio measurement method and uncertainty." />
 <meta property="og:site_name" content="Yzowledge" />
 <meta property="og:article:author" content="Yunchi Zhang" />
-<meta property="og:article:published_time" content="2026-02-22T10:00:00-05:00" />
-<meta name="twitter:title" content="Polarizations Part 2: Polarization Match ">
-<meta name="twitter:description" content="Wave polarization match factor.">
+<meta property="og:article:published_time" content="2026-03-01T15:32:00-05:00" />
+<meta name="twitter:title" content="Polarizations Part 4: Axial Ratio Measurement ">
+<meta name="twitter:description" content="Axial ratio measurement method and uncertainty.">
 
-        <title>Polarizations Part 2: Polarization Match  · Yzowledge
+        <title>Polarizations Part 4: Axial Ratio Measurement  · Yzowledge
 </title>
         <link rel="shortcut icon" href="https://yunchizhang.github.io/theme/images/favicon.ico" type="image/x-icon" />
         <link rel="icon" href="https://yunchizhang.github.io/theme/images/apple-touch-icon-152x152.png" type="image/png" />
@@ -81,8 +81,8 @@
 <div class="row-fluid">
     <header class="page-header span10 offset2">
         <h1>
-            <a href="https://yunchizhang.github.io/posts/antenna_polarization_2.html">
-                Polarizations Part 2: Polarization Match
+            <a href="https://yunchizhang.github.io/posts/antenna_polarization_4.html">
+                Polarizations Part 4: Axial Ratio Measurement
             </a>
         </h1>
     </header>
@@ -94,9 +94,16 @@
         <h4>Contents</h4>
         <div class="toc">
 <ul>
-<li><a href="#effective-length-of-an-antenna">Effective Length of An Antenna</a></li>
-<li><a href="#received-voltage">Received Voltage</a></li>
-<li><a href="#polarization-match-factor">Polarization Match Factor</a></li>
+<li><a href="#measurement-method">Measurement Method</a></li>
+<li><a href="#polarization-purity-impact">Polarization Purity Impact</a><ul>
+<li><a href="#understanding-the-error-mechanism">Understanding the Error Mechanism</a></li>
+<li><a href="#quantifying-the-measurement-error">Quantifying the Measurement Error</a><ul>
+<li><a href="#perfect-probe-case">Perfect Probe Case</a></li>
+<li><a href="#worst-case-error">Worst-Case Error</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </div>
         </nav>
@@ -104,74 +111,82 @@
     <div class="span8 article-content">
             
             
-<p>It is obvious that when two antennas are used in a communication system, they should be matched in
-polarization so that the available power at the receiving antenna can be fully utilized. A polarization match
-factor is developed and can be given in terms of the standard polarization parameters.</p>
-<h2 id="effective-length-of-an-antenna">Effective Length of An Antenna</h2>
-<p>The transmitted field of any antenna can be written as:</p>
-<div class="math">$$\begin{equation}\mathbf{E}^t(r,\theta,\phi)=\frac{jZ_0I}{2\lambda
-r}e^{-jkr}\mathbf{h}(\theta,\phi)\end{equation}$$</div>
-<p>where <span class="math">\(Z_0\)</span> is the intrinsic impedance of free space, <span class="math">\(k\)</span> is the free space propagation constant,
-<span class="math">\(\lambda\)</span> is the wavelength, and <span class="math">\(I\)</span> is an input current at an arbitrary pair of terminals.
-<span class="math">\(\mathbf{h}(\theta,\phi)\)</span> is <em>effective length</em> of a general antenna. The effective length does not
-necessarily correspond to a physical length of the antenna. <span class="math">\(\mathbf{h}\)</span> is a complex vector to
-describe an elliptical polarized field. With proper choice of coordinate system, <span class="math">\(\mathbf{E}^t\)</span> and
-<span class="math">\(\mathbf{h}\)</span> will have only two components since in the radiation zone <span class="math">\(\mathbf{E}^t\)</span> has no radial
-component.</p>
-<h2 id="received-voltage">Received Voltage</h2>
-<p>The open-circuit voltage induced in a receiving antenna by an externally produced field is
-proportional to its effective length. The received voltage across the open terminals of the
-receiving antenna is:</p>
-<div class="math">$$\begin{equation}V_r=\mathbf{E}^i\cdot\mathbf{h} \end{equation}$$</div>
-<p>where <span class="math">\(mathbf{h}\)</span> is the effective length of the receiving antenna.</p>
-<p>For maximum received power, the relationship between <span class="math">\(\mathbf{h}\)</span> and <span class="math">\(\mathbf{E}^i\)</span> is:</p>
-<div class="math">$$\begin{equation}\frac{h_\phi}{h_\theta}=\left(\frac{E_\phi^i}{E_\theta^i}\right)^*
+<p>Measuring the axial ratio (AR) of a circularly polarized antenna is important because it quantifies how close the
+antenna’s polarization is to ideal circular polarization, which directly affects signal quality, polarization matching,
+and system performance.</p>
+<h2 id="measurement-method">Measurement Method</h2>
+<p>A linearly polarized antenna is usually used to measure the axial ratio of a circularly polarized antenna. The method
+relies on the fact that a linearly polarized antenna responds differently to the major and minor axes of the
+polarization ellipse.</p>
+<p>A circularly (or elliptically) polarized wave can be represented as two orthogonal linear components. When a linearly
+polarized probe is rotated about its boresight axis:</p>
+<ul>
+<li>The received power varies sinusoidally.</li>
+<li>The maximum received power corresponds to alignment with the major axis of the polarization ellipse.</li>
+<li>The minimum received power corresponds to alignment with the minor axis.</li>
+</ul>
+<p>The axial ratio is then obtained from the ratio of these two field magnitudes.</p>
+<p>Because received power is proportional to the square of the electric field:</p>
+<div class="math">$$\begin{equation}AR=\frac{E_{max}}{E_{min}}=\sqrt{\frac{P_{max}}{P_{min}}} \end{equation} $$</div>
+<p>In dB:</p>
+<div class="math">$$\begin{equation}AR_{dB}=P_{max,dB}-P_{min,dB} \end{equation} $$</div>
+<h2 id="polarization-purity-impact">Polarization Purity Impact</h2>
+<p>When the linear polarization reference antenna has limited cross-polarization isolation (also called cross-pol
+discrimination or XPD), it will affect the accuracy of axial ratio measurements. The reference antenna's
+cross-polarization component introduces measurement errors that can make the circular polarization antenna appear
+better or worse than its actual performance.</p>
+<h3 id="understanding-the-error-mechanism">Understanding the Error Mechanism</h3>
+<p>An ideal linear polarization antenna transmits only in its main polarization (e.g., vertical) with zero energy in the
+orthogonal polarization (e.g., horizontal). However, real antennas have finite cross-polarization isolation, meaning
+they transmit some unwanted energy in the orthogonal polarization.</p>
+<p>When measuring a circular polarization antenna's axial ratio, the linear antenna's cross-polarization component adds to
+the measurement, corrupting the true polarization pattern. This is particularly problematic because circular
+polarization requires precise balance between orthogonal components.</p>
+<h3 id="quantifying-the-measurement-error">Quantifying the Measurement Error</h3>
+<p>The polarization match factor between practical linear polarization and circular polarization antennas is (presented in
+Polarizations: Part3):</p>
+<div class="math">$$\begin{equation}\begin{split}\rho(\phi)&amp;=\frac{\cos^2\beta+\gamma_{CP}^2\sin^2\beta+\gamma_{LP}^2\left(\sin^2\beta+\gamma_{CP}^2\cos^2\beta\right)+2\gamma_{LP}\left[\left(1-\gamma_{CP}^2\right)\sin\beta\cos\beta\cos\phi+s\gamma_{CP}\sin\phi\right]}{(1+\gamma_{LP}^2)(1+\gamma_{CP}^2)}
+\\ \\ &amp;=
+\frac{1}{2}+\frac{2s\gamma_{LP}\gamma_{CP}\sin\phi}{(1+\gamma_{LP}^2)(1+\gamma_{CP}^2)}+\frac{(1-\gamma_{LP}^2)(1-\gamma_{CP}^2)\cos2\beta}{2(1+\gamma_{LP}^2)(1+\gamma_{CP}^2)}+\frac{\gamma_{LP}(1-\gamma_{CP}^2)\cos\phi\sin
+2\beta}{(1+\gamma_{LP}^2)(1+\gamma_{CP}^2)} \\ \\ &amp;=A+B\cos 2\beta+C\sin 2\beta\end{split}\end{equation}$$</div>
+<p>where</p>
+<div class="math">$$\begin{equation}\begin{cases}A=\frac{1}{2}+\frac{2s\gamma_{LP}\gamma_{CP}\sin\phi}{(1+\gamma_{LP}^2)(1+\gamma_{CP}^2)}
+\\ \\
+B=\frac{(1-\gamma_{LP}^2)(1-\gamma_{CP}^2)}{2(1+\gamma_{LP}^2)(1+\gamma_{CP}^2)} \\ \\ C=\frac{\gamma_{LP}(1-\gamma_{CP}^2)\cos\phi}{(1+\gamma_{LP}^2)(1+\gamma_{CP}^2)}
+\end{cases}\end{equation}$$</div>
+<p><span class="math">\(\rho(\phi)\)</span> is a sinusoid of the form <span class="math">\(A+\sqrt{B^2+C^2}\cos (2\beta-2\beta_0)\)</span>, where <span class="math">\(\tan 2\beta_0=\tan 2\delta
+\cos\phi\)</span>, <span class="math">\(\gamma_{CP}=\tan \delta\)</span>. Therefore,</p>
+<div class="math">$$\begin{equation}\begin{cases}\rho_{max}=A+\sqrt{B^2+C^2} \\ \\ \rho_{min}=A-\sqrt{B^2+C^2}
+\end{cases}\end{equation}$$</div>
+<p>and,</p>
+<div class="math">$$\begin{equation}\sqrt{B^2+C^2}=\frac{(1-\gamma_{CP}^2)\sqrt{1+2\gamma_{LP}^2\cos\phi+\gamma_{LP}^4}}{2(1+\gamma_{LP}^2)(1+\gamma_{CP}^2)}
 \end{equation}$$</div>
-<h2 id="polarization-match-factor">Polarization Match Factor</h2>
-<p>The polarization match factor is the ratio of actual power received to that received under the most
-favorable circumstances of matched polarization:</p>
-<div class="math">$$\begin{equation}\rho=\frac{\left|\mathbf{E}^i\cdot\mathbf{h}
-\right|^2}{\left|\mathbf{E}^i\right|^2\left|\mathbf{h}\right|^2} \end{equation}$$</div>
-<p>The polarization match factor is sometimes called polarization efficiency, and <span class="math">\(0\le\rho\le1\)</span>. The
-polarization match factor shows how well a receiving antenna of effective length h is matched in
-polarization to an incoming wave.</p>
-<p>When two antennas are in transmit-receive configuration, both antennas will be described in its
-polarization properties by the right-handed coordinate system adjacent to itself. The following
-image shows the coordinate systems of two such antennas with opposite x-axis and z-axis. The
-reason is that antenna polarization is normally based on a right-handed system with z-axis pointing
-in the direction of outward wave from antenna.</p>
-<p><img alt="Antenna Coordinate Systems" src="https://yunchizhang.github.io/RF_related/images/ant_coordinate_systems.png"/></p>
-<p>The incident wave from antenna 1 may be written as:</p>
-<div class="math">$$\begin{equation} \mathbf{E_1}^i=E_{01}\left(\hat{x}+p_1e^{-j\frac{\pi}{2}}\hat{y} \right) \end{equation}$$</div>
-<p>The effective length of antenna 2 may be written as:</p>
-<div class="math">$$\begin{equation} \mathbf{h}_2=h_{02}\left(\hat{x'}+p_2e^{-j\frac{\pi}{2}}\hat{y'}
-\right)\end{equation}$$</div>
-<p>If the tilt angle of antenna 2 in the x'y'z'-system is <span class="math">\(\tau_2\)</span>, then it will be <span class="math">\(\pi-\tau_2\)</span> in xyz-system.</p>
-<p>Therefore, the induced voltage on antenna 2 is:</p>
-<div class="math">$$\begin{equation}V_2=\mathbf{E_1}^i\cdot\mathbf{h_2}=-E_{01}h_{02}(1+p_1p_2) \end{equation}$$</div>
-<p>Also,</p>
-<div class="math">$$\begin{equation} \left|\mathbf{E_1}^i \right|^2=\left|E_{01} \right|^2(1+p_1p_1^*)
+<p>The measured axial ratio is:</p>
+<div class="math">$$\begin{equation}AR_{meas}=\sqrt{\frac{\rho_{max}}{\rho_{min}}}=\sqrt{\frac{(1+\gamma_{LP}^2)(1+\gamma_{CP}^2)+4\gamma_{LP}\gamma_{CP}\sin\phi+(1-\gamma_{CP}^2)\sqrt{1+2\gamma_{LP}^2\cos
+2\phi+\gamma_{LP}^4}}{(1+\gamma_{LP}^2)(1+\gamma_{CP}^2)+4\gamma_{LP}\gamma_{CP}\sin\phi-(1-\gamma_{CP}^2)\sqrt{1+2\gamma_{LP}^2\cos
+2\phi+\gamma_{LP}^4}}}
 \end{equation}$$</div>
-<p>and</p>
-<div class="math">$$\begin{equation}|\mathbf{h_2}|^2=|h_{02}|^2(1+p_2p_2^*) \end{equation}$$</div>
-<p>Then, the polarization match factor is:</p>
-<div class="math">$$\begin{equation}\rho=\frac{(1+p_1p_2)(1+p_1^*p_2^*)}{(1+p_1p_1^*)(1+p_2p_2^*)}=\frac{(1-P_1P_2)(1-P_1^*P_2^*)}{(1+P_1P_1^*)(1+P_2P_2^*)} \end{equation}$$</div>
-<p><span class="math">\(\rho\)</span> can be written in terms of <span class="math">\(q\)</span> as:</p>
-<div class="math">$$\begin{equation}\rho=\frac{(1+q_1q_2)(1+q_1^*q_2^*)}{(1+q_1q_1^*)(1+q_2q_2^*)} \end{equation}$$</div>
-<p>It is not surprising that <span class="math">\(p\)</span> has the same form in <span class="math">\(q\)</span> as in <span class="math">\(p\)</span>, since the form for <span class="math">\(q\)</span> in
-terms of <span class="math">\(p\)</span> is the same as for <span class="math">\(p\)</span> in terms of <span class="math">\(q\)</span>.</p>
-<p><span class="math">\(\rho\)</span> can also be written in terms of axial ratio as:</p>
-<div class="math">$$\begin{equation}\rho=\frac{1}{2}+\frac{4AR_1AR_2+(AR_1^2-1)(AR_2^2-1)\cos2\beta}{2(AR_1^2+1)(AR_2^2+1)}
-\end{equation}$$</div>
-<p>where <span class="math">\(\beta=\tau_1+\tau_2\)</span> is the angle between semi-major axes of the two elliptical
-polarizations.</p>
-<p>Axial ratio does not provide the rotation sense information of the polarization. If axial ratio is
-purposely defined as positive for right-hand rotation and negative for left-hand rotation, then
-the formula can be used for cases with polarizations having either same or different rotation
-senses.</p>
-<p>If inverse axial ratio <span class="math">\(\gamma=\frac{1}{AR}\)</span> (<span class="math">\(0\le\gamma\le1\)</span>) is used, then the polarization
-match factor can be written as:</p>
-<div class="math">$$\begin{equation}\rho=\frac{1}{2}+\frac{4\gamma_1\gamma_2+(1-\gamma_1^2)(1-\gamma_2^2)\cos2\beta}{2(1+\gamma_1^2)(1+\gamma_2^2)}\end{equation}$$</div>
+<p><span class="math">\(s\)</span> is taken as <span class="math">\(+1\)</span> with loss of generality.</p>
+<p>For perfect linear polarization, <span class="math">\(\gamma_{LP}=0\)</span>, then <span class="math">\(AR_{meas}=\frac{1}{\gamma_{CP}}\)</span>, as expected.</p>
+<p>For perfect circular polarization, <span class="math">\(\gamma_{CP}=1\)</span>, then <span class="math">\(AR_{meas}=1\)</span>, as expected too.</p>
+<p>The true axial ratio is <span class="math">\(AR_{true}=\frac{1}{\gamma_{CP}}\)</span>. The measurement error in dB is:</p>
+<div class="math">$$\begin{equation}Err_{dB}=AR_{meas,dB}-AR_{true,dB}=20\log_{10}\left(\frac{AR_{meas}}{AR_{true}}\right)=20\log_{10}\left(\gamma_{CP}AR_{meas}\right) \end{equation}$$</div>
+<p>The measurement error or uncertainty depends on the cross polarization phase difference (<span class="math">\(\phi\)</span>) than the colinear polarization of
+the linearly polarized antenna. <span class="math">\(\phi\)</span> is typically unknown and random.</p>
+<h4 id="perfect-probe-case">Perfect Probe Case</h4>
+<p>If <span class="math">\(\phi=0^\circ, 180^\circ\)</span>, the formula reduces to <span class="math">\(\mathbf{AR}_{meas}=\frac{1}{\gamma_{CP}}=\mathbf{AR}_{true}\)</span>. For
+this case, both co-pol and cross-pol voltages scale together, and the measured AR is unaffected.</p>
+<h4 id="worst-case-error">Worst-Case Error</h4>
+<p>The error is maximized when the <span class="math">\(\sin\phi\)</span> and <span class="math">\(\cos 2\phi\)</span> terms interact to minimize the denominator. This typically
+occurs near <span class="math">\(\phi = \pm 90^\circ\)</span> (quadrature leakage). This gives <span class="math">\(\beta=0\)</span> which means the major axis of the circular
+polarization is aligned with the linear polarization. The linear polarization is actually an elliptical polarization with
+major axis same as the colinear direction. <span class="math">\(\phi = \pm 90^\circ\)</span> corresponds to the two rotation senses of the elliptical
+polarization that defines the two worst-case errors.</p>
+<div class="math">$$\begin{equation}AR_{meas,worst}=\begin{cases}\frac{1+\gamma_{LP}\gamma_{CP}}{\gamma_{LP}+\gamma_{CP}}=\frac{AR_{true}\sqrt{XPD_{LP}}+1}{AR_{true}+\sqrt{XPD_{LP}}},&amp;if\space
+\phi=\frac{\pi}{2} \\ \\ \left| \frac{1-\gamma_{LP}\gamma_{CP}}{\gamma_{LP}-\gamma_{CP}}\right|=\left| \frac{AR_{true}\sqrt{XPD_{LP}}-1}{AR_{true}-\sqrt{XPD_{LP}}}\right|,&amp;if\space
+\phi=-\frac{\pi}{2} \end{cases}\end{equation}$$</div>
+<p>The measured axial ratio will be within the estimations of the two worst cases, as illustrated in the figure below.</p>
+<p><img alt="AR uncertainty" src="https://yunchizhang.github.io/RF_related/images/axial_ratio_uncertainty.png"/></p>
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var align = "center",
         indent = "0em",
@@ -258,8 +273,8 @@ match factor can be written as:</p>
                 <a class="accordion-toggle disqus-comment-count comment-count collapsed"
                    data-toggle="collapse"
                    data-parent="#accordion2"
-                   data-disqus-identifier="https://yunchizhang.github.io/posts/antenna_polarization_2.html"
-                   href="https://yunchizhang.github.io/posts/antenna_polarization_2.html#comment_thread"
+                   data-disqus-identifier="https://yunchizhang.github.io/posts/antenna_polarization_4.html"
+                   href="https://yunchizhang.github.io/posts/antenna_polarization_4.html#comment_thread"
                    id="comment-accordion-toggle">
                     Comments
                 </a>
@@ -277,8 +292,8 @@ match factor can be written as:</p>
         (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
     }());
 
-    var disqus_identifier = 'https://yunchizhang.github.io/posts/antenna_polarization_2.html';
-    var disqus_url = 'https://yunchizhang.github.io/posts/antenna_polarization_2.html';
+    var disqus_identifier = 'https://yunchizhang.github.io/posts/antenna_polarization_4.html';
+    var disqus_url = 'https://yunchizhang.github.io/posts/antenna_polarization_4.html';
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -305,36 +320,35 @@ match factor can be written as:</p>
     <h2>Related Posts</h2>
 <ul class="related-posts-list">
 <li><a href="https://yunchizhang.github.io/posts/antenna_polarization_1.html" title="Polarizations Part 1: Concept">Polarizations Part 1: Concept</a></li>
+<li><a href="https://yunchizhang.github.io/posts/antenna_polarization_2.html" title="Polarizations Part 2: Polarization Match">Polarizations Part 2: Polarization Match</a></li>
 <li><a href="https://yunchizhang.github.io/posts/antenna_polarization_3.html" title="Polarizations Part 3: Polarization Match Special Cases">Polarizations Part 3: Polarization Match Special Cases</a></li>
-<li><a href="https://yunchizhang.github.io/posts/antenna_polarization_4.html" title="Polarizations Part 4: Axial Ratio Measurement">Polarizations Part 4: Axial Ratio Measurement</a></li>
 </ul>
 <hr />
 </section>
             <aside>
             <nav>
             <ul class="articles-timeline">
-                <li class="previous-article">« <a href="https://yunchizhang.github.io/posts/antenna_polarization_1.html" title="Previous: Polarizations Part 1: Concept">Polarizations Part 1: Concept</a></li>
-                <li class="next-article"><a href="https://yunchizhang.github.io/posts/antenna_polarization_3.html" title="Next: Polarizations Part 3: Polarization Match Special Cases">Polarizations Part 3: Polarization Match Special Cases</a> »</li>
+                <li class="previous-article">« <a href="https://yunchizhang.github.io/posts/antenna_polarization_3.html" title="Previous: Polarizations Part 3: Polarization Match Special Cases">Polarizations Part 3: Polarization Match Special Cases</a></li>
             </ul>
             </nav>
             </aside>
         </div>
         <section id="article-sidebar" class="span2">
             <h4>Published</h4>
-            <time itemprop="dateCreated" datetime="2026-02-22T10:00:00-05:00">Sun 22 February 2026</time>
+            <time itemprop="dateCreated" datetime="2026-03-01T15:32:00-05:00">Sun 01 March 2026</time>
         <h4>Polarizations</h4>
     <ul class="multi-parts-list">
             <li >
             <a href="https://yunchizhang.github.io/posts/antenna_polarization_1.html" title="Polarizations Part 1: Concept">Part 1: Polarizations Part 1: Concept</a>
             </li>
-            <li  class="active-part">
-            Part 2: Polarizations Part 2: Polarization Match
+            <li >
+            <a href="https://yunchizhang.github.io/posts/antenna_polarization_2.html" title="Polarizations Part 2: Polarization Match">Part 2: Polarizations Part 2: Polarization Match</a>
             </li>
             <li >
             <a href="https://yunchizhang.github.io/posts/antenna_polarization_3.html" title="Polarizations Part 3: Polarization Match Special Cases">Part 3: Polarizations Part 3: Polarization Match Special Cases</a>
             </li>
-            <li >
-            <a href="https://yunchizhang.github.io/posts/antenna_polarization_4.html" title="Polarizations Part 4: Axial Ratio Measurement">Part 4: Polarizations Part 4: Axial Ratio Measurement</a>
+            <li  class="active-part">
+            Part 4: Polarizations Part 4: Axial Ratio Measurement
             </li>
     </ul>
             <h4>Category</h4>
@@ -343,6 +357,9 @@ match factor can be written as:</p>
             <ul class="list-of-tags tags-in-article">
                 <li><a href="https://yunchizhang.github.io/tags#antenna-ref">Antenna
                     <span class="superscript">4</span>
+</a></li>
+                <li><a href="https://yunchizhang.github.io/tags#axial-ratio-ref">Axial Ratio
+                    <span class="superscript">1</span>
 </a></li>
                 <li><a href="https://yunchizhang.github.io/tags#polarization-ref">Polarization
                     <span class="superscript">4</span>

@@ -1,5 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Yzowledge</title><link href="https://yunchizhang.github.io/" rel="alternate"/><link href="https://yunchizhang.github.io/feeds/all.atom.xml" rel="self"/><id>https://yunchizhang.github.io/</id><updated>2026-02-27T14:43:00-05:00</updated><subtitle>Knowledge and Experience</subtitle><entry><title>Polarization Match: Special Cases</title><link href="https://yunchizhang.github.io/posts/antenna_polarization_3.html" rel="alternate"/><published>2026-02-27T14:43:00-05:00</published><updated>2026-02-27T14:43:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2026-02-27:/posts/antenna_polarization_3.html</id><summary type="html">&lt;p&gt;Wave polarization match factor of special cases.&lt;/p&gt;</summary><content type="html">
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Yzowledge</title><link href="https://yunchizhang.github.io/" rel="alternate"></link><link href="https://yunchizhang.github.io/feeds/all.atom.xml" rel="self"></link><id>https://yunchizhang.github.io/</id><updated>2026-03-01T15:32:00-05:00</updated><subtitle>Knowledge and Experience</subtitle><entry><title>Polarizations Part 4: Axial Ratio Measurement</title><link href="https://yunchizhang.github.io/posts/antenna_polarization_4.html" rel="alternate"></link><published>2026-03-01T15:32:00-05:00</published><updated>2026-03-01T15:32:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2026-03-01:/posts/antenna_polarization_4.html</id><summary type="html">&lt;p&gt;Axial ratio measurement method and uncertainty.&lt;/p&gt;</summary><content type="html">
+&lt;p&gt;Measuring the axial ratio (AR) of a circularly polarized antenna is important because it quantifies how close the
+antenna’s polarization is to ideal circular polarization, which directly affects signal quality, polarization matching,
+and system performance.&lt;/p&gt;
+&lt;h2 id="measurement-method"&gt;Measurement Method&lt;/h2&gt;
+&lt;p&gt;A linearly polarized antenna is usually used to measure the axial ratio of a circularly polarized antenna. The method
+relies on the fact that a linearly polarized antenna responds differently to the major and minor axes of the
+polarization ellipse.&lt;/p&gt;
+&lt;p&gt;A circularly (or elliptically) polarized wave can be represented as two orthogonal linear components. When a linearly
+polarized probe is rotated about its boresight axis:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The received power varies sinusoidally.&lt;/li&gt;
+&lt;li&gt;The maximum received power corresponds to alignment with the major axis of the polarization ellipse.&lt;/li&gt;
+&lt;li&gt;The minimum received power corresponds to alignment with the minor axis.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The axial ratio is then obtained from the ratio of these two field magnitudes.&lt;/p&gt;
+&lt;p&gt;Because received power is proportional to the square of the electric field:&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}AR=\frac{E_{max}}{E_{min}}=\sqrt{\frac{P_{max}}{P_{min}}} \end{equation} $$&lt;/div&gt;
+&lt;p&gt;In dB:&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}AR_{dB}=P_{max,dB}-P_{min,dB} \end{equation} $$&lt;/div&gt;
+&lt;h2 id="polarization-purity-impact"&gt;Polarization Purity Impact&lt;/h2&gt;
+&lt;p&gt;When the linear polarization reference antenna has limited cross-polarization isolation (also called cross-pol
+discrimination or XPD), it will affect the accuracy of axial ratio measurements. The reference antenna's
+cross-polarization component introduces measurement errors that can make the circular polarization antenna appear
+better or worse than its actual performance.&lt;/p&gt;
+&lt;h3 id="understanding-the-error-mechanism"&gt;Understanding the Error Mechanism&lt;/h3&gt;
+&lt;p&gt;An ideal linear polarization antenna transmits only in its main polarization (e.g., vertical) with zero energy in the
+orthogonal polarization (e.g., horizontal). However, real antennas have finite cross-polarization isolation, meaning
+they transmit some unwanted energy in the orthogonal polarization.&lt;/p&gt;
+&lt;p&gt;When measuring a circular polarization antenna's axial ratio, the linear antenna's cross-polarization component adds to
+the measurement, corrupting the true polarization pattern. This is particularly problematic because circular
+polarization requires precise balance between orthogonal components.&lt;/p&gt;
+&lt;h3 id="quantifying-the-measurement-error"&gt;Quantifying the Measurement Error&lt;/h3&gt;
+&lt;p&gt;The polarization match factor between practical linear polarization and circular polarization antennas is (presented in
+Polarizations: Part3):&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}\begin{split}\rho(\phi)&amp;amp;=\frac{\cos^2\beta+\gamma_{CP}^2\sin^2\beta+\gamma_{LP}^2\left(\sin^2\beta+\gamma_{CP}^2\cos^2\beta\right)+2\gamma_{LP}\left[\left(1-\gamma_{CP}^2\right)\sin\beta\cos\beta\cos\phi+s\gamma_{CP}\sin\phi\right]}{(1+\gamma_{LP}^2)(1+\gamma_{CP}^2)}
+\\ \\ &amp;amp;=
+\frac{1}{2}+\frac{2s\gamma_{LP}\gamma_{CP}\sin\phi}{(1+\gamma_{LP}^2)(1+\gamma_{CP}^2)}+\frac{(1-\gamma_{LP}^2)(1-\gamma_{CP}^2)\cos2\beta}{2(1+\gamma_{LP}^2)(1+\gamma_{CP}^2)}+\frac{\gamma_{LP}(1-\gamma_{CP}^2)\cos\phi\sin
+2\beta}{(1+\gamma_{LP}^2)(1+\gamma_{CP}^2)} \\ \\ &amp;amp;=A+B\cos 2\beta+C\sin 2\beta\end{split}\end{equation}$$&lt;/div&gt;
+&lt;p&gt;where&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}\begin{cases}A=\frac{1}{2}+\frac{2s\gamma_{LP}\gamma_{CP}\sin\phi}{(1+\gamma_{LP}^2)(1+\gamma_{CP}^2)}
+\\ \\
+B=\frac{(1-\gamma_{LP}^2)(1-\gamma_{CP}^2)}{2(1+\gamma_{LP}^2)(1+\gamma_{CP}^2)} \\ \\ C=\frac{\gamma_{LP}(1-\gamma_{CP}^2)\cos\phi}{(1+\gamma_{LP}^2)(1+\gamma_{CP}^2)}
+\end{cases}\end{equation}$$&lt;/div&gt;
+&lt;p&gt;&lt;span class="math"&gt;\(\rho(\phi)\)&lt;/span&gt; is a sinusoid of the form &lt;span class="math"&gt;\(A+\sqrt{B^2+C^2}\cos (2\beta-2\beta_0)\)&lt;/span&gt;, where &lt;span class="math"&gt;\(\tan 2\beta_0=\tan 2\delta
+\cos\phi\)&lt;/span&gt;, &lt;span class="math"&gt;\(\gamma_{CP}=\tan \delta\)&lt;/span&gt;. Therefore,&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}\begin{cases}\rho_{max}=A+\sqrt{B^2+C^2} \\ \\ \rho_{min}=A-\sqrt{B^2+C^2}
+\end{cases}\end{equation}$$&lt;/div&gt;
+&lt;p&gt;and,&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}\sqrt{B^2+C^2}=\frac{(1-\gamma_{CP}^2)\sqrt{1+2\gamma_{LP}^2\cos\phi+\gamma_{LP}^4}}{2(1+\gamma_{LP}^2)(1+\gamma_{CP}^2)}
+\end{equation}$$&lt;/div&gt;
+&lt;p&gt;The measured axial ratio is:&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}AR_{meas}=\sqrt{\frac{\rho_{max}}{\rho_{min}}}=\sqrt{\frac{(1+\gamma_{LP}^2)(1+\gamma_{CP}^2)+4\gamma_{LP}\gamma_{CP}\sin\phi+(1-\gamma_{CP}^2)\sqrt{1+2\gamma_{LP}^2\cos
+2\phi+\gamma_{LP}^4}}{(1+\gamma_{LP}^2)(1+\gamma_{CP}^2)+4\gamma_{LP}\gamma_{CP}\sin\phi-(1-\gamma_{CP}^2)\sqrt{1+2\gamma_{LP}^2\cos
+2\phi+\gamma_{LP}^4}}}
+\end{equation}$$&lt;/div&gt;
+&lt;p&gt;&lt;span class="math"&gt;\(s\)&lt;/span&gt; is taken as &lt;span class="math"&gt;\(+1\)&lt;/span&gt; with loss of generality.&lt;/p&gt;
+&lt;p&gt;For perfect linear polarization, &lt;span class="math"&gt;\(\gamma_{LP}=0\)&lt;/span&gt;, then &lt;span class="math"&gt;\(AR_{meas}=\frac{1}{\gamma_{CP}}\)&lt;/span&gt;, as expected.&lt;/p&gt;
+&lt;p&gt;For perfect circular polarization, &lt;span class="math"&gt;\(\gamma_{CP}=1\)&lt;/span&gt;, then &lt;span class="math"&gt;\(AR_{meas}=1\)&lt;/span&gt;, as expected too.&lt;/p&gt;
+&lt;p&gt;The true axial ratio is &lt;span class="math"&gt;\(AR_{true}=\frac{1}{\gamma_{CP}}\)&lt;/span&gt;. The measurement error in dB is:&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}Err_{dB}=AR_{meas,dB}-AR_{true,dB}=20\log_{10}\left(\frac{AR_{meas}}{AR_{true}}\right)=20\log_{10}\left(\gamma_{CP}AR_{meas}\right) \end{equation}$$&lt;/div&gt;
+&lt;p&gt;The measurement error or uncertainty depends on the cross polarization phase difference (&lt;span class="math"&gt;\(\phi\)&lt;/span&gt;) than the colinear polarization of
+the linearly polarized antenna. &lt;span class="math"&gt;\(\phi\)&lt;/span&gt; is typically unknown and random.&lt;/p&gt;
+&lt;h4 id="perfect-probe-case"&gt;Perfect Probe Case&lt;/h4&gt;
+&lt;p&gt;If &lt;span class="math"&gt;\(\phi=0^\circ, 180^\circ\)&lt;/span&gt;, the formula reduces to &lt;span class="math"&gt;\(\mathbf{AR}_{meas}=\frac{1}{\gamma_{CP}}=\mathbf{AR}_{true}\)&lt;/span&gt;. For
+this case, both co-pol and cross-pol voltages scale together, and the measured AR is unaffected.&lt;/p&gt;
+&lt;h4 id="worst-case-error"&gt;Worst-Case Error&lt;/h4&gt;
+&lt;p&gt;The error is maximized when the &lt;span class="math"&gt;\(\sin\phi\)&lt;/span&gt; and &lt;span class="math"&gt;\(\cos 2\phi\)&lt;/span&gt; terms interact to minimize the denominator. This typically
+occurs near &lt;span class="math"&gt;\(\phi = \pm 90^\circ\)&lt;/span&gt; (quadrature leakage). This gives &lt;span class="math"&gt;\(\beta=0\)&lt;/span&gt; which means the major axis of the circular
+polarization is aligned with the linear polarization. The linear polarization is actually an elliptical polarization with
+major axis same as the colinear direction. &lt;span class="math"&gt;\(\phi = \pm 90^\circ\)&lt;/span&gt; corresponds to the two rotation senses of the elliptical
+polarization that defines the two worst-case errors.&lt;/p&gt;
+&lt;div class="math"&gt;$$\begin{equation}AR_{meas,worst}=\begin{cases}\frac{1+\gamma_{LP}\gamma_{CP}}{\gamma_{LP}+\gamma_{CP}}=\frac{AR_{true}\sqrt{XPD_{LP}}+1}{AR_{true}+\sqrt{XPD_{LP}}},&amp;amp;if\space
+\phi=\frac{\pi}{2} \\ \\ \left| \frac{1-\gamma_{LP}\gamma_{CP}}{\gamma_{LP}-\gamma_{CP}}\right|=\left| \frac{AR_{true}\sqrt{XPD_{LP}}-1}{AR_{true}-\sqrt{XPD_{LP}}}\right|,&amp;amp;if\space
+\phi=-\frac{\pi}{2} \end{cases}\end{equation}$$&lt;/div&gt;
+&lt;p&gt;The measured axial ratio will be within the estimations of the two worst cases, as illustrated in the figure below.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="AR uncertainty" src="https://yunchizhang.github.io/RF_related/images/axial_ratio_uncertainty.png"/&gt;&lt;/p&gt;
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width &lt; 768) ? "left" : align;
+        indent = (screen.width &lt; 768) ? "0em" : indent;
+        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+&lt;/script&gt;</content><category term="Antenna"></category><category term="Antenna"></category><category term="Polarization"></category><category term="Axial Ratio"></category></entry><entry><title>Polarizations Part 3: Polarization Match Special Cases</title><link href="https://yunchizhang.github.io/posts/antenna_polarization_3.html" rel="alternate"></link><published>2026-02-27T14:43:00-05:00</published><updated>2026-02-27T14:43:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2026-02-27:/posts/antenna_polarization_3.html</id><summary type="html">&lt;p&gt;Wave polarization match factor of special cases.&lt;/p&gt;</summary><content type="html">
 &lt;p&gt;Special cases of polarization match in a transmit-receive system are studied herein.&lt;/p&gt;
 &lt;h2 id="polarization-matched-antennas"&gt;Polarization-Matched Antennas&lt;/h2&gt;
 &lt;p&gt;If we have two polarization-matched antennas in a transmit-receive system, the polarization match
@@ -146,7 +284,7 @@ mechanical alignment. The extrema can be calculated:&lt;/p&gt;
     (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
-&lt;/script&gt;</content><category term="Antenna"/><category term="Antenna"/><category term="Polarization"/></entry><entry><title>Polarization Match</title><link href="https://yunchizhang.github.io/posts/antenna_polarization_2.html" rel="alternate"/><published>2026-02-22T10:00:00-05:00</published><updated>2026-02-22T10:00:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2026-02-22:/posts/antenna_polarization_2.html</id><summary type="html">&lt;p&gt;Wave polarization match factor.&lt;/p&gt;</summary><content type="html">
+&lt;/script&gt;</content><category term="Antenna"></category><category term="Antenna"></category><category term="Polarization"></category></entry><entry><title>Polarizations Part 2: Polarization Match</title><link href="https://yunchizhang.github.io/posts/antenna_polarization_2.html" rel="alternate"></link><published>2026-02-22T10:00:00-05:00</published><updated>2026-02-22T10:00:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2026-02-22:/posts/antenna_polarization_2.html</id><summary type="html">&lt;p&gt;Wave polarization match factor.&lt;/p&gt;</summary><content type="html">
 &lt;p&gt;It is obvious that when two antennas are used in a communication system, they should be matched in
 polarization so that the available power at the receiving antenna can be fully utilized. A polarization match
 factor is developed and can be given in terms of the standard polarization parameters.&lt;/p&gt;
@@ -276,7 +414,7 @@ match factor can be written as:&lt;/p&gt;
     (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
-&lt;/script&gt;</content><category term="Antenna"/><category term="Antenna"/><category term="Polarization"/></entry><entry><title>Polarizations Concept</title><link href="https://yunchizhang.github.io/posts/antenna_polarization_1.html" rel="alternate"/><published>2026-02-16T15:47:00-05:00</published><updated>2026-02-16T15:47:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2026-02-16:/posts/antenna_polarization_1.html</id><summary type="html">&lt;p&gt;Wave polarization concept.&lt;/p&gt;</summary><content type="html">
+&lt;/script&gt;</content><category term="Antenna"></category><category term="Antenna"></category><category term="Polarization"></category></entry><entry><title>Polarizations Part 1: Concept</title><link href="https://yunchizhang.github.io/posts/antenna_polarization_1.html" rel="alternate"></link><published>2026-02-16T15:47:00-05:00</published><updated>2026-02-16T15:47:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2026-02-16:/posts/antenna_polarization_1.html</id><summary type="html">&lt;p&gt;Wave polarization concept.&lt;/p&gt;</summary><content type="html">
 &lt;p&gt;Electromagnetic (EM) wave polarization describes the geometric orientation and time evolution of
 the electric field vector &lt;strong&gt;E&lt;/strong&gt; at a fixed point in space. Because the magnetic field &lt;strong&gt;B&lt;/strong&gt; is orthogonal
 to &lt;strong&gt;E&lt;/strong&gt; and to the direction of propagation (from Maxwell’s equations), polarization is fully
@@ -448,7 +586,7 @@ R=\frac{1}{\sqrt{2}}\left(a+jbe^{j\phi} \right) \end{cases} \end{equation}$$&lt;
     (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
-&lt;/script&gt;</content><category term="Antenna"/><category term="Antenna"/><category term="Polarization"/></entry><entry><title>Directory Tree in Windows</title><link href="https://yunchizhang.github.io/posts/directory_tree_windows.html" rel="alternate"/><published>2026-01-30T15:00:00-05:00</published><updated>2026-01-30T15:00:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2026-01-30:/posts/directory_tree_windows.html</id><summary type="html">&lt;p&gt;Generate directory tree in Windows operating system.&lt;/p&gt;</summary><content type="html">
+&lt;/script&gt;</content><category term="Antenna"></category><category term="Antenna"></category><category term="Polarization"></category></entry><entry><title>Directory Tree in Windows</title><link href="https://yunchizhang.github.io/posts/directory_tree_windows.html" rel="alternate"></link><published>2026-01-30T15:00:00-05:00</published><updated>2026-01-30T15:00:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2026-01-30:/posts/directory_tree_windows.html</id><summary type="html">&lt;p&gt;Generate directory tree in Windows operating system.&lt;/p&gt;</summary><content type="html">
 &lt;p&gt;In Windows, if you want to see the directory structure up to a specific depth level. &lt;strong&gt;PowerShell&lt;/strong&gt;
 script can be used. Windows has a built-in &lt;code&gt;tree&lt;/code&gt; command. While it doesn't have a "depth" flag,
 you can simulate it in &lt;strong&gt;PowerShell&lt;/strong&gt; by filtering the output, though it's a bit "hacky."&lt;/p&gt;
@@ -635,7 +773,7 @@ you can simulate it in &lt;strong&gt;PowerShell&lt;/strong&gt; by filtering the 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3 id="output-to-file"&gt;Output to file&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nb"&gt;PS &lt;/span&gt;&lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="p"&gt;:\&lt;/span&gt;&lt;span class="n"&gt;Temp&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;Show-Tree&lt;/span&gt; &lt;span class="n"&gt;-Depth&lt;/span&gt; &lt;span class="n"&gt;2&lt;/span&gt; &lt;span class="n"&gt;-Unicode&lt;/span&gt; &lt;span class="n"&gt;-IncludeFiles&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nb"&gt;Out-File&lt;/span&gt; &lt;span class="n"&gt;tree&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;txt&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="Coding"/><category term="PowerShell"/><category term="Windows"/><category term="Directory"/></entry><entry><title>Synchronizing Multiple Remote Repositories</title><link href="https://yunchizhang.github.io/posts/multi_remote_repos.html" rel="alternate"/><published>2025-08-17T11:08:00-05:00</published><updated>2025-08-17T11:08:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2025-08-17:/posts/multi_remote_repos.html</id><summary type="html">&lt;p&gt;How to synchronize multiple remote repositories with a local one.&lt;/p&gt;</summary><content type="html">
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="Coding"></category><category term="PowerShell"></category><category term="Windows"></category><category term="Directory"></category></entry><entry><title>Synchronizing Multiple Remote Repositories</title><link href="https://yunchizhang.github.io/posts/multi_remote_repos.html" rel="alternate"></link><published>2025-08-17T11:08:00-05:00</published><updated>2025-08-17T11:08:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2025-08-17:/posts/multi_remote_repos.html</id><summary type="html">&lt;p&gt;How to synchronize multiple remote repositories with a local one.&lt;/p&gt;</summary><content type="html">
 &lt;h2 id="multiple-remote-git-repositories"&gt;Multiple Remote Git Repositories&lt;/h2&gt;
 &lt;p&gt;Synchronizing two remote Git repositories is often needed if, for example, you’re mirroring between
 &lt;a href="https://github.com"&gt;GitHub&lt;/a&gt; and &lt;a href="https://gitlab.com"&gt;GitLab&lt;/a&gt;, or keeping a company’s internal Git server in sync with
@@ -706,7 +844,7 @@ automatically.&lt;/p&gt;
 &lt;li&gt;
 &lt;p&gt;Consider a CI job or hook to auto-sync branches (e.g., GitHub Action that pushes to GitLab). That way developers only need to push once.&lt;/p&gt;
 &lt;/li&gt;
-&lt;/ul&gt;</content><category term="Coding"/><category term="repository"/><category term="git"/><category term="remote"/></entry><entry><title>RF Mismatch Loss, Error and Uncertainty</title><link href="https://yunchizhang.github.io/posts/rf_mismatch_error.html" rel="alternate"/><published>2025-07-14T09:20:00-05:00</published><updated>2025-07-14T09:20:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2025-07-14:/posts/rf_mismatch_error.html</id><summary type="html">&lt;p&gt;Analysis of RF mismatch between components.&lt;/p&gt;</summary><content type="html">
+&lt;/ul&gt;</content><category term="Coding"></category><category term="repository"></category><category term="git"></category><category term="remote"></category></entry><entry><title>RF Mismatch Loss, Error and Uncertainty</title><link href="https://yunchizhang.github.io/posts/rf_mismatch_error.html" rel="alternate"></link><published>2025-07-14T09:20:00-05:00</published><updated>2025-07-14T09:20:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2025-07-14:/posts/rf_mismatch_error.html</id><summary type="html">&lt;p&gt;Analysis of RF mismatch between components.&lt;/p&gt;</summary><content type="html">
 &lt;p&gt;For maximum transfer of the power from any RF source component, the total input impedance of the
 component connected to the source must be equal to the conjugate of the source impedance. In
 practice, there is always some degree of impedance mismatch between the source and connected
@@ -844,7 +982,7 @@ T_{max}=\frac{(1-\gamma_S^2)(1-\gamma_L^2)}{(1-\gamma_S\gamma_L)^2}\end{cases}$$
     (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
-&lt;/script&gt;</content><category term="RF System"/><category term="RF"/><category term="Microwave"/><category term="System"/></entry><entry><title>Galois Field and Reed-Solomon Coding</title><link href="https://yunchizhang.github.io/posts/galois_field_RS_coding.html" rel="alternate"/><published>2025-06-03T09:20:00-05:00</published><updated>2025-06-03T09:20:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2025-06-03:/posts/galois_field_RS_coding.html</id><summary type="html">Describe details of Galois Field and Reed-Solomon Coding.</summary><content type="html">
+&lt;/script&gt;</content><category term="RF System"></category><category term="RF"></category><category term="Microwave"></category><category term="System"></category></entry><entry><title>Galois Field and Reed-Solomon Coding</title><link href="https://yunchizhang.github.io/posts/galois_field_RS_coding.html" rel="alternate"></link><published>2025-06-03T09:20:00-05:00</published><updated>2025-06-03T09:20:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2025-06-03:/posts/galois_field_RS_coding.html</id><summary type="html">Describe details of Galois Field and Reed-Solomon Coding.</summary><content type="html">
 &lt;main&gt;
 &lt;div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=61afe0f7"&gt;
 &lt;div class="jp-Cell-inputWrapper" tabindex="0"&gt;
@@ -1430,7 +1568,7 @@ Equality against original message: True
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/main&gt;
-</content><category term="Digital Communications"/><category term="Galois Field, Digital, Communications"/><category term="Galois Field, Reed-Solomon Coding, Digital Communications"/></entry><entry><title>Linear Feedback Shift Register</title><link href="https://yunchizhang.github.io/posts/lfsr.html" rel="alternate"/><published>2025-05-09T09:20:00-05:00</published><updated>2025-05-09T09:20:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2025-05-09:/posts/lfsr.html</id><summary type="html">&lt;p&gt;Describe details of linear feedback shift register (LFSR).&lt;/p&gt;</summary><content type="html">
+</content><category term="Digital Communications"></category><category term="Galois Field, Digital, Communications"></category><category term="Galois Field, Reed-Solomon Coding, Digital Communications"></category></entry><entry><title>Linear Feedback Shift Register</title><link href="https://yunchizhang.github.io/posts/lfsr.html" rel="alternate"></link><published>2025-05-09T09:20:00-05:00</published><updated>2025-05-09T09:20:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2025-05-09:/posts/lfsr.html</id><summary type="html">&lt;p&gt;Describe details of linear feedback shift register (LFSR).&lt;/p&gt;</summary><content type="html">
 &lt;p&gt;A linear-feedback shift register (LFSR) is a shift register whose input bit is a linear function of
 its previous state.&lt;/p&gt;
 &lt;p&gt;The most commonly used linear function of single bits is exclusive-or (XOR). Thus, an LFSR is most
@@ -1712,7 +1850,7 @@ two configurations.&lt;/p&gt;
     (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
-&lt;/script&gt;</content><category term="Digital Communications"/><category term="LFSR"/><category term="Digital"/><category term="Communications"/></entry><entry><title>Mathjax support in VS Code and Pelican</title><link href="https://yunchizhang.github.io/posts/mathjax_support.html" rel="alternate"/><published>2025-05-02T15:20:00-05:00</published><updated>2025-05-02T15:20:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2025-05-02:/posts/mathjax_support.html</id><summary type="html">&lt;p&gt;Describe how to support Mathjax in VS Code and Pelican.&lt;/p&gt;</summary><content type="html">
+&lt;/script&gt;</content><category term="Digital Communications"></category><category term="LFSR"></category><category term="Digital"></category><category term="Communications"></category></entry><entry><title>Mathjax support in VS Code and Pelican</title><link href="https://yunchizhang.github.io/posts/mathjax_support.html" rel="alternate"></link><published>2025-05-02T15:20:00-05:00</published><updated>2025-05-02T15:20:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2025-05-02:/posts/mathjax_support.html</id><summary type="html">&lt;p&gt;Describe how to support Mathjax in VS Code and Pelican.&lt;/p&gt;</summary><content type="html">
 &lt;h2 id="mathjax"&gt;Mathjax&lt;/h2&gt;
 &lt;p&gt;MathJax is an open-source JavaScript display engine for LaTeX, MathML, and AsciiMath notation that
 works in all modern browsers. Please refer to &lt;a class="ampl" href="https://www.mathjax.org/"&gt;Mathjax&lt;/a&gt;
@@ -1840,7 +1978,7 @@ $$&lt;/div&gt;
     (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
-&lt;/script&gt;</content><category term="Content Creation"/><category term="pelican"/><category term="markdown"/><category term="webpage"/><category term="mathjax"/><category term="vs code"/><category term="equation"/></entry><entry><title>Markdown codeblock format for Pelican</title><link href="https://yunchizhang.github.io/posts/codeblock_markdown_pelican.html" rel="alternate"/><published>2025-05-01T14:00:00-05:00</published><updated>2025-05-01T14:00:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2025-05-01:/posts/codeblock_markdown_pelican.html</id><summary type="html">&lt;p&gt;Describe how to write codeblock inside a list item in markdown.&lt;/p&gt;</summary><content type="html">
+&lt;/script&gt;</content><category term="Content Creation"></category><category term="pelican"></category><category term="markdown"></category><category term="webpage"></category><category term="mathjax"></category><category term="vs code"></category><category term="equation"></category></entry><entry><title>Markdown codeblock format for Pelican</title><link href="https://yunchizhang.github.io/posts/codeblock_markdown_pelican.html" rel="alternate"></link><published>2025-05-01T14:00:00-05:00</published><updated>2025-05-01T14:00:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2025-05-01:/posts/codeblock_markdown_pelican.html</id><summary type="html">&lt;p&gt;Describe how to write codeblock inside a list item in markdown.&lt;/p&gt;</summary><content type="html">
 &lt;h2 id="code-snippet-in-markdown"&gt;Code Snippet in Markdown&lt;/h2&gt;
 &lt;h3 id="inline-code"&gt;Inline Code&lt;/h3&gt;
 &lt;p&gt;The single &lt;strong&gt;backticks `&lt;/strong&gt; in Markdown can be used to indicate inline code. For example,
@@ -2022,7 +2160,7 @@ used.&lt;/p&gt;
         &lt;span class="s2"&gt;"markdown.extensions.codehilite"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;"css_class"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"highlight"&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
     &lt;span class="p"&gt;},&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="Content Creation"/><category term="pelican"/><category term="markdown"/><category term="webpage"/></entry><entry><title>Publish Pelican Webpages to Github Pages</title><link href="https://yunchizhang.github.io/posts/pelican_on_github.html" rel="alternate"/><published>2024-09-29T10:46:00-05:00</published><updated>2025-05-02T12:44:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2024-09-29:/posts/pelican_on_github.html</id><summary type="html">&lt;p&gt;Describe how to publish Pelican generated webpages to Github pages.&lt;/p&gt;</summary><content type="html">
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="Content Creation"></category><category term="pelican"></category><category term="markdown"></category><category term="webpage"></category></entry><entry><title>Publish Pelican Webpages to Github Pages</title><link href="https://yunchizhang.github.io/posts/pelican_on_github.html" rel="alternate"></link><published>2024-09-29T10:46:00-05:00</published><updated>2025-05-02T12:44:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2024-09-29:/posts/pelican_on_github.html</id><summary type="html">&lt;p&gt;Describe how to publish Pelican generated webpages to Github pages.&lt;/p&gt;</summary><content type="html">
 &lt;h1 id="pelican-and-github-pages"&gt;Pelican and Github Pages&lt;/h1&gt;
 &lt;p&gt;You can publish &lt;a href="https://getpelican.com/"&gt;Pelican&lt;/a&gt; generated site to &lt;a href="https://pages.github.com/"&gt;GitHub
 Pages&lt;/a&gt; for free. Your site will be published to &lt;code&gt;https://yourusername.github.io&lt;/code&gt;.&lt;/p&gt;
@@ -2175,7 +2313,7 @@ produce:&lt;/p&gt;
 &lt;li&gt;Sub-item 2, four space indent&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;/ol&gt;</content><category term="Content Creation"/><category term="pelican"/><category term="github"/><category term="python"/><category term="webpage"/></entry><entry><title>JPL Horizon Query</title><link href="https://yunchizhang.github.io/posts/jpl_horizon_query.html" rel="alternate"/><published>2024-07-11T09:20:00-05:00</published><updated>2024-07-11T09:20:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2024-07-11:/posts/jpl_horizon_query.html</id><summary type="html">Describe details of JPL Horizon Query in Python.</summary><content type="html">
+&lt;/ol&gt;</content><category term="Content Creation"></category><category term="pelican"></category><category term="github"></category><category term="python"></category><category term="webpage"></category></entry><entry><title>JPL Horizon Query</title><link href="https://yunchizhang.github.io/posts/jpl_horizon_query.html" rel="alternate"></link><published>2024-07-11T09:20:00-05:00</published><updated>2024-07-11T09:20:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2024-07-11:/posts/jpl_horizon_query.html</id><summary type="html">Describe details of JPL Horizon Query in Python.</summary><content type="html">
 &lt;main&gt;
 &lt;div class="jp-Cell jp-MarkdownCell jp-Notebook-cell"&gt;
 &lt;div class="jp-Cell-inputWrapper" tabindex="0"&gt;
@@ -2427,7 +2565,7 @@ Length = 44641 rows
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/main&gt;
-</content><category term="Satellite"/><category term="JPL Horizon, Python"/><category term="JPL, Horizon, Query, astroquery"/></entry><entry><title>RFI and OOBE</title><link href="https://yunchizhang.github.io/posts/rfi_and_oobe.html" rel="alternate"/><published>2024-04-01T09:20:00-05:00</published><updated>2024-04-01T09:20:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2024-04-01:/posts/rfi_and_oobe.html</id><summary type="html">Describe details of RFI and OOBE.</summary><content type="html">
+</content><category term="Satellite"></category><category term="JPL Horizon, Python"></category><category term="JPL, Horizon, Query, astroquery"></category></entry><entry><title>RFI and OOBE</title><link href="https://yunchizhang.github.io/posts/rfi_and_oobe.html" rel="alternate"></link><published>2024-04-01T09:20:00-05:00</published><updated>2024-04-01T09:20:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2024-04-01:/posts/rfi_and_oobe.html</id><summary type="html">Describe details of RFI and OOBE.</summary><content type="html">
 &lt;main&gt;
 &lt;div class="jp-Cell jp-MarkdownCell jp-Notebook-cell"&gt;
 &lt;div class="jp-Cell-inputWrapper" tabindex="0"&gt;
@@ -2680,4 +2818,4 @@ systems.&lt;/li&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/main&gt;
-</content><category term="RF System"/><category term="RF, RFI, OOBE, System"/></entry></feed>
+</content><category term="RF System"></category><category term="RF, RFI, OOBE, System"></category></entry></feed>
