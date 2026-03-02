@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Yzowledge - Antenna</title><link href="https://yunchizhang.github.io/" rel="alternate"></link><link href="https://yunchizhang.github.io/feeds/antenna.atom.xml" rel="self"></link><id>https://yunchizhang.github.io/</id><updated>2026-03-01T15:32:00-05:00</updated><subtitle>Knowledge and Experience</subtitle><entry><title>Polarizations Part 4: Axial Ratio Measurement</title><link href="https://yunchizhang.github.io/posts/antenna_polarization_4.html" rel="alternate"></link><published>2026-03-01T15:32:00-05:00</published><updated>2026-03-01T15:32:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2026-03-01:/posts/antenna_polarization_4.html</id><summary type="html">&lt;p&gt;Axial ratio measurement method and uncertainty.&lt;/p&gt;</summary><content type="html">
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Yzowledge - Antenna</title><link href="https://yunchizhang.github.io/" rel="alternate"/><link href="https://yunchizhang.github.io/feeds/antenna.atom.xml" rel="self"/><id>https://yunchizhang.github.io/</id><updated>2026-03-01T15:32:00-05:00</updated><subtitle>Knowledge and Experience</subtitle><entry><title>Polarizations Part 4: Axial Ratio Measurement</title><link href="https://yunchizhang.github.io/posts/antenna_polarization_4.html" rel="alternate"/><published>2026-03-01T15:32:00-05:00</published><updated>2026-03-01T15:32:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2026-03-01:/posts/antenna_polarization_4.html</id><summary type="html">&lt;p&gt;Axial ratio measurement method and uncertainty.&lt;/p&gt;</summary><content type="html">
 &lt;p&gt;Measuring the axial ratio (AR) of a circularly polarized antenna is important because it quantifies how close the
 antenna’s polarization is to ideal circular polarization, which directly affects signal quality, polarization matching,
 and system performance.&lt;/p&gt;
@@ -137,7 +137,7 @@ polarization that defines the two worst-case errors.&lt;/p&gt;
     (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
-&lt;/script&gt;</content><category term="Antenna"></category><category term="Antenna"></category><category term="Polarization"></category><category term="Axial Ratio"></category></entry><entry><title>Polarizations Part 3: Polarization Match Special Cases</title><link href="https://yunchizhang.github.io/posts/antenna_polarization_3.html" rel="alternate"></link><published>2026-02-27T14:43:00-05:00</published><updated>2026-02-27T14:43:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2026-02-27:/posts/antenna_polarization_3.html</id><summary type="html">&lt;p&gt;Wave polarization match factor of special cases.&lt;/p&gt;</summary><content type="html">
+&lt;/script&gt;</content><category term="Antenna"/><category term="Antenna"/><category term="Polarization"/><category term="Axial Ratio"/></entry><entry><title>Polarizations Part 3: Polarization Match Special Cases</title><link href="https://yunchizhang.github.io/posts/antenna_polarization_3.html" rel="alternate"/><published>2026-02-27T14:43:00-05:00</published><updated>2026-02-27T14:43:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2026-02-27:/posts/antenna_polarization_3.html</id><summary type="html">&lt;p&gt;Wave polarization match factor of special cases.&lt;/p&gt;</summary><content type="html">
 &lt;p&gt;Special cases of polarization match in a transmit-receive system are studied herein.&lt;/p&gt;
 &lt;h2 id="polarization-matched-antennas"&gt;Polarization-Matched Antennas&lt;/h2&gt;
 &lt;p&gt;If we have two polarization-matched antennas in a transmit-receive system, the polarization match
@@ -198,7 +198,8 @@ colinear direction.&lt;/p&gt;
 colinear direction of the linear polarization and semi-major axis of the circular polarization, and
 &lt;span class="math"&gt;\(s=\pm 1\)&lt;/span&gt; to indicate the rotation sense.&lt;/p&gt;
 &lt;p&gt;The polarization match factor can be derived as:&lt;/p&gt;
-&lt;div class="math"&gt;$$\begin{equation}\begin{split}\rho(\phi)=\frac{|\mathbf{E_{LP}^*}\cdot\mathbf{E_{CP}}|^2}{|\mathbf{E_{LP}^*}|^2|\mathbf{E_{CP}}|^2}&amp;amp;=\frac{1}{(1+\gamma_{LP}^2)(1+\gamma_{CP}^2)}\left|(\cos\beta-js\gamma_{CP}\sin\beta)+\gamma_{LP}e^{-j\phi}(\sin\beta+js\gamma_{CP}\cos\beta)\right|^2
+&lt;div class="math"&gt;$$\begin{equation}\begin{split}\rho(\phi)&amp;amp;=\frac{|\mathbf{E_{LP}^*}\cdot\mathbf{E_{CP}}|^2}{|\mathbf{E_{LP}^*}|^2|\mathbf{E_{CP}}|^2}
+\\ \\ &amp;amp;=\frac{1}{(1+\gamma_{LP}^2)(1+\gamma_{CP}^2)}\left|(\cos\beta-js\gamma_{CP}\sin\beta)+\gamma_{LP}e^{-j\phi}(\sin\beta+js\gamma_{CP}\cos\beta)\right|^2
 \\ \\
 &amp;amp;=\frac{\cos^2\beta+\gamma_{CP}^2\sin^2\beta+\gamma_{LP}^2\left(\sin^2\beta+\gamma_{CP}^2\cos^2\beta\right)+2\gamma_{LP}\left[\left(1-\gamma_{CP}^2\right)\sin\beta\cos\beta\cos\phi+s\gamma_{CP}\sin\phi\right]}{(1+\gamma_{LP}^2)(1+\gamma_{CP}^2)}
 \\ \\ &amp;amp;=
@@ -284,7 +285,7 @@ mechanical alignment. The extrema can be calculated:&lt;/p&gt;
     (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
-&lt;/script&gt;</content><category term="Antenna"></category><category term="Antenna"></category><category term="Polarization"></category></entry><entry><title>Polarizations Part 2: Polarization Match</title><link href="https://yunchizhang.github.io/posts/antenna_polarization_2.html" rel="alternate"></link><published>2026-02-22T10:00:00-05:00</published><updated>2026-02-22T10:00:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2026-02-22:/posts/antenna_polarization_2.html</id><summary type="html">&lt;p&gt;Wave polarization match factor.&lt;/p&gt;</summary><content type="html">
+&lt;/script&gt;</content><category term="Antenna"/><category term="Antenna"/><category term="Polarization"/></entry><entry><title>Polarizations Part 2: Polarization Match</title><link href="https://yunchizhang.github.io/posts/antenna_polarization_2.html" rel="alternate"/><published>2026-02-22T10:00:00-05:00</published><updated>2026-02-22T10:00:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2026-02-22:/posts/antenna_polarization_2.html</id><summary type="html">&lt;p&gt;Wave polarization match factor.&lt;/p&gt;</summary><content type="html">
 &lt;p&gt;It is obvious that when two antennas are used in a communication system, they should be matched in
 polarization so that the available power at the receiving antenna can be fully utilized. A polarization match
 factor is developed and can be given in terms of the standard polarization parameters.&lt;/p&gt;
@@ -414,7 +415,7 @@ match factor can be written as:&lt;/p&gt;
     (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
-&lt;/script&gt;</content><category term="Antenna"></category><category term="Antenna"></category><category term="Polarization"></category></entry><entry><title>Polarizations Part 1: Concept</title><link href="https://yunchizhang.github.io/posts/antenna_polarization_1.html" rel="alternate"></link><published>2026-02-16T15:47:00-05:00</published><updated>2026-02-16T15:47:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2026-02-16:/posts/antenna_polarization_1.html</id><summary type="html">&lt;p&gt;Wave polarization concept.&lt;/p&gt;</summary><content type="html">
+&lt;/script&gt;</content><category term="Antenna"/><category term="Antenna"/><category term="Polarization"/></entry><entry><title>Polarizations Part 1: Concept</title><link href="https://yunchizhang.github.io/posts/antenna_polarization_1.html" rel="alternate"/><published>2026-02-16T15:47:00-05:00</published><updated>2026-02-16T15:47:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2026-02-16:/posts/antenna_polarization_1.html</id><summary type="html">&lt;p&gt;Wave polarization concept.&lt;/p&gt;</summary><content type="html">
 &lt;p&gt;Electromagnetic (EM) wave polarization describes the geometric orientation and time evolution of
 the electric field vector &lt;strong&gt;E&lt;/strong&gt; at a fixed point in space. Because the magnetic field &lt;strong&gt;B&lt;/strong&gt; is orthogonal
 to &lt;strong&gt;E&lt;/strong&gt; and to the direction of propagation (from Maxwell’s equations), polarization is fully
@@ -586,4 +587,4 @@ R=\frac{1}{\sqrt{2}}\left(a+jbe^{j\phi} \right) \end{cases} \end{equation}$$&lt;
     (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
-&lt;/script&gt;</content><category term="Antenna"></category><category term="Antenna"></category><category term="Polarization"></category></entry></feed>
+&lt;/script&gt;</content><category term="Antenna"/><category term="Antenna"/><category term="Polarization"/></entry></feed>
