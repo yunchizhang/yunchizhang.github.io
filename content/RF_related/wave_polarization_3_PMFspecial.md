@@ -107,7 +107,8 @@ $s=\pm 1$ to indicate the rotation sense.
 
 The polarization match factor can be derived as:
 
-$$\begin{equation}\begin{split}\rho(\phi)=\frac{|\mathbf{E_{LP}^*}\cdot\mathbf{E_{CP}}|^2}{|\mathbf{E_{LP}^*}|^2|\mathbf{E_{CP}}|^2}&=\frac{1}{(1+\gamma_{LP}^2)(1+\gamma_{CP}^2)}\left|(\cos\beta-js\gamma_{CP}\sin\beta)+\gamma_{LP}e^{-j\phi}(\sin\beta+js\gamma_{CP}\cos\beta)\right|^2
+$$\begin{equation}\begin{split}\rho(\phi)&=\frac{|\mathbf{E_{LP}^*}\cdot\mathbf{E_{CP}}|^2}{|\mathbf{E_{LP}^*}|^2|\mathbf{E_{CP}}|^2}
+\\ \\ &=\frac{1}{(1+\gamma_{LP}^2)(1+\gamma_{CP}^2)}\left|(\cos\beta-js\gamma_{CP}\sin\beta)+\gamma_{LP}e^{-j\phi}(\sin\beta+js\gamma_{CP}\cos\beta)\right|^2
 \\ \\
 &=\frac{\cos^2\beta+\gamma_{CP}^2\sin^2\beta+\gamma_{LP}^2\left(\sin^2\beta+\gamma_{CP}^2\cos^2\beta\right)+2\gamma_{LP}\left[\left(1-\gamma_{CP}^2\right)\sin\beta\cos\beta\cos\phi+s\gamma_{CP}\sin\phi\right]}{(1+\gamma_{LP}^2)(1+\gamma_{CP}^2)}
 \\ \\ &=
