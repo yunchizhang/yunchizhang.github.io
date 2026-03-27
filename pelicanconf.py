@@ -80,6 +80,11 @@ PAGE_PATHS = ['pages', 'antenna']
 # projects
 PROJECTS = [
     {
+        'name': 'SnPViewer',
+        'url': 'https://github.com/archer-yz/SnPViewer',
+        'description': 'SnPViewer is a professional RF Touchstone (.sNp) parameter viewer with advanced visualization and analysis capabilities.',
+    },
+    {
         'name': 'Jitter Analyzer',
         'url': '#',
         'description': 'Jitter Analyzer can perform jitter measurement, jitter trend, jitter decomposition, ' +

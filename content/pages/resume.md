@@ -104,6 +104,8 @@ M.S. and B.S. in Technical Physics, Sep 1992 – Jul 2000
 
 ## **Honors**
 
+- Peraton Performance Award, Dec 2025
+- Peraton Platinum Award, Dec 2025
 - Peraton Platinum Award, Dec 2024
 - Peraton Platinum Award, Aug 2023
 - Peraton Recognition - Core Value Award, Feb 2023
