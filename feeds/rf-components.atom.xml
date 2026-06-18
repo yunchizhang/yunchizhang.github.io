@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Yzowledge - RF Components</title><link href="https://yunchizhang.github.io/" rel="alternate"/><link href="https://yunchizhang.github.io/feeds/rf-components.atom.xml" rel="self"/><id>https://yunchizhang.github.io/</id><updated>2026-06-18T11:00:00-05:00</updated><subtitle>Knowledge and Experience</subtitle><entry><title>Waveguide Filter in H-Bend</title><link href="https://yunchizhang.github.io/posts/waveguide_filter_h_bend.html" rel="alternate"/><published>2026-06-18T11:00:00-05:00</published><updated>2026-06-18T11:00:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2026-06-18:/posts/waveguide_filter_h_bend.html</id><summary type="html">&lt;p&gt;A waveguide filter built in H-bend.&lt;/p&gt;</summary><content type="html">
+&lt;p&gt;In a full-duplex RF system employing a shared antenna, the diplexer provides frequency separation
+between transmit and receive bands. However, the isolation offered by the employed diplexer is
+insufficient to adequately suppress transmission leakage to the sensitive receive path. This
+leakage causes receiver saturation and intermodulation distortion, degrading system performance.&lt;/p&gt;
+&lt;p&gt;A waveguide filter designed to fit within an existing H-bend component in the receive path provides
+additional rejection at transmit frequencies, complementing the diplexer isolation. By
+strategically placing the filter to replace the waveguide H-bend, the design leverages existing
+waveguide infrastructure while adding critical stopband attenuation. This document outlines the
+design and manufacturing methodology for realizing such a waveguide filter that maintains the
+H-bend geometry while meeting the required frequency response specifications.&lt;/p&gt;
+&lt;h2 id="requirements"&gt;Requirements&lt;/h2&gt;
+&lt;h3 id="mechanical-dimensions"&gt;Mechanical Dimensions&lt;/h3&gt;
+&lt;p&gt;&lt;img alt="Waveguide Bend" src="https://yunchizhang.github.io/RF_related/images/wg_bend_spec.png"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Figure 1: H-bend waveguide dimensional specification&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;The filter must conform to the following dimensional constraints (see Figure 1):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Overall H-bend geometry: The filter port interfaces must be aligned with the original H-bend
+  ports so that it can replace the H-bend.&lt;/li&gt;
+&lt;li&gt;Waveguide port dimensions: Standard Rectangular Waveguide Interface.&lt;/li&gt;
+&lt;li&gt;Material: Aluminum&lt;/li&gt;
+&lt;li&gt;Finish: White Enamel&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="rf-specifications"&gt;RF Specifications&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Parameter&lt;/th&gt;
+&lt;th&gt;Specification&lt;/th&gt;
+&lt;th&gt;Unit&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Passband Frequency&lt;/td&gt;
+&lt;td&gt;2.200 - 2.215&lt;/td&gt;
+&lt;td&gt;GHz&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Passband Insertion Loss&lt;/td&gt;
+&lt;td&gt;0.15 max&lt;/td&gt;
+&lt;td&gt;dB&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Passband VSWR&lt;/td&gt;
+&lt;td&gt;1.20:1 max&lt;/td&gt;
+&lt;td&gt;N/A&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Stopband Frequency&lt;/td&gt;
+&lt;td&gt;2.025 - 2.040&lt;/td&gt;
+&lt;td&gt;GHz&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Stopband Rejection&lt;/td&gt;
+&lt;td&gt;50dB min&lt;/td&gt;
+&lt;td&gt;dB&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="environmental-requirements"&gt;Environmental Requirements&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Operating Temperature Range: -20 - 55 °C&lt;/li&gt;
+&lt;li&gt;Pressure: 2.0 PSIG&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="design"&gt;Design&lt;/h2&gt;
+&lt;h3 id="circuit-simulation"&gt;Circuit Simulation&lt;/h3&gt;
+&lt;p&gt;A three-pole filter topology was selected based on circuit simulation analysis to meet the
+specified RF requirements. The simulation determined that three poles provide the optimal balance
+between passband flatness, insertion loss, and stopband rejection while maintaining the mechanical
+constraints of the H-bend geometry.&lt;/p&gt;
+&lt;h3 id="hfss-full-wave-simulation"&gt;HFSS Full-Wave Simulation&lt;/h3&gt;
+&lt;p&gt;Standard rectangular waveguide WR430 is required at the filter ports. The filter is designed in
+H-Plane with iris coupling between waveguide resonators. The resonator lengths and iris widths are
+optimized to achieve the desired filter performance.&lt;/p&gt;
+&lt;p&gt;The filter design was implemented and optimized using Ansys HFSS (High Frequency Structure
+Simulator) to account for the three-dimensional electromagnetic field interactions within the
+waveguide structure. The simulation included the complete filter elements to ensure accurate
+prediction of the filter response.&lt;/p&gt;
+&lt;h4 id="3d-model"&gt;3D Model&lt;/h4&gt;
+&lt;p&gt;&lt;img alt="Filter 3D Model" src="https://yunchizhang.github.io/RF_related/images/wg_3pole_filter_hfss_model.png"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Figure 2: HFSS 3D model of the 3-pole waveguide filter in H-bend configuration&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;The 3D model incorporates the filter resonators positioned strategically within the waveguide to
+achieve the required frequency response while maintaining the H-bend port interfaces.&lt;/p&gt;
+&lt;h4 id="simulation-results"&gt;Simulation Results&lt;/h4&gt;
+&lt;p&gt;&lt;img alt="Filter Response" src="https://yunchizhang.github.io/RF_related/images/wg_3pole_filter_hfss_response.png"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Figure 3: Simulated 3-pole filter magnitude response&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;The HFSS simulation results demonstrate that the three-pole filter design meets the specified requirements.&lt;/p&gt;
+&lt;h2 id="manufacture-and-measurement"&gt;Manufacture and Measurement&lt;/h2&gt;
+&lt;h3 id="assembly-process"&gt;Assembly Process&lt;/h3&gt;
+&lt;p&gt;The filter is manufactured as two components: a filter body and a lid. The lid is brazed onto the
+filter body to create a hermetic seal, ensuring environmental protection and structural integrity.
+Tuning screws are strategically integrated into the filter body to enable precise adjustment of
+the resonators and iris couplings, allowing fine-tuning of the filter response during manufacturing
+and field commissioning.&lt;/p&gt;
+&lt;h3 id="tuning-and-optimization"&gt;Tuning and Optimization&lt;/h3&gt;
+&lt;p&gt;The tuning screws provide manual control of the resonator frequencies and coupling levels. Through
+iterative tuning, the filter response is adjusted to meet the specified passband and stopband
+requirements. This tuning capability ensures that manufacturing tolerances do not impact final
+filter performance.&lt;/p&gt;
+&lt;h3 id="measurement-results"&gt;Measurement Results&lt;/h3&gt;
+&lt;h4 id="manufactured-filter"&gt;Manufactured Filter&lt;/h4&gt;
+&lt;p&gt;&lt;img alt="Manufactured Filter" src="https://yunchizhang.github.io/RF_related/images/wg_3pole_filter_proto.png"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Figure 4: Manufactured 3-pole waveguide filter in H-bend configuration&lt;/em&gt;&lt;/p&gt;
+&lt;h4 id="measurement-data"&gt;Measurement Data&lt;/h4&gt;
+&lt;p&gt;&lt;img alt="Measurement Results" src="https://yunchizhang.github.io/RF_related/images/wg_3pole_filter_meas.png"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Figure 5: Network analyzer measurement of the fabricated filter&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;The completed filter was measured using network analyzer testing to validate performance against
+the RF specifications. The measured results demonstrate that the filter meets all specified
+requirements.&lt;/p&gt;
+&lt;p&gt;The manufactured filter successfully provides the required frequency separation and isolation in
+the full-duplex RF system receive path.&lt;/p&gt;
+&lt;h2 id="5-pole-filter-design-with-improved-attenuation"&gt;5-pole Filter Design with Improved Attenuation&lt;/h2&gt;
+&lt;p&gt;While the 3-pole filter design successfully meets the baseline RF requirements, in scenarios where
+transmission leakage suppression proves insufficient, a 5-pole filter design offers significantly
+enhanced stopband attenuation (&amp;gt;95 dB) to further protect the receive path.&lt;/p&gt;
+&lt;h3 id="design-approach"&gt;Design Approach&lt;/h3&gt;
+&lt;p&gt;The 5-pole filter extends the filter topology to five resonators with additional coupling irises,
+providing steeper filter skirts and deeper rejection in the stopband. The key innovation in this
+design is vertical expansion within the H-bend structure: rather than extending the filter
+footprint horizontally beyond the original H-bend envelope, the resonators are strategically
+positioned to grow vertically between the fixed waveguide ports. This approach maintains
+compatibility with the existing H-bend real estate while accommodating the additional filter
+elements.&lt;/p&gt;
+&lt;h3 id="hfss-full-wave-simulation_1"&gt;HFSS Full-Wave Simulation&lt;/h3&gt;
+&lt;p&gt;The 5-pole filter design was optimized using Ansys HFSS to validate the enhanced performance
+while maintaining the constrained geometry. The simulation accounts for the vertical arrangement
+of resonators and optimized iris coupling dimensions.&lt;/p&gt;
+&lt;h4 id="3d-model_1"&gt;3D Model&lt;/h4&gt;
+&lt;p&gt;&lt;img alt="5-pole Filter 3D Model" src="https://yunchizhang.github.io/RF_related/images/wg_5pole_filter_hfss_model.png"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Figure 6: HFSS 3D model of the 5-pole waveguide filter with vertical expansion in H-bend configuration&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;The 3D model demonstrates how the five resonators are positioned vertically to maximize stopband
+attenuation while maintaining the original H-bend port interfaces and fitting within the available
+height constraints.&lt;/p&gt;
+&lt;h4 id="simulation-results_1"&gt;Simulation Results&lt;/h4&gt;
+&lt;p&gt;&lt;img alt="5-pole Filter Response" src="https://yunchizhang.github.io/RF_related/images/wg_5pole_filter_hfss_response.png"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Figure 7: Simulated 5-pole filter magnitude response showing enhanced stopband rejection&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;The HFSS simulation results demonstrate that the five-pole filter design achieves greater than
+95 dB rejection in the stopband while maintaining acceptable passband performance. The increased
+filter order provides the additional attenuation necessary to suppress transmission leakage in
+demanding full-duplex RF systems.&lt;/p&gt;</content><category term="RF Components"/><category term="RF"/><category term="Microwave"/><category term="System"/><category term="Waveguide"/><category term="Passive"/><category term="Components"/></entry></feed>
