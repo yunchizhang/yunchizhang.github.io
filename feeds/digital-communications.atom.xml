@@ -1,5 +1,1869 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Yzowledge - Digital Communications</title><link href="https://yunchizhang.github.io/" rel="alternate"/><link href="https://yunchizhang.github.io/feeds/digital-communications.atom.xml" rel="self"/><id>https://yunchizhang.github.io/</id><updated>2025-06-03T09:20:00-05:00</updated><subtitle>Knowledge and Experience</subtitle><entry><title>Galois Field and Reed-Solomon Coding</title><link href="https://yunchizhang.github.io/posts/galois_field_RS_coding.html" rel="alternate"/><published>2025-06-03T09:20:00-05:00</published><updated>2025-06-03T09:20:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2025-06-03:/posts/galois_field_RS_coding.html</id><summary type="html">Describe details of Galois Field and Reed-Solomon Coding.</summary><content type="html">
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Yzowledge - Digital Communications</title><link href="https://yunchizhang.github.io/" rel="alternate"/><link href="https://yunchizhang.github.io/feeds/digital-communications.atom.xml" rel="self"/><id>https://yunchizhang.github.io/</id><updated>2026-09-22T17:20:00-05:00</updated><subtitle>Knowledge and Experience</subtitle><entry><title>General Phase Modulation</title><link href="https://yunchizhang.github.io/posts/general_pm.html" rel="alternate"/><published>2026-09-22T17:20:00-05:00</published><updated>2026-09-22T17:20:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2026-09-22:/posts/general_pm.html</id><summary type="html">&lt;p&gt;Describe details of general phase modulation.&lt;/p&gt;</summary><content type="html">
+&lt;h2 id="unified-pm-pcmpm-and-pcmpskpm-modulation-and-demodulation"&gt;Unified PM, PCM/PM, and PCM/PSK/PM Modulation and Demodulation&lt;/h2&gt;
+&lt;h3 id="1-overview"&gt;1. Overview&lt;/h3&gt;
+&lt;p&gt;This document develops a common mathematical framework for phase-modulated RF signals and uses it to describe:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;General analog phase modulation (PM)&lt;/li&gt;
+&lt;li&gt;PCM/PM with one or more data sequences&lt;/li&gt;
+&lt;li&gt;PCM/PSK/PM with sinusoidal or square-wave subcarriers&lt;/li&gt;
+&lt;li&gt;PSK as a special case of phase modulation&lt;/li&gt;
+&lt;li&gt;Pulse-shaped data sequences such as NRZ-L/M/S, BiPhase, RRC, etc.&lt;/li&gt;
+&lt;li&gt;Residual carrier generation and carrier recovery&lt;/li&gt;
+&lt;li&gt;Residual-carrier power and data-channel power&lt;/li&gt;
+&lt;li&gt;Coherent demodulation&lt;/li&gt;
+&lt;li&gt;Addition of tone-ranging signals, including major and minor ranging tones&lt;/li&gt;
+&lt;li&gt;Practical transmitter and receiver architectures&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The central idea is that all of these waveforms can be represented by a constant-envelope complex signal&lt;/p&gt;
+&lt;div class="math"&gt;$$
+x(t)=\sqrt{P}\,e^{j\phi_m(t)}
+$$&lt;/div&gt;
+&lt;p&gt;where the complete modulation is contained in the phase&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\phi_m(t)=\sum_i \theta_i s_i(t).
+$$&lt;/div&gt;
+&lt;p&gt;The RF signal is then obtained by translating this complex envelope to the carrier frequency.&lt;/p&gt;
+&lt;hr/&gt;
+&lt;h3 id="2-general-phase-modulation"&gt;2. General Phase Modulation&lt;/h3&gt;
+&lt;p&gt;Consider the most general PM signal&lt;/p&gt;
+&lt;div class="math"&gt;$$
+S_T(t)=\sqrt{2P}
+\sin\left[\omega_0t+\phi_m(t)+\phi_c(t)\right]
+$$&lt;/div&gt;
+&lt;p&gt;where:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class="math"&gt;\(P\)&lt;/span&gt; is the average RF power,&lt;/li&gt;
+&lt;li&gt;&lt;span class="math"&gt;\(\omega_0=2\pi f_0\)&lt;/span&gt; is the RF carrier angular frequency,&lt;/li&gt;
+&lt;li&gt;&lt;span class="math"&gt;\(\phi_c(t)\)&lt;/span&gt; represents carrier phase/frequency errors, propagation phase, Doppler phase, etc.,&lt;/li&gt;
+&lt;li&gt;&lt;span class="math"&gt;\(\phi_m(t)\)&lt;/span&gt; is the intentional modulation phase.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For a general PM signal,&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+\phi_m(t)=\theta\,m(t)
+}
+$$&lt;/div&gt;
+&lt;p&gt;where &lt;span class="math"&gt;\(m(t)\)&lt;/span&gt; is a normalized modulation waveform and &lt;span class="math"&gt;\(\theta\)&lt;/span&gt; is the peak phase modulation index in radians.&lt;/p&gt;
+&lt;p&gt;More generally, with multiple phase-modulation components,&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+\phi_m(t)=\sum_{i=1}^{N}\theta_i s_i(t)
+}
+$$&lt;/div&gt;
+&lt;p&gt;where &lt;span class="math"&gt;\(s_i(t)\)&lt;/span&gt; is normalized according to the definition of each modulation component.&lt;/p&gt;
+&lt;p&gt;The corresponding complex envelope is&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+x(t)=\sqrt{P}e^{j\phi_m(t)}
+}
+$$&lt;/div&gt;
+&lt;p&gt;and therefore&lt;/p&gt;
+&lt;div class="math"&gt;$$
+I(t)=\sqrt{P}\cos\phi_m(t),
+$$&lt;/div&gt;
+&lt;div class="math"&gt;$$
+Q(t)=\sqrt{P}\sin\phi_m(t).
+$$&lt;/div&gt;
+&lt;p&gt;Consequently,&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{I^2(t)+Q^2(t)=P}.
+$$&lt;/div&gt;
+&lt;p&gt;Thus ideal PM is a constant-envelope modulation.&lt;/p&gt;
+&lt;p&gt;The RF signal can be reconstructed from the complex envelope as&lt;/p&gt;
+&lt;div class="math"&gt;$$
+S_T(t)=\sqrt{2}\,
+\operatorname{Im}
+\left\{
+x(t)e^{j\omega_0t}
+\right\}
+$$&lt;/div&gt;
+&lt;p&gt;for the sine-carrier convention used here.&lt;/p&gt;
+&lt;hr/&gt;
+&lt;h3 id="3-the-most-general-unified-phase-modulation-model"&gt;3. The Most General Unified Phase-Modulation Model&lt;/h3&gt;
+&lt;p&gt;A useful model for the applications considered here is&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+\phi_m(t)
+=
+\sum_{i=1}^{N}
+\theta_i d_i(t)w_i(t)
++
+\phi_R(t)
+}
+$$&lt;/div&gt;
+&lt;p&gt;where:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class="math"&gt;\(d_i(t)\)&lt;/span&gt; is a normalized data waveform,&lt;/li&gt;
+&lt;li&gt;&lt;span class="math"&gt;\(w_i(t)\)&lt;/span&gt; is an optional subcarrier waveform,&lt;/li&gt;
+&lt;li&gt;&lt;span class="math"&gt;\(\theta_i\)&lt;/span&gt; is the corresponding modulation index,&lt;/li&gt;
+&lt;li&gt;&lt;span class="math"&gt;\(\phi_R(t)\)&lt;/span&gt; represents ranging or other intentional phase-modulation components.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Thus&lt;/p&gt;
+&lt;div class="math"&gt;$$
+x(t)
+=
+\sqrt{P}
+\exp\left[
+j\left(
+\sum_i\theta_i d_i(t)w_i(t)+\phi_R(t)
+\right)
+\right].
+$$&lt;/div&gt;
+&lt;p&gt;This formulation is particularly useful because several apparently different modulation schemes are simply different choices of &lt;span class="math"&gt;\(w_i(t)\)&lt;/span&gt;.&lt;/p&gt;
+&lt;h4 id="no-subcarrier"&gt;No subcarrier&lt;/h4&gt;
+&lt;div class="math"&gt;$$
+w_i(t)=1
+$$&lt;/div&gt;
+&lt;p&gt;gives PCM/PM.&lt;/p&gt;
+&lt;h4 id="sinusoidal-subcarrier"&gt;Sinusoidal subcarrier&lt;/h4&gt;
+&lt;div class="math"&gt;$$
+w_i(t)=\sin(\omega_{sci}t+\varphi_i)
+$$&lt;/div&gt;
+&lt;p&gt;gives PCM/PSK/PM-type modulation.&lt;/p&gt;
+&lt;h4 id="square-wave-subcarrier"&gt;Square-wave subcarrier&lt;/h4&gt;
+&lt;div class="math"&gt;$$
+w_i(t)=
+\operatorname{sgn}
+[\sin(\omega_{sci}t+\varphi_i)]
+$$&lt;/div&gt;
+&lt;p&gt;gives a square-wave-subcarrier form of PCM/PSK/PM.&lt;/p&gt;
+&lt;p&gt;Here &lt;span class="math"&gt;\(\omega_{sci}=2\pi f_{sci}\)&lt;/span&gt;, where &lt;span class="math"&gt;\(f_{sci}\)&lt;/span&gt; is the square-wave subcarrier's fundamental
+frequency and &lt;span class="math"&gt;\(\varphi_i\)&lt;/span&gt; is its phase. The square wave alternates between &lt;span class="math"&gt;\(+1\)&lt;/span&gt; and &lt;span class="math"&gt;\(-1\)&lt;/span&gt; at
+the subcarrier timing instants and contains odd harmonics of &lt;span class="math"&gt;\(f_{sci}\)&lt;/span&gt;. It is therefore a
+subcarrier with a frequency, not merely a sign-changing coefficient with no time scale.&lt;/p&gt;
+&lt;p&gt;Therefore PCM/PM can be viewed as a special case of the more general phase-modulation framework in which the optional subcarrier is simply&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{w(t)=1}.
+$$&lt;/div&gt;
+&lt;p&gt;It is more precise to call this the &lt;strong&gt;no-subcarrier case&lt;/strong&gt; rather than a subcarrier with zero frequency.&lt;/p&gt;
+&lt;hr/&gt;
+&lt;h3 id="4-pcmpm"&gt;4. PCM/PM&lt;/h3&gt;
+&lt;h4 id="41-one-data-sequence"&gt;4.1 One data sequence&lt;/h4&gt;
+&lt;p&gt;For one data sequence,&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+\phi_m(t)=\theta d(t)
+}
+$$&lt;/div&gt;
+&lt;p&gt;and&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+x(t)=\sqrt{P}e^{j\theta d(t)}.
+}
+$$&lt;/div&gt;
+&lt;p&gt;For binary data with&lt;/p&gt;
+&lt;div class="math"&gt;$$
+d(t)\in\{-1,+1\},
+$$&lt;/div&gt;
+&lt;p&gt;the two phase states are&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\phi_m=+\theta
+$$&lt;/div&gt;
+&lt;p&gt;and&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\phi_m=-\theta.
+$$&lt;/div&gt;
+&lt;p&gt;The phase separation is therefore&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{\Delta\phi=2\theta}.
+$$&lt;/div&gt;
+&lt;p&gt;The constellation consists of two points on the unit circle.&lt;/p&gt;
+&lt;p&gt;For&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\theta=\frac{\pi}{2},
+$$&lt;/div&gt;
+&lt;p&gt;the two states are separated by &lt;span class="math"&gt;\(\pi\)&lt;/span&gt;, which is conventional BPSK.&lt;/p&gt;
+&lt;p&gt;Thus BPSK can be interpreted as a special case of binary PM.&lt;/p&gt;
+&lt;hr/&gt;
+&lt;h3 id="5-pcmpm-with-multiple-data-sequences"&gt;5. PCM/PM With Multiple Data Sequences&lt;/h3&gt;
+&lt;p&gt;With two data sequences,&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+\phi_m(t)
+=
+\theta_1d_1(t)
++
+\theta_2d_2(t)
+}
+$$&lt;/div&gt;
+&lt;p&gt;and&lt;/p&gt;
+&lt;div class="math"&gt;$$
+x(t)
+=
+\sqrt{P}
+e^{j[\theta_1d_1(t)+\theta_2d_2(t)]}.
+$$&lt;/div&gt;
+&lt;p&gt;If both data sequences are binary,&lt;/p&gt;
+&lt;div class="math"&gt;$$
+d_1,d_2\in\{-1,+1\},
+$$&lt;/div&gt;
+&lt;p&gt;there are four possible phase states:&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\begin{aligned}
+\phi_{++}&amp;amp;=+\theta_1+\theta_2,\\
+\phi_{+-}&amp;amp;=+\theta_1-\theta_2,\\
+\phi_{-+}&amp;amp;=-\theta_1+\theta_2,\\
+\phi_{--}&amp;amp;=-\theta_1-\theta_2.
+\end{aligned}
+$$&lt;/div&gt;
+&lt;p&gt;This resembles a PSK constellation with four possible phases, but the phase states are generated as the sum of independently modulated data channels.&lt;/p&gt;
+&lt;p&gt;If&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\theta_1=\theta_2=\frac{\pi}{4},
+$$&lt;/div&gt;
+&lt;p&gt;the four states become&lt;/p&gt;
+&lt;div class="math"&gt;$$
++\frac{\pi}{2},\quad 0,\quad 0,\quad-\frac{\pi}{2},
+$$&lt;/div&gt;
+&lt;p&gt;so duplicate phase states occur. In general, the modulation indices determine whether the nominal data combinations produce distinct phase states.&lt;/p&gt;
+&lt;hr/&gt;
+&lt;h3 id="6-pcmpskpm"&gt;6. PCM/PSK/PM&lt;/h3&gt;
+&lt;p&gt;PCM/PSK/PM introduces a subcarrier into the phase modulation.&lt;/p&gt;
+&lt;p&gt;For one data channel,&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+\phi_m(t)=
+\theta d(t)w(t).
+}
+$$&lt;/div&gt;
+&lt;p&gt;The most common cases are:&lt;/p&gt;
+&lt;h4 id="sinusoidal-subcarrier_1"&gt;Sinusoidal subcarrier&lt;/h4&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+\phi_m(t)=
+\theta d(t)\sin(\omega_{sc}t)
+}
+$$&lt;/div&gt;
+&lt;h4 id="square-wave-subcarrier_1"&gt;Square-wave subcarrier&lt;/h4&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+\phi_m(t)=
+\theta d(t)c(t)
+}
+$$&lt;/div&gt;
+&lt;p&gt;where&lt;/p&gt;
+&lt;div class="math"&gt;$$
+c(t)=\operatorname{sgn}[\sin(2\pi f_{sc}t+\varphi_{sc})]
+\in\{-1,+1\}.
+$$&lt;/div&gt;
+&lt;p&gt;Here &lt;span class="math"&gt;\(f_{sc}\)&lt;/span&gt; is the square-wave subcarrier's fundamental frequency and &lt;span class="math"&gt;\(\varphi_{sc}\)&lt;/span&gt; is its
+phase. The receiver must be synchronized to this subcarrier timing (or estimate it) before
+multiplying by &lt;span class="math"&gt;\(c(t)\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;The corresponding complex envelope is always&lt;/p&gt;
+&lt;div class="math"&gt;$$
+x(t)=\sqrt P e^{j\phi_m(t)}.
+$$&lt;/div&gt;
+&lt;p&gt;Thus the I/Q trajectory remains on a circle even though the phase may be continuously varying.&lt;/p&gt;
+&lt;hr/&gt;
+&lt;h3 id="7-relationship-to-psk"&gt;7. Relationship to PSK&lt;/h3&gt;
+&lt;p&gt;PSK can be viewed as phase modulation in which the information directly selects discrete phase states.&lt;/p&gt;
+&lt;p&gt;For M-PSK,&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\phi_k=\phi_0+\frac{2\pi k}{M},
+\qquad k=0,\ldots,M-1.
+$$&lt;/div&gt;
+&lt;p&gt;The complex envelope is&lt;/p&gt;
+&lt;div class="math"&gt;$$
+x_k=\sqrt P e^{j\phi_k}.
+$$&lt;/div&gt;
+&lt;p&gt;Therefore:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;PM is the general continuous-phase framework.&lt;/li&gt;
+&lt;li&gt;PSK is a discrete-phase special case.&lt;/li&gt;
+&lt;li&gt;BPSK is binary phase modulation with phase separation &lt;span class="math"&gt;\(\pi\)&lt;/span&gt;.&lt;/li&gt;
+&lt;li&gt;QPSK is four-state phase modulation.&lt;/li&gt;
+&lt;li&gt;PCM/PM can generate discrete phase states when &lt;span class="math"&gt;\(d(t)\)&lt;/span&gt; is discrete.&lt;/li&gt;
+&lt;li&gt;PCM/PSK/PM additionally imposes a subcarrier waveform on the phase.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr/&gt;
+&lt;h3 id="8-data-waveform-dt"&gt;8. Data Waveform &lt;span class="math"&gt;\(d(t)\)&lt;/span&gt;&lt;/h3&gt;
+&lt;p&gt;The data waveform does not have to be an ideal rectangular NRZ waveform.&lt;/p&gt;
+&lt;p&gt;A general pulse-shaped sequence can be written as&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+d(t)=\sum_k a_kp(t-kT_b)
+}
+$$&lt;/div&gt;
+&lt;p&gt;where:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class="math"&gt;\(a_k\)&lt;/span&gt; is the data symbol,&lt;/li&gt;
+&lt;li&gt;&lt;span class="math"&gt;\(T_b\)&lt;/span&gt; is the symbol/bit interval,&lt;/li&gt;
+&lt;li&gt;&lt;span class="math"&gt;\(p(t)\)&lt;/span&gt; is the pulse shape.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Possible pulse shapes include:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;NRZ-L&lt;/li&gt;
+&lt;li&gt;NRZ-M&lt;/li&gt;
+&lt;li&gt;NRZ-S&lt;/li&gt;
+&lt;li&gt;BiPhase&lt;/li&gt;
+&lt;li&gt;rectangular&lt;/li&gt;
+&lt;li&gt;raised cosine&lt;/li&gt;
+&lt;li&gt;root-raised cosine&lt;/li&gt;
+&lt;li&gt;half-sine&lt;/li&gt;
+&lt;li&gt;Gaussian&lt;/li&gt;
+&lt;li&gt;custom FIR pulse shapes&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For PM, the pulse shape is applied to the &lt;strong&gt;phase argument&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+\phi_m(t)=\theta d(t).
+}
+$$&lt;/div&gt;
+&lt;p&gt;This is fundamentally different from ordinary linear amplitude modulation, where the pulse-shaped waveform directly scales amplitude.&lt;/p&gt;
+&lt;p&gt;For example, with RRC pulse shaping,&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\phi_m(t)=
+\theta
+\sum_k a_kp_{\mathrm{RRC}}(t-kT_b).
+$$&lt;/div&gt;
+&lt;p&gt;The resulting RF signal still has constant envelope.&lt;/p&gt;
+&lt;hr/&gt;
+&lt;h3 id="9-iq-interpretation"&gt;9. I/Q Interpretation&lt;/h3&gt;
+&lt;p&gt;After ideal carrier downconversion, the complex baseband signal is&lt;/p&gt;
+&lt;div class="math"&gt;$$
+r(t)=A e^{j[\phi_c(t)+\phi_m(t)]}+n(t).
+$$&lt;/div&gt;
+&lt;p&gt;If the carrier phase has been removed,&lt;/p&gt;
+&lt;div class="math"&gt;$$
+r_c(t)\approx A e^{j\phi_m(t)}.
+$$&lt;/div&gt;
+&lt;p&gt;Then&lt;/p&gt;
+&lt;div class="math"&gt;$$
+I(t)=A\cos\phi_m(t),
+$$&lt;/div&gt;
+&lt;div class="math"&gt;$$
+Q(t)=A\sin\phi_m(t).
+$$&lt;/div&gt;
+&lt;p&gt;Therefore&lt;/p&gt;
+&lt;div class="math"&gt;$$
+I^2+Q^2=A^2.
+$$&lt;/div&gt;
+&lt;p&gt;The modulation information is carried by the &lt;strong&gt;angle&lt;/strong&gt; of the I/Q vector, not its radius.&lt;/p&gt;
+&lt;p&gt;This gives a useful distinction:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Modulation&lt;/th&gt;
+&lt;th&gt;Radius&lt;/th&gt;
+&lt;th&gt;Phase&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;PM&lt;/td&gt;
+&lt;td&gt;Constant&lt;/td&gt;
+&lt;td&gt;Varies&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;PSK&lt;/td&gt;
+&lt;td&gt;Constant&lt;/td&gt;
+&lt;td&gt;Discrete&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;QAM&lt;/td&gt;
+&lt;td&gt;Varies&lt;/td&gt;
+&lt;td&gt;Varies&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;FM&lt;/td&gt;
+&lt;td&gt;Constant&lt;/td&gt;
+&lt;td&gt;Time integral of frequency deviation&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr/&gt;
+&lt;h3 id="10-general-demodulation"&gt;10. General Demodulation&lt;/h3&gt;
+&lt;p&gt;The receiver problem is to recover&lt;/p&gt;
+&lt;div class="math"&gt;$$
+d_i(t)
+$$&lt;/div&gt;
+&lt;p&gt;from the measured phase.&lt;/p&gt;
+&lt;p&gt;The ideal conceptual sequence is&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+r(t)
+\rightarrow
+\text{carrier recovery}
+\rightarrow
+\text{derotation}
+\rightarrow
+\text{phase extraction}
+\rightarrow
+\text{subcarrier separation}
+\rightarrow
+\text{matched filtering}
+\rightarrow
+\text{data decisions}
+}
+$$&lt;/div&gt;
+&lt;p&gt;After carrier correction,&lt;/p&gt;
+&lt;div class="math"&gt;$$
+r_c(t)
+=
+r(t)e^{-j\hat\phi_c(t)}
+\approx
+A e^{j\phi_m(t)}.
+$$&lt;/div&gt;
+&lt;p&gt;Then&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+\hat\phi_m(t)=\arg[r_c(t)]
+}
+$$&lt;/div&gt;
+&lt;p&gt;with phase unwrapping as required.&lt;/p&gt;
+&lt;p&gt;For a small-noise/high-SNR conceptual model,&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\hat\phi_m(t)\approx\phi_m(t)+\text{phase noise}.
+$$&lt;/div&gt;
+&lt;hr/&gt;
+&lt;h3 id="11-demodulation-of-pcmpm"&gt;11. Demodulation of PCM/PM&lt;/h3&gt;
+&lt;p&gt;For&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\phi_m(t)=\theta d(t),
+$$&lt;/div&gt;
+&lt;p&gt;the recovered data waveform is simply&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+\hat d(t)=\frac{\hat\phi_m(t)}{\theta}.
+}
+$$&lt;/div&gt;
+&lt;p&gt;For pulse-shaped data,&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\hat d(t)
+\rightarrow
+\text{matched filter}
+\rightarrow
+\text{symbol sampler}
+\rightarrow
+\hat a_k.
+$$&lt;/div&gt;
+&lt;p&gt;For a pulse &lt;span class="math"&gt;\(p(t)\)&lt;/span&gt;, the matched filter is&lt;/p&gt;
+&lt;div class="math"&gt;$$
+h(t)=p^*(-t).
+$$&lt;/div&gt;
+&lt;p&gt;For an RRC transmit pulse, an RRC receive filter produces the overall raised-cosine response.&lt;/p&gt;
+&lt;hr/&gt;
+&lt;h3 id="12-demodulation-of-pcmpskpm"&gt;12. Demodulation of PCM/PSK/PM&lt;/h3&gt;
+&lt;p&gt;For a sinusoidal subcarrier,&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\phi_m(t)
+=
+\theta d(t)\sin(\omega_{sc}t).
+$$&lt;/div&gt;
+&lt;p&gt;After phase extraction,&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\hat\phi_m(t)
+\approx
+\theta d(t)\sin(\omega_{sc}t).
+$$&lt;/div&gt;
+&lt;p&gt;A coherent subcarrier demodulator multiplies by the recovered subcarrier:&lt;/p&gt;
+&lt;div class="math"&gt;$$
+u(t)=
+\hat\phi_m(t)\sin(\omega_{sc}t).
+$$&lt;/div&gt;
+&lt;p&gt;Using&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\sin^2x=
+\frac{1-\cos2x}{2},
+$$&lt;/div&gt;
+&lt;p&gt;we obtain&lt;/p&gt;
+&lt;div class="math"&gt;$$
+u(t)
+=
+\frac{\theta d(t)}{2}
+-
+\frac{\theta d(t)}{2}\cos(2\omega_{sc}t).
+$$&lt;/div&gt;
+&lt;p&gt;Low-pass filtering gives&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+\operatorname{LPF}\{u(t)\}
+=
+\frac{\theta}{2}d(t).
+}
+$$&lt;/div&gt;
+&lt;p&gt;Therefore&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+\hat d(t)
+=
+\frac{2}{\theta}
+\operatorname{LPF}
+\left\{
+\hat\phi_m(t)\sin(\omega_{sc}t)
+\right\}.
+}
+$$&lt;/div&gt;
+&lt;p&gt;The factor of two comes from the sinusoidal subcarrier power normalization.&lt;/p&gt;
+&lt;hr/&gt;
+&lt;h3 id="13-square-wave-subcarrier-demodulation"&gt;13. Square-Wave Subcarrier Demodulation&lt;/h3&gt;
+&lt;p&gt;For&lt;/p&gt;
+&lt;div class="math"&gt;$$
+w(t)=c(t)=\operatorname{sgn}[\sin(2\pi f_{sc}t+\varphi_{sc})]
+\in\{-1,+1\},
+$$&lt;/div&gt;
+&lt;p&gt;where &lt;span class="math"&gt;\(f\_{sc}\)&lt;/span&gt; is the square-wave subcarrier frequency,&lt;/p&gt;
+&lt;p&gt;we have&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\phi_m(t)=\theta d(t)c(t).
+$$&lt;/div&gt;
+&lt;p&gt;Since&lt;/p&gt;
+&lt;div class="math"&gt;$$
+c^2(t)=1,
+$$&lt;/div&gt;
+&lt;p&gt;multiplication by the synchronized subcarrier gives&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\phi_m(t)c(t)=\theta d(t).
+$$&lt;/div&gt;
+&lt;p&gt;Therefore&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+\hat d(t)
+=
+\frac{1}{\theta}
+\hat\phi_m(t)c(t).
+}
+$$&lt;/div&gt;
+&lt;p&gt;A subsequent matched filter recovers the data symbols. This assumes a unit-amplitude (&lt;span class="math"&gt;\(\pm1\)&lt;/span&gt;)
+square wave and synchronized subcarrier timing. If the square wave is scaled by an amplitude
+&lt;span class="math"&gt;\(A*{sc}\)&lt;/span&gt;, the result must instead be divided by &lt;span class="math"&gt;\(\theta A*{sc}^2\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;Unlike the sinusoidal case, no factor of two is required when the square wave has amplitude &lt;span class="math"&gt;\(\pm1\)&lt;/span&gt;.&lt;/p&gt;
+&lt;hr/&gt;
+&lt;h3 id="14-multiple-data-channels"&gt;14. Multiple Data Channels&lt;/h3&gt;
+&lt;p&gt;For&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\phi_m(t)=
+\sum_i\theta_i d_i(t)w_i(t),
+$$&lt;/div&gt;
+&lt;p&gt;the receiver can separate channels using correlation.&lt;/p&gt;
+&lt;p&gt;For orthogonal sinusoidal subcarriers,&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\hat d_i(t)
+\propto
+\operatorname{LPF}
+\left\{
+\hat\phi_m(t)
+\sin(\omega_{sci}t)
+\right\}.
+$$&lt;/div&gt;
+&lt;p&gt;More generally, each channel can be extracted by projection onto its known basis function.&lt;/p&gt;
+&lt;p&gt;The important requirement is that the subcarrier/basis waveforms be sufficiently orthogonal over the integration interval.&lt;/p&gt;
+&lt;p&gt;If multiple data channels are not orthogonal, residual cross-coupling remains after demodulation.&lt;/p&gt;
+&lt;h4 id="141-how-to-verify-orthogonality"&gt;14.1 How to verify orthogonality&lt;/h4&gt;
+&lt;p&gt;For an integration interval of duration &lt;span class="math"&gt;\(T\)&lt;/span&gt;, define the normalized inner
+product of two real basis waveforms as&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\langle w_i,w_j\rangle*T
+=
+\frac{1}{T}\int_{t_0}^{t_0+T}w_i(t)w_j(t)\,dt.
+$$&lt;/div&gt;
+&lt;p&gt;The waveforms are orthogonal over this interval when&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+\langle w_i,w_j\rangle_T=0,
+\qquad i\ne j.
+}
+$$&lt;/div&gt;
+&lt;p&gt;The interval &lt;span class="math"&gt;\(T\)&lt;/span&gt; is not inherently the symbol period. For data with symbol
+interval &lt;span class="math"&gt;\(T_b\)&lt;/span&gt;, the symbol rate is&lt;/p&gt;
+&lt;div class="math"&gt;$$
+R_s=\frac{1}{T_b}.
+$$&lt;/div&gt;
+&lt;p&gt;In a practical receiver, choose the coherent integration interval to cover an integer number of complete symbols,&lt;/p&gt;
+&lt;div class="math"&gt;$$
+T=M T_b,
+\qquad M\in\mathbb{Z}_{&amp;gt;0},
+$$&lt;/div&gt;
+&lt;p&gt;and align its start and end with symbol boundaries. If the data symbols or
+pulse shape change within the interval, the receiver normally performs this
+operation per symbol or uses a matched filter rather than assuming that one
+long interval has a constant data value. Thus &lt;span class="math"&gt;\(T\)&lt;/span&gt; is a receiver/design
+choice, while &lt;span class="math"&gt;\(T_b\)&lt;/span&gt; is set by the data symbol rate.&lt;/p&gt;
+&lt;p&gt;In practice, form the Gram matrix&lt;/p&gt;
+&lt;div class="math"&gt;$$
+G_{ij}=\langle w_i,w_j\rangle_T.
+$$&lt;/div&gt;
+&lt;p&gt;The diagonal terms give the waveform energies and the off-diagonal terms
+measure cross-coupling. A useful normalized measure is&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+\rho_{ij}
+=
+\frac{\langle w_i,w_j\rangle_T}
+{\sqrt{\langle w_i,w_i\rangle_T\langle w_j,w_j\rangle_T}}.
+}
+$$&lt;/div&gt;
+&lt;p&gt;The magnitude &lt;span class="math"&gt;\(|\rho_{ij}|\)&lt;/span&gt; should be below the allowed interference or
+error budget. Exact zero is ideal; finite observation time, timing error,
+frequency error, filtering, and sampling usually make the measured value
+nonzero.&lt;/p&gt;
+&lt;h5 id="sinusoidal-subcarriers"&gt;Sinusoidal subcarriers&lt;/h5&gt;
+&lt;p&gt;For subcarriers &lt;span class="math"&gt;\(w_i(t)=\sin(2\pi f_i t+\varphi_i)\)&lt;/span&gt;, choose the coherent
+integration interval so that it contains an integer number of cycles of every
+subcarrier. A sufficient condition is&lt;/p&gt;
+&lt;div class="math"&gt;$$
+f_iT=N_i,
+\qquad N_i\in\mathbb{Z},
+$$&lt;/div&gt;
+&lt;p&gt;for every &lt;span class="math"&gt;\(i\)&lt;/span&gt;, with distinct frequencies represented by distinct integer
+cycle counts. Equivalently, choose a common base frequency &lt;span class="math"&gt;\(\Delta f=1/T\)&lt;/span&gt;
+and use &lt;span class="math"&gt;\(f_i=k_i\Delta f\)&lt;/span&gt; with distinct integers &lt;span class="math"&gt;\(k_i\)&lt;/span&gt;. Under these
+conditions, distinct sinusoidal basis functions are orthogonal, subject to
+accurate frequency and phase synchronization.&lt;/p&gt;
+&lt;p&gt;With &lt;span class="math"&gt;\(T=M T_b\)&lt;/span&gt;, this condition can also be written as&lt;/p&gt;
+&lt;div class="math"&gt;$$
+f_i=\frac{k_i}{M T_b}=\frac{k_i}{M}R_s.
+$$&lt;/div&gt;
+&lt;p&gt;For the simple one-symbol case &lt;span class="math"&gt;\(M=1\)&lt;/span&gt;, each subcarrier has an integer
+number of cycles per symbol: &lt;span class="math"&gt;\(f_i=k_iR_s\)&lt;/span&gt;. Other choices of &lt;span class="math"&gt;\(M\)&lt;/span&gt; permit
+fractional multiples of the symbol rate while retaining orthogonality over
+the full &lt;span class="math"&gt;\(M\)&lt;/span&gt;-symbol integration interval.&lt;/p&gt;
+&lt;p&gt;This is related to, but not the same as, the orthogonality used by MSK. MSK
+is continuous-phase binary FSK with modulation index &lt;span class="math"&gt;\(h=1/2\)&lt;/span&gt;. Its two
+instantaneous frequency tones have offsets &lt;span class="math"&gt;\(\pm 1/(4T_b)\)&lt;/span&gt; from the carrier,
+and its signal-space behavior depends on phase continuity and the complete
+symbol waveform. Therefore MSK should not be interpreted as using
+subcarriers whose frequencies are simply integer multiples of &lt;span class="math"&gt;\(R_s\)&lt;/span&gt;. The
+same inner-product test still applies, but it must be applied to the actual
+MSK waveforms over the receiver's detection interval. GMSK additionally uses
+Gaussian pulse shaping and is generally not strictly orthogonal in the same
+ideal sense.&lt;/p&gt;
+&lt;p&gt;If the interval does not contain integer cycles, the cross terms generally do
+not integrate to zero. Increasing &lt;span class="math"&gt;\(T\)&lt;/span&gt;, aligning the integration window, or
+using a longer matched filter reduces this leakage.&lt;/p&gt;
+&lt;h5 id="square-wave-subcarriers"&gt;Square-wave subcarriers&lt;/h5&gt;
+&lt;p&gt;For square waves, use the same Gram-matrix calculation with&lt;/p&gt;
+&lt;div class="math"&gt;$$
+w_i(t)=\operatorname{sgn}[\sin(2\pi f_i t+\varphi_i)].
+$$&lt;/div&gt;
+&lt;p&gt;Do not assume that distinct square-wave frequencies are automatically
+orthogonal. Each square wave contains odd harmonics, and harmonics from two
+channels can overlap. Choose frequencies and phases, evaluate &lt;span class="math"&gt;\(G_{ij}\)&lt;/span&gt; over
+the actual symbol or integration interval, and reject a set whose normalized
+cross-correlation exceeds the system budget. If a non-orthogonal set must be
+used, jointly recover the channels with the Gram matrix:&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\mathbf{z}=\mathbf{G}\mathbf{a},
+\qquad
+\hat{\mathbf{a}}=\mathbf{G}^{-1}\mathbf{z},
+$$&lt;/div&gt;
+&lt;p&gt;provided &lt;span class="math"&gt;\(\mathbf{G}\)&lt;/span&gt; is well-conditioned and the receiver knows the
+waveforms accurately.&lt;/p&gt;
+&lt;hr/&gt;
+&lt;h3 id="15-carrier-recovery-is-a-special-issue-for-pm"&gt;15. Carrier Recovery Is a Special Issue for PM&lt;/h3&gt;
+&lt;p&gt;The received signal contains both carrier phase and modulation phase:&lt;/p&gt;
+&lt;div class="math"&gt;$$
+r(t)=
+A e^{j[\phi_c(t)+\phi_m(t)]}+n(t).
+$$&lt;/div&gt;
+&lt;p&gt;The receiver directly observes only&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+\phi_{\mathrm{obs}}(t)
+=
+\phi_c(t)+\phi_m(t).
+}
+$$&lt;/div&gt;
+&lt;p&gt;Therefore the carrier phase cannot, in general, be separated from the modulation phase without additional information.&lt;/p&gt;
+&lt;p&gt;Useful mechanisms include:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Residual carrier&lt;/li&gt;
+&lt;li&gt;Pilot/reference carrier&lt;/li&gt;
+&lt;li&gt;Known preamble&lt;/li&gt;
+&lt;li&gt;Data-aided carrier recovery&lt;/li&gt;
+&lt;li&gt;Decision-directed recovery&lt;/li&gt;
+&lt;li&gt;Time-scale separation between carrier dynamics and modulation&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;For the systems considered here, the &lt;strong&gt;residual carrier&lt;/strong&gt; is particularly useful.&lt;/p&gt;
+&lt;hr/&gt;
+&lt;h3 id="16-residual-carrier"&gt;16. Residual Carrier&lt;/h3&gt;
+&lt;p&gt;Define the complex envelope&lt;/p&gt;
+&lt;div class="math"&gt;$$
+x(t)=\sqrt P e^{j\phi_m(t)}.
+$$&lt;/div&gt;
+&lt;p&gt;The residual carrier is the spectral line at zero frequency in the complex-envelope domain.&lt;/p&gt;
+&lt;p&gt;Its normalized complex amplitude is&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+C_0=
+\left\langle
+e^{j\phi_m(t)}
+\right\rangle
+}
+$$&lt;/div&gt;
+&lt;p&gt;where &lt;span class="math"&gt;\(\langle\cdot\rangle\)&lt;/span&gt; denotes an appropriate time or ensemble average.&lt;/p&gt;
+&lt;p&gt;Thus&lt;/p&gt;
+&lt;div class="math"&gt;$$
+x(t)
+=
+\sqrt P C_0
++
+x_{\mathrm{AC}}(t).
+$$&lt;/div&gt;
+&lt;p&gt;The residual carrier power is&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+P_c=P|C_0|^2.
+}
+$$&lt;/div&gt;
+&lt;p&gt;The carrier-to-total-power ratio is therefore&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+\frac{P_c}{P}=|C_0|^2.
+}
+$$&lt;/div&gt;
+&lt;p&gt;In dBc,&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+C_{\mathrm{dBc}}
+=
+10\log_{10}\frac{P_c}{P}
+=
+20\log_{10}|C_0|.
+}
+$$&lt;/div&gt;
+&lt;p&gt;The residual carrier has complex phase&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\phi_{C_0}=\arg C_0.
+$$&lt;/div&gt;
+&lt;p&gt;This phase can be absorbed into the receiver carrier reference.&lt;/p&gt;
+&lt;hr/&gt;
+&lt;h3 id="17-residual-carrier-for-binary-pcmpm"&gt;17. Residual Carrier for Binary PCM/PM&lt;/h3&gt;
+&lt;p&gt;For balanced binary data,&lt;/p&gt;
+&lt;div class="math"&gt;$$
+d=\pm1
+$$&lt;/div&gt;
+&lt;p&gt;with equal probability,&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\phi_m=\theta d.
+$$&lt;/div&gt;
+&lt;p&gt;Therefore&lt;/p&gt;
+&lt;div class="math"&gt;$$
+C_0
+=
+\frac12e^{j\theta}
++
+\frac12e^{-j\theta}.
+$$&lt;/div&gt;
+&lt;p&gt;Using Euler's identity,&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+C_0=\cos\theta.
+}
+$$&lt;/div&gt;
+&lt;p&gt;Consequently,&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+P_c=P\cos^2\theta
+}
+$$&lt;/div&gt;
+&lt;p&gt;and&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+C_{\mathrm{dBc}}
+=
+20\log_{10}|\cos\theta|.
+}
+$$&lt;/div&gt;
+&lt;p&gt;This immediately shows why the residual carrier depends strongly on modulation index.&lt;/p&gt;
+&lt;p&gt;The carrier disappears when&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\cos\theta=0,
+$$&lt;/div&gt;
+&lt;p&gt;i.e.&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+\theta=\frac{\pi}{2},
+\frac{3\pi}{2},
+\ldots
+}
+$$&lt;/div&gt;
+&lt;p&gt;For the usual first quadrant,&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\theta=\frac{\pi}{2}.
+$$&lt;/div&gt;
+&lt;p&gt;That is exactly the BPSK point.&lt;/p&gt;
+&lt;hr/&gt;
+&lt;h3 id="18-unbalanced-binary-data"&gt;18. Unbalanced Binary Data&lt;/h3&gt;
+&lt;p&gt;If&lt;/p&gt;
+&lt;div class="math"&gt;$$
+P(d=+1)=p
+$$&lt;/div&gt;
+&lt;p&gt;and&lt;/p&gt;
+&lt;div class="math"&gt;$$
+P(d=-1)=1-p,
+$$&lt;/div&gt;
+&lt;p&gt;then&lt;/p&gt;
+&lt;div class="math"&gt;$$
+C_0=
+pe^{j\theta}
++
+(1-p)e^{-j\theta}.
+$$&lt;/div&gt;
+&lt;p&gt;Therefore&lt;/p&gt;
+&lt;div class="math"&gt;$$
+C_0=
+\cos\theta
++
+j(2p-1)\sin\theta.
+$$&lt;/div&gt;
+&lt;p&gt;Its magnitude squared is&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+|C_0|^2
+=
+\cos^2\theta
++
+(2p-1)^2\sin^2\theta.
+}
+$$&lt;/div&gt;
+&lt;p&gt;Thus the residual carrier can increase when the data sequence has a nonzero statistical bias.&lt;/p&gt;
+&lt;hr/&gt;
+&lt;h3 id="19-residual-carrier-for-sinusoidal-pcmpskpm"&gt;19. Residual Carrier for Sinusoidal PCM/PSK/PM&lt;/h3&gt;
+&lt;p&gt;Consider&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\phi_m(t)
+=
+\theta d(t)\sin(\omega_{sc}t).
+$$&lt;/div&gt;
+&lt;p&gt;For balanced binary data and sufficiently representative averaging,&lt;/p&gt;
+&lt;div class="math"&gt;$$
+C_0
+=
+\left\langle
+e^{j\theta d\sin(\omega_{sc}t)}
+\right\rangle.
+$$&lt;/div&gt;
+&lt;p&gt;For either &lt;span class="math"&gt;\(d=+1\)&lt;/span&gt; or &lt;span class="math"&gt;\(d=-1\)&lt;/span&gt;,&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\left\langle
+e^{\pm j\theta\sin x}
+\right\rangle
+=
+J_0(\theta),
+$$&lt;/div&gt;
+&lt;p&gt;where &lt;span class="math"&gt;\(J_0\)&lt;/span&gt; is the zeroth-order Bessel function of the first kind.&lt;/p&gt;
+&lt;p&gt;Therefore&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+C_0=J_0(\theta).
+}
+$$&lt;/div&gt;
+&lt;p&gt;The residual carrier power is&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+P_c=P J_0^2(\theta).
+}
+$$&lt;/div&gt;
+&lt;p&gt;and&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+C_{\mathrm{dBc}}
+=
+20\log_{10}|J_0(\theta)|.
+}
+$$&lt;/div&gt;
+&lt;p&gt;The first zero of &lt;span class="math"&gt;\(J_0\)&lt;/span&gt; occurs at approximately&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+\theta=2.4048\ \mathrm{rad}.
+}
+$$&lt;/div&gt;
+&lt;p&gt;At this modulation index the residual carrier theoretically disappears.&lt;/p&gt;
+&lt;hr/&gt;
+&lt;h3 id="20-residual-carrier-for-square-wave-pcmpskpm"&gt;20. Residual Carrier for Square-Wave PCM/PSK/PM&lt;/h3&gt;
+&lt;p&gt;For&lt;/p&gt;
+&lt;div class="math"&gt;$$
+w(t)=c(t)\in\{-1,+1\}
+$$&lt;/div&gt;
+&lt;p&gt;and&lt;/p&gt;
+&lt;div class="math"&gt;$$
+d(t)\in\{-1,+1\},
+$$&lt;/div&gt;
+&lt;p&gt;the product&lt;/p&gt;
+&lt;div class="math"&gt;$$
+d(t)c(t)
+$$&lt;/div&gt;
+&lt;p&gt;is also &lt;span class="math"&gt;\(\pm1\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;Thus&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\phi_m=\pm\theta
+$$&lt;/div&gt;
+&lt;p&gt;and for balanced states,&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+C_0=\cos\theta.
+}
+$$&lt;/div&gt;
+&lt;p&gt;Consequently,&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+P_c=P\cos^2\theta.
+}
+$$&lt;/div&gt;
+&lt;p&gt;This is different from the sinusoidal-subcarrier case, whose carrier coefficient is &lt;span class="math"&gt;\(J_0(\theta)\)&lt;/span&gt;.&lt;/p&gt;
+&lt;hr/&gt;
+&lt;h3 id="21-multiple-phase-modulation-components"&gt;21. Multiple Phase-Modulation Components&lt;/h3&gt;
+&lt;p&gt;For&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\phi_m(t)
+=
+\sum_i\theta_i s_i(t),
+$$&lt;/div&gt;
+&lt;p&gt;the exact residual carrier coefficient is&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+C_0=
+\left\langle
+\exp
+\left[
+j\sum_i\theta_i s_i(t)
+\right]
+\right\rangle.
+}
+$$&lt;/div&gt;
+&lt;p&gt;Equivalently,&lt;/p&gt;
+&lt;div class="math"&gt;$$
+C_0=
+\left\langle
+\prod_i
+e^{j\theta_i s_i(t)}
+\right\rangle.
+$$&lt;/div&gt;
+&lt;p&gt;It is tempting to write&lt;/p&gt;
+&lt;div class="math"&gt;$$
+C_0=\prod_i C_{0,i},
+$$&lt;/div&gt;
+&lt;p&gt;but this factorization requires suitable independence/separability assumptions.&lt;/p&gt;
+&lt;p&gt;It is not valid for arbitrary correlated data or synchronized deterministic waveforms.&lt;/p&gt;
+&lt;p&gt;When the relevant processes are statistically independent,&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+C_0=
+\prod_i C_{0,i}.
+}
+$$&lt;/div&gt;
+&lt;p&gt;Then&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+P_c
+=
+P\prod_i|C_{0,i}|^2.
+}
+$$&lt;/div&gt;
+&lt;hr/&gt;
+&lt;h3 id="22-data-channel-power"&gt;22. Data-Channel Power&lt;/h3&gt;
+&lt;p&gt;Because ideal PM is constant envelope,&lt;/p&gt;
+&lt;div class="math"&gt;$$
+P_{\mathrm{total}}=P.
+$$&lt;/div&gt;
+&lt;p&gt;The residual carrier consumes&lt;/p&gt;
+&lt;div class="math"&gt;$$
+P_c=P|C_0|^2.
+$$&lt;/div&gt;
+&lt;p&gt;Therefore the total power not contained in the residual carrier is&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+P_{\mathrm{AC}}
+=
+P-P_c
+=
+P(1-|C_0|^2).
+}
+$$&lt;/div&gt;
+&lt;p&gt;This is the total &lt;strong&gt;non-residual-carrier power&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;It is important to distinguish this from the power of a particular data channel.&lt;/p&gt;
+&lt;p&gt;For a waveform containing several data channels,&lt;/p&gt;
+&lt;div class="math"&gt;$$
+P_{\mathrm{AC}}
+$$&lt;/div&gt;
+&lt;p&gt;includes all non-carrier spectral components, including:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;data sidebands,&lt;/li&gt;
+&lt;li&gt;subcarrier components,&lt;/li&gt;
+&lt;li&gt;intermodulation/cross terms,&lt;/li&gt;
+&lt;li&gt;harmonics generated by nonlinear phase mapping,&lt;/li&gt;
+&lt;li&gt;ranging tones,&lt;/li&gt;
+&lt;li&gt;interactions among phase-modulation components.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Therefore,&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+P_{\mathrm{AC}}\neq
+\text{power of one particular data channel}
+}
+$$&lt;/div&gt;
+&lt;p&gt;in general.&lt;/p&gt;
+&lt;p&gt;A particular channel's power should instead be determined by integrating the corresponding spectral components or by defining an appropriate matched-filter/correlation output.&lt;/p&gt;
+&lt;hr/&gt;
+&lt;h3 id="23-small-modulation-approximation"&gt;23. Small-Modulation Approximation&lt;/h3&gt;
+&lt;p&gt;For small phase modulation,&lt;/p&gt;
+&lt;div class="math"&gt;$$
+|\phi_m(t)|\ll1,
+$$&lt;/div&gt;
+&lt;p&gt;we can write&lt;/p&gt;
+&lt;div class="math"&gt;$$
+e^{j\phi_m}
+\approx
+1+j\phi_m-\frac{\phi_m^2}{2}.
+$$&lt;/div&gt;
+&lt;p&gt;Therefore&lt;/p&gt;
+&lt;div class="math"&gt;$$
+x(t)
+\approx
+\sqrt P
+\left[
+1+j\phi_m(t)-\frac{\phi_m^2(t)}{2}
+\right].
+$$&lt;/div&gt;
+&lt;p&gt;The carrier term is approximately&lt;/p&gt;
+&lt;div class="math"&gt;$$
+C_0
+\approx
+1-\frac12\langle\phi_m^2\rangle
++j\langle\phi_m\rangle.
+$$&lt;/div&gt;
+&lt;p&gt;For zero-mean modulation,&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+|C_0|^2
+\approx
+1-\langle\phi_m^2\rangle.
+}
+$$&lt;/div&gt;
+&lt;p&gt;Hence the non-carrier power is approximately&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+P_{\mathrm{AC}}
+\approx
+P\langle\phi_m^2\rangle.
+}
+$$&lt;/div&gt;
+&lt;p&gt;This is a very useful approximation for link-budget calculations involving relatively small phase-modulation indices.&lt;/p&gt;
+&lt;hr/&gt;
+&lt;h3 id="24-tone-ranging-added-to-pm"&gt;24. Tone Ranging Added to PM&lt;/h3&gt;
+&lt;p&gt;A ranging signal can be added directly to the phase.&lt;/p&gt;
+&lt;p&gt;Suppose there are two ranging tones:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;major tone: frequency &lt;span class="math"&gt;\(f_M\)&lt;/span&gt;, modulation index &lt;span class="math"&gt;\(\theta_M\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;minor tone: frequency &lt;span class="math"&gt;\(f_m\)&lt;/span&gt;, modulation index &lt;span class="math"&gt;\(\theta_m\)&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Then&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+\phi_R(t)
+=
+\theta_M\sin(\omega_Mt+\psi_M)
++
+\theta_m\sin(\omega_mt+\psi_m)
+}
+$$&lt;/div&gt;
+&lt;p&gt;where&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\omega_M=2\pi f_M,
+\qquad
+\omega_m=2\pi f_m.
+$$&lt;/div&gt;
+&lt;p&gt;The complete phase becomes&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+\phi(t)
+=
+\phi_{\mathrm{data}}(t)
++
+\theta_M\sin(\omega_Mt+\psi_M)
++
+\theta_m\sin(\omega_mt+\psi_m).
+}
+$$&lt;/div&gt;
+&lt;p&gt;The transmitted complex envelope is&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+x(t)=
+\sqrt P
+e^{j\phi(t)}.
+}
+$$&lt;/div&gt;
+&lt;p&gt;Thus tone ranging is naturally just another phase-modulation component.&lt;/p&gt;
+&lt;hr/&gt;
+&lt;h3 id="25-ranging-as-phase-modulation"&gt;25. Ranging as Phase Modulation&lt;/h3&gt;
+&lt;p&gt;Consider first a single tone:&lt;/p&gt;
+&lt;div class="math"&gt;$$
+x(t)
+=
+\sqrt P
+e^{j\theta_R\sin\omega_Rt}.
+$$&lt;/div&gt;
+&lt;p&gt;Using the Jacobi-Anger expansion,&lt;/p&gt;
+&lt;div class="math"&gt;$$
+e^{j\theta_R\sin\omega_Rt}
+=
+\sum_{n=-\infty}^{\infty}
+J_n(\theta_R)
+e^{jn\omega_Rt}.
+$$&lt;/div&gt;
+&lt;p&gt;Therefore the RF spectrum contains:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;a carrier component,&lt;/li&gt;
+&lt;li&gt;first-order ranging sidebands,&lt;/li&gt;
+&lt;li&gt;second-order sidebands,&lt;/li&gt;
+&lt;li&gt;higher-order sidebands.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The complex-envelope amplitude of the &lt;span class="math"&gt;\(n\)&lt;/span&gt;-th order ranging component is&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+J_n(\theta_R).
+}
+$$&lt;/div&gt;
+&lt;p&gt;The corresponding power fraction is&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+P_n/P=J_n^2(\theta_R).
+}
+$$&lt;/div&gt;
+&lt;p&gt;For small &lt;span class="math"&gt;\(\theta_R\)&lt;/span&gt;,&lt;/p&gt;
+&lt;div class="math"&gt;$$
+J_0(\theta_R)\approx1-\frac{\theta_R^2}{4},
+$$&lt;/div&gt;
+&lt;div class="math"&gt;$$
+J_1(\theta_R)\approx\frac{\theta_R}{2},
+$$&lt;/div&gt;
+&lt;p&gt;and higher-order terms become progressively smaller.&lt;/p&gt;
+&lt;p&gt;Thus the first-order ranging sidebands contain approximately&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+P_{\pm1}/P
+\approx
+\frac{\theta_R^2}{4}
+}
+$$&lt;/div&gt;
+&lt;p&gt;each.&lt;/p&gt;
+&lt;p&gt;The combined first-order sideband power is approximately&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+P_{+1}+P_{-1}
+\approx
+\frac{\theta_R^2}{2}P.
+}
+$$&lt;/div&gt;
+&lt;hr/&gt;
+&lt;h3 id="26-major-and-minor-ranging-tones"&gt;26. Major and Minor Ranging Tones&lt;/h3&gt;
+&lt;p&gt;With two tones,&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\phi_R(t)
+=
+\theta_M\sin\omega_Mt
++
+\theta_m\sin\omega_mt,
+$$&lt;/div&gt;
+&lt;p&gt;the envelope is&lt;/p&gt;
+&lt;div class="math"&gt;$$
+x_R(t)
+=
+\sqrt P
+e^{j\theta_M\sin\omega_Mt}
+e^{j\theta_m\sin\omega_mt}.
+$$&lt;/div&gt;
+&lt;p&gt;Expanding both terms gives&lt;/p&gt;
+&lt;div class="math"&gt;$$
+x_R(t)
+=
+\sqrt P
+\sum_{k=-\infty}^{\infty}
+\sum_{\ell=-\infty}^{\infty}
+J_k(\theta_M)
+J_\ell(\theta_m)
+e^{j(k\omega_M+\ell\omega_m)t}.
+$$&lt;/div&gt;
+&lt;p&gt;Therefore the ranging spectrum contains components at&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+f=kf_M+\ell f_m.
+}
+$$&lt;/div&gt;
+&lt;p&gt;The corresponding power fraction is approximately&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+P_{k,\ell}/P
+=
+J_k^2(\theta_M)
+J_\ell^2(\theta_m)
+}
+$$&lt;/div&gt;
+&lt;p&gt;when the individual spectral components are resolved.&lt;/p&gt;
+&lt;p&gt;The residual carrier contribution from the two ranging tones alone is&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+P_c/P
+=
+J_0^2(\theta_M)
+J_0^2(\theta_m).
+}
+$$&lt;/div&gt;
+&lt;p&gt;For small modulation indices,&lt;/p&gt;
+&lt;div class="math"&gt;$$
+P_c/P
+\approx
+1-\frac{\theta_M^2+\theta_m^2}{2}.
+$$&lt;/div&gt;
+&lt;hr/&gt;
+&lt;h3 id="27-ranging-combined-with-data-modulation"&gt;27. Ranging Combined With Data Modulation&lt;/h3&gt;
+&lt;p&gt;The complete phase may be written&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+\phi_m(t)
+=
+\phi_D(t)+\phi_R(t)
+}
+$$&lt;/div&gt;
+&lt;p&gt;with&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\phi_D(t)
+=
+\sum_i\theta_i d_i(t)w_i(t)
+$$&lt;/div&gt;
+&lt;p&gt;and&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\phi_R(t)
+=
+\theta_M\sin\omega_Mt
++
+\theta_m\sin\omega_mt.
+$$&lt;/div&gt;
+&lt;p&gt;Therefore&lt;/p&gt;
+&lt;div class="math"&gt;$$
+x(t)
+=
+\sqrt P
+e^{j\phi_D(t)}
+e^{j\phi_R(t)}.
+$$&lt;/div&gt;
+&lt;p&gt;This factorization is extremely useful conceptually.&lt;/p&gt;
+&lt;p&gt;The data modulation and ranging modulation are both phase modulation, but they can be separated at the receiver because their spectral/time-domain structures are different.&lt;/p&gt;
+&lt;p&gt;Under suitable independence/orthogonality assumptions, the residual carrier coefficient becomes approximately&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+C_0
+=
+C_{0,D}
+J_0(\theta_M)
+J_0(\theta_m).
+}
+$$&lt;/div&gt;
+&lt;p&gt;Consequently,&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+P_c
+=
+P
+|C_{0,D}|^2
+J_0^2(\theta_M)
+J_0^2(\theta_m).
+}
+$$&lt;/div&gt;
+&lt;hr/&gt;
+&lt;h3 id="28-ranging-demodulation"&gt;28. Ranging Demodulation&lt;/h3&gt;
+&lt;p&gt;After carrier recovery and data-component handling, a receiver can correlate the recovered phase with the known ranging tones.&lt;/p&gt;
+&lt;p&gt;For the major tone,&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\hat\theta_M
+\propto
+\left\langle
+\hat\phi(t)\sin(\omega_Mt+\psi_M)
+\right\rangle.
+$$&lt;/div&gt;
+&lt;p&gt;Likewise,&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\hat\theta_m
+\propto
+\left\langle
+\hat\phi(t)\sin(\omega_mt+\psi_m)
+\right\rangle.
+$$&lt;/div&gt;
+&lt;p&gt;The correlation interval should be selected so that unwanted components average toward zero.&lt;/p&gt;
+&lt;p&gt;A practical ranging receiver may therefore use:&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+\text{carrier recovery}
+\rightarrow
+\text{phase extraction}
+\rightarrow
+\text{ranging correlators}
+\rightarrow
+\text{tone phase/amplitude estimation}
+}
+$$&lt;/div&gt;
+&lt;p&gt;and a parallel branch for the data channel.&lt;/p&gt;
+&lt;hr/&gt;
+&lt;h3 id="29-important-distinction-carrier-ranging-tones-and-data"&gt;29. Important Distinction: Carrier, Ranging Tones, and Data&lt;/h3&gt;
+&lt;p&gt;The phase-modulated RF spectrum can contain several conceptually different components.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Component&lt;/th&gt;
+&lt;th&gt;Origin&lt;/th&gt;
+&lt;th&gt;Receiver function&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Residual carrier&lt;/td&gt;
+&lt;td&gt;&lt;span class="math"&gt;\(C_0\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;Carrier recovery&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Major ranging tone&lt;/td&gt;
+&lt;td&gt;&lt;span class="math"&gt;\(\theta_M\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;Range measurement&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Minor ranging tone&lt;/td&gt;
+&lt;td&gt;&lt;span class="math"&gt;\(\theta_m\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;Fine range measurement&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Data sidebands&lt;/td&gt;
+&lt;td&gt;&lt;span class="math"&gt;\(d_i(t)\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;Data recovery&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Subcarrier components&lt;/td&gt;
+&lt;td&gt;&lt;span class="math"&gt;\(w_i(t)\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;Data channel separation&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Higher-order PM products&lt;/td&gt;
+&lt;td&gt;Nonlinear &lt;span class="math"&gt;\(e^{j\phi}\)&lt;/span&gt; mapping&lt;/td&gt;
+&lt;td&gt;Usually part of modulation spectrum&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;The total RF power is still&lt;/p&gt;
+&lt;div class="math"&gt;$$
+P.
+$$&lt;/div&gt;
+&lt;p&gt;Power is redistributed among these spectral components; ideal PM does not change the envelope power.&lt;/p&gt;
+&lt;hr/&gt;
+&lt;h3 id="30-carrier-recovery-using-the-residual-carrier"&gt;30. Carrier Recovery Using the Residual Carrier&lt;/h3&gt;
+&lt;p&gt;Suppose&lt;/p&gt;
+&lt;div class="math"&gt;$$
+x(t)
+=
+\sqrt P
+C_0e^{j\phi_c(t)}
++
+x_{\mathrm{SB}}(t).
+$$&lt;/div&gt;
+&lt;p&gt;If &lt;span class="math"&gt;\(C_0\neq0\)&lt;/span&gt;, the carrier line provides a direct phase reference.&lt;/p&gt;
+&lt;p&gt;A narrowband PLL can lock primarily to this component:&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\hat\phi_c(t)
+\approx
+\phi_c(t)+\arg C_0.
+$$&lt;/div&gt;
+&lt;p&gt;The receiver then derotates:&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+r_{\mathrm{corr}}(t)
+=
+r(t)e^{-j\hat\phi_c(t)}.
+}
+$$&lt;/div&gt;
+&lt;p&gt;Ideally,&lt;/p&gt;
+&lt;div class="math"&gt;$$
+r_{\mathrm{corr}}(t)
+\approx
+A e^{j\phi_m(t)}.
+$$&lt;/div&gt;
+&lt;p&gt;The constant phase &lt;span class="math"&gt;\(\arg C_0\)&lt;/span&gt; is simply part of the carrier reference and normally does not need to be separately known.&lt;/p&gt;
+&lt;p&gt;The PLL bandwidth should be selected carefully:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Too wide: it follows modulation and removes part of the desired phase information.&lt;/li&gt;
+&lt;li&gt;Too narrow: it may not track Doppler or oscillator dynamics.&lt;/li&gt;
+&lt;li&gt;Appropriate bandwidth: it tracks the residual carrier while rejecting most modulation sidebands.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr/&gt;
+&lt;h3 id="31-a-unified-receiver-architecture"&gt;31. A Unified Receiver Architecture&lt;/h3&gt;
+&lt;p&gt;A practical receiver can therefore be organized as&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;                 ┌──────────────────┐
+RF input ───────►│ Downconversion   │
+                 └────────┬─────────┘
+                          │
+                          ▼
+                 ┌──────────────────┐
+                 │ Residual-carrier │
+                 │ PLL / carrier    │
+                 │ recovery         │
+                 └────────┬─────────┘
+                          │
+                          ▼
+                 ┌──────────────────┐
+                 │ Carrier derotate │
+                 └────────┬─────────┘
+                          │
+                          ▼
+                 ┌──────────────────┐
+                 │ atan2 / phase    │
+                 │ extraction       │
+                 └────────┬─────────┘
+                          │
+              ┌───────────┴────────────┐
+              │                        │
+              ▼                        ▼
+       Ranging branch             Data branch
+              │                        │
+       tone correlation          subcarrier
+       major/minor               demodulation
+              │                        │
+              │                  matched filter
+              │                        │
+              │                  symbol decision
+              ▼                        ▼
+       range estimate              data bits
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This architecture separates the fundamentally different receiver functions.&lt;/p&gt;
+&lt;hr/&gt;
+&lt;h3 id="32-phase-unwrapping-and-practical-noise"&gt;32. Phase Unwrapping and Practical Noise&lt;/h3&gt;
+&lt;p&gt;The operation&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\hat\phi(t)=\operatorname{atan2}(Q,I)
+$$&lt;/div&gt;
+&lt;p&gt;returns phase modulo &lt;span class="math"&gt;\(2\pi\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;If the phase excursion can cross &lt;span class="math"&gt;\(\pm\pi\)&lt;/span&gt;, phase unwrapping may be required.&lt;/p&gt;
+&lt;p&gt;However, direct phase extraction is mainly a conceptual model. In a practical low-SNR receiver, an optimum receiver does not necessarily need to explicitly form&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\operatorname{atan2}(Q,I).
+$$&lt;/div&gt;
+&lt;p&gt;Equivalent processing can be implemented with:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;complex correlation,&lt;/li&gt;
+&lt;li&gt;matched filtering,&lt;/li&gt;
+&lt;li&gt;Costas/PLL structures,&lt;/li&gt;
+&lt;li&gt;maximum-likelihood phase estimation,&lt;/li&gt;
+&lt;li&gt;decision-directed carrier recovery,&lt;/li&gt;
+&lt;li&gt;digital phase discriminators.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The mathematical phase representation remains useful even when the implementation uses a different estimator.&lt;/p&gt;
+&lt;hr/&gt;
+&lt;h3 id="33-arbitrary-pulse-shaped-data-and-residual-carrier"&gt;33. Arbitrary Pulse-Shaped Data and Residual Carrier&lt;/h3&gt;
+&lt;p&gt;For arbitrary&lt;/p&gt;
+&lt;div class="math"&gt;$$
+d(t)=\sum_k a_kp(t-kT_b),
+$$&lt;/div&gt;
+&lt;p&gt;the residual carrier is still&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+C_0=
+\left\langle
+e^{j\theta d(t)}
+\right\rangle.
+}
+$$&lt;/div&gt;
+&lt;p&gt;It is generally &lt;strong&gt;not&lt;/strong&gt; sufficient to replace this with&lt;/p&gt;
+&lt;div class="math"&gt;$$
+e^{j\theta\langle d(t)\rangle}.
+$$&lt;/div&gt;
+&lt;p&gt;Because the exponential is nonlinear,&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\left\langle e^{j\theta d}\right\rangle
+\neq
+e^{j\theta\langle d\rangle}
+$$&lt;/div&gt;
+&lt;p&gt;in general.&lt;/p&gt;
+&lt;p&gt;Therefore pulse shape, symbol statistics, transition regions, and deterministic data patterns can all affect the exact residual carrier.&lt;/p&gt;
+&lt;p&gt;For ideal rectangular binary NRZ with balanced symbols, the simple result&lt;/p&gt;
+&lt;div class="math"&gt;$$
+C_0=\cos\theta
+$$&lt;/div&gt;
+&lt;p&gt;is recovered.&lt;/p&gt;
+&lt;hr/&gt;
+&lt;h3 id="34-deterministic-sequence-versus-random-data"&gt;34. Deterministic Sequence Versus Random Data&lt;/h3&gt;
+&lt;p&gt;There are two useful interpretations of residual carrier.&lt;/p&gt;
+&lt;h4 id="periodicdeterministic-waveform"&gt;Periodic/deterministic waveform&lt;/h4&gt;
+&lt;p&gt;For a periodic sequence with period &lt;span class="math"&gt;\(T\)&lt;/span&gt;,&lt;/p&gt;
+&lt;div class="math"&gt;$$
+C_0=
+\frac1T
+\int_0^T
+e^{j\phi_m(t)}dt.
+$$&lt;/div&gt;
+&lt;h4 id="random-data"&gt;Random data&lt;/h4&gt;
+&lt;p&gt;For an ergodic random process,&lt;/p&gt;
+&lt;div class="math"&gt;$$
+C_0=
+E\left[e^{j\phi_m(t)}\right].
+$$&lt;/div&gt;
+&lt;p&gt;These definitions become equivalent when a sufficiently long observation is representative of the ensemble.&lt;/p&gt;
+&lt;p&gt;For simulation and spectrum analysis, it is therefore important to distinguish:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;finite-length FFT carrier bin,&lt;/li&gt;
+&lt;li&gt;periodic-sequence spectral line,&lt;/li&gt;
+&lt;li&gt;ensemble-average residual carrier,&lt;/li&gt;
+&lt;li&gt;long-term measured carrier power.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr/&gt;
+&lt;h3 id="35-power-conservation"&gt;35. Power Conservation&lt;/h3&gt;
+&lt;p&gt;For ideal phase modulation,&lt;/p&gt;
+&lt;div class="math"&gt;$$
+|x(t)|^2=P.
+$$&lt;/div&gt;
+&lt;p&gt;Therefore&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+P_{\mathrm{total}}=P.
+}
+$$&lt;/div&gt;
+&lt;p&gt;If all spectral components are accounted for,&lt;/p&gt;
+&lt;div class="math"&gt;$$
+P=
+P_c+
+P_{\mathrm{data}}
++
+P_{\mathrm{ranging}}
++
+P_{\mathrm{other}}.
+$$&lt;/div&gt;
+&lt;p&gt;The exact partition depends on how the spectral components are defined.&lt;/p&gt;
+&lt;p&gt;For a single sinusoidal PM tone,&lt;/p&gt;
+&lt;div class="math"&gt;$$
+P
+=
+P
+\sum_{n=-\infty}^{\infty}
+J_n^2(\theta)
+$$&lt;/div&gt;
+&lt;p&gt;because&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+\sum_{n=-\infty}^{\infty}J_n^2(\theta)=1.
+}
+$$&lt;/div&gt;
+&lt;p&gt;Thus&lt;/p&gt;
+&lt;div class="math"&gt;$$
+P_c=PJ_0^2(\theta)
+$$&lt;/div&gt;
+&lt;p&gt;and the remainder is&lt;/p&gt;
+&lt;div class="math"&gt;$$
+P-P_c
+=
+P\left[1-J_0^2(\theta)\right].
+$$&lt;/div&gt;
+&lt;p&gt;This is a useful exact demonstration of power conservation in PM.&lt;/p&gt;
+&lt;hr/&gt;
+&lt;h3 id="36-practical-modulation-index-considerations"&gt;36. Practical Modulation-Index Considerations&lt;/h3&gt;
+&lt;p&gt;The modulation index controls several competing quantities:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;residual carrier power,&lt;/li&gt;
+&lt;li&gt;sideband/data-channel power,&lt;/li&gt;
+&lt;li&gt;phase separation,&lt;/li&gt;
+&lt;li&gt;receiver sensitivity,&lt;/li&gt;
+&lt;li&gt;interference between phase-modulation components,&lt;/li&gt;
+&lt;li&gt;carrier-recovery margin.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For binary PCM/PM,&lt;/p&gt;
+&lt;div class="math"&gt;$$
+P_c/P=\cos^2\theta.
+$$&lt;/div&gt;
+&lt;p&gt;For sinusoidal PCM/PSK/PM,&lt;/p&gt;
+&lt;div class="math"&gt;$$
+P_c/P=J_0^2(\theta).
+$$&lt;/div&gt;
+&lt;p&gt;Thus the same numerical modulation index does &lt;strong&gt;not&lt;/strong&gt; produce the same residual carrier power for different subcarrier waveforms.&lt;/p&gt;
+&lt;p&gt;This is one of the most important consequences of the unified formulation.&lt;/p&gt;
+&lt;hr/&gt;
+&lt;h3 id="37-recommended-mathematical-model-for-simulation"&gt;37. Recommended Mathematical Model for Simulation&lt;/h3&gt;
+&lt;p&gt;For a comprehensive digital simulator, it is useful to define the total phase as&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+\phi(t)
+=
+\phi_{\mathrm{carrier}}(t)
++
+\phi_{\mathrm{data}}(t)
++
+\phi_{\mathrm{ranging}}(t)
++
+\phi_{\mathrm{channel}}(t)
+}
+$$&lt;/div&gt;
+&lt;p&gt;where&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\phi_{\mathrm{data}}(t)
+=
+\sum_i\theta_i d_i(t)w_i(t),
+$$&lt;/div&gt;
+&lt;p&gt;and&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\phi_{\mathrm{ranging}}(t)
+=
+\sum_r\theta_{R,r}
+\sin(\omega_{R,r}t+\psi_{R,r}).
+$$&lt;/div&gt;
+&lt;p&gt;Then&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+x(t)
+=
+\sqrt P
+e^{j\phi(t)}.
+}
+$$&lt;/div&gt;
+&lt;p&gt;The RF waveform is&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+S_T(t)
+=
+\sqrt{2P}
+\sin[\omega_0t+\phi(t)].
+}
+$$&lt;/div&gt;
+&lt;p&gt;This model provides a single implementation path for:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;PCM/PM&lt;/li&gt;
+&lt;li&gt;PCM/PSK/PM&lt;/li&gt;
+&lt;li&gt;multiple data channels&lt;/li&gt;
+&lt;li&gt;ranging&lt;/li&gt;
+&lt;li&gt;residual carrier&lt;/li&gt;
+&lt;li&gt;Doppler&lt;/li&gt;
+&lt;li&gt;carrier phase error&lt;/li&gt;
+&lt;li&gt;oscillator phase noise&lt;/li&gt;
+&lt;li&gt;channel phase distortion&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr/&gt;
+&lt;h3 id="38-suggested-software-abstraction"&gt;38. Suggested Software Abstraction&lt;/h3&gt;
+&lt;p&gt;A simulator can represent each phase-modulation component as&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\phi_i(t)=\theta_i s_i(t)
+$$&lt;/div&gt;
+&lt;p&gt;and sum all components:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;phase = carrier_phase
+
+for component in phase_components:
+    phase += component.modulation_index * component.waveform(t)
+
+x = sqrt(P) * exp(1j * phase)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;A component can represent:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;DataComponent
+    waveform = d(t)
+    index = theta
+
+SubcarrierDataComponent
+    waveform = d(t) * w(t)
+    index = theta
+
+RangingTone
+    waveform = sin(omega*t + phase)
+    index = theta_R
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This makes PCM/PM and PCM/PSK/PM naturally instances of the same software architecture.&lt;/p&gt;
+&lt;hr/&gt;
+&lt;h3 id="39-summary-of-important-special-cases"&gt;39. Summary of Important Special Cases&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Waveform&lt;/th&gt;
+&lt;th&gt;Phase modulation&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;General PM&lt;/td&gt;
+&lt;td&gt;&lt;span class="math"&gt;\(\theta m(t)\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;PCM/PM&lt;/td&gt;
+&lt;td&gt;&lt;span class="math"&gt;\(\theta d(t)\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Two-channel PCM/PM&lt;/td&gt;
+&lt;td&gt;&lt;span class="math"&gt;\(\theta_1d_1+\theta_2d_2\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Sinusoidal PCM/PSK/PM&lt;/td&gt;
+&lt;td&gt;&lt;span class="math"&gt;\(\theta d(t)\sin\omega_{sc}t\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Square-wave PCM/PSK/PM&lt;/td&gt;
+&lt;td&gt;&lt;span class="math"&gt;\(\theta d(t)\operatorname{sgn}[\sin(2\pi f_{sc}t+\varphi_{sc})]\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;BPSK&lt;/td&gt;
+&lt;td&gt;discrete phase states separated by &lt;span class="math"&gt;\(\pi\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;M-PSK&lt;/td&gt;
+&lt;td&gt;&lt;span class="math"&gt;\(\phi_k=2\pi k/M\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Single ranging tone&lt;/td&gt;
+&lt;td&gt;&lt;span class="math"&gt;\(\theta_R\sin\omega_Rt\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Two ranging tones&lt;/td&gt;
+&lt;td&gt;&lt;span class="math"&gt;\(\theta_M\sin\omega_Mt+\theta_m\sin\omega_mt\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr/&gt;
+&lt;h3 id="40-key-residual-carrier-results"&gt;40. Key Residual-Carrier Results&lt;/h3&gt;
+&lt;p&gt;For balanced binary PCM/PM:&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+C_0=\cos\theta
+}
+$$&lt;/div&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+P_c=P\cos^2\theta
+}
+$$&lt;/div&gt;
+&lt;p&gt;For sinusoidal-subcarrier PCM/PSK/PM:&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+C_0=J_0(\theta)
+}
+$$&lt;/div&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+P_c=PJ_0^2(\theta)
+}
+$$&lt;/div&gt;
+&lt;p&gt;For square-wave-subcarrier PCM/PSK/PM:&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+C_0=\cos\theta
+}
+$$&lt;/div&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+P_c=P\cos^2\theta
+}
+$$&lt;/div&gt;
+&lt;p&gt;For arbitrary modulation:&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+C_0=
+\left\langle e^{j\phi_m(t)}\right\rangle
+}
+$$&lt;/div&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+P_c=P|C_0|^2
+}
+$$&lt;/div&gt;
+&lt;p&gt;and&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+P_{\mathrm{noncarrier}}
+=
+P(1-|C_0|^2).
+}
+$$&lt;/div&gt;
+&lt;hr/&gt;
+&lt;h3 id="41-final-conceptual-picture"&gt;41. Final Conceptual Picture&lt;/h3&gt;
+&lt;p&gt;The most useful way to think about these systems is:&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+\text{Data/ranging information}
+\rightarrow
+\text{phase waveform}
+\rightarrow
+e^{j\phi(t)}
+\rightarrow
+\text{constant-envelope RF}
+}
+$$&lt;/div&gt;
+&lt;p&gt;The receiver performs the inverse operations:&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+\text{RF}
+\rightarrow
+\text{complex baseband}
+\rightarrow
+\text{residual-carrier recovery}
+\rightarrow
+\text{phase recovery}
+\rightarrow
+\text{data/ranging separation}.
+}
+$$&lt;/div&gt;
+&lt;p&gt;The unifying principle is that PCM/PM, PCM/PSK/PM, PSK, and tone ranging are not fundamentally separate modulation mechanisms. They are different ways of constructing the phase function&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+\phi_m(t).
+}
+$$&lt;/div&gt;
+&lt;p&gt;Once that phase function is defined, the transmitted waveform, I/Q trajectory, residual carrier, spectral distribution, and receiver architecture follow from&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\boxed{
+x(t)=\sqrt P e^{j\phi_m(t)}.
+}
+$$&lt;/div&gt;
+&lt;p&gt;This is the central mathematical framework for analyzing and implementing the family of constant-envelope phase-modulated telemetry and ranging waveforms.&lt;/p&gt;
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width &lt; 768) ? "left" : align;
+        indent = (screen.width &lt; 768) ? "0em" : indent;
+        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+&lt;/script&gt;</content><category term="Digital Communications"/><category term="Digital"/><category term="Communications"/><category term="PM"/></entry><entry><title>Galois Field and Reed-Solomon Coding</title><link href="https://yunchizhang.github.io/posts/galois_field_RS_coding.html" rel="alternate"/><published>2025-06-03T09:20:00-05:00</published><updated>2025-06-03T09:20:00-05:00</updated><author><name>Yunchi Zhang</name></author><id>tag:yunchizhang.github.io,2025-06-03:/posts/galois_field_RS_coding.html</id><summary type="html">Describe details of Galois Field and Reed-Solomon Coding.</summary><content type="html">
 &lt;main&gt;
 &lt;div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=61afe0f7"&gt;
 &lt;div class="jp-Cell-inputWrapper" tabindex="0"&gt;
