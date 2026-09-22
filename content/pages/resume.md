@@ -1,7 +1,7 @@
 Title: Curriculum Vitae
 Subtitle: Yunchi Zhang - Subject Matter Expert
 Date: 2025-04-24 18:23
-Modified: 2025-05-04 20:21
+Modified: 2026-09-22 17:21
 Status: published
 Slug: resume
 Comments: False
@@ -104,6 +104,7 @@ M.S. and B.S. in Technical Physics, Sep 1992 – Jul 2000
 
 ## **Honors**
 
+- Peraton Performance Award, June 2026
 - Peraton Performance Award, Dec 2025
 - Peraton Platinum Award, Dec 2025
 - Peraton Platinum Award, Dec 2024
